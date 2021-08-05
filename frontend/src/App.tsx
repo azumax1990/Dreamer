@@ -1,9 +1,17 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { SignUp } from './components/pages/SignUp';
 
 function App() {
   return (
     <>
-      hello React
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <SignUp/>
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </>
   );
 }
