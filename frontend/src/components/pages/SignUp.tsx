@@ -1,5 +1,12 @@
-import React from 'react'
+import React, { ChangeEvent, memo, useContext, useState, VFC } from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+
+import Cookies from 'js-cookie'
+
+import { signUp } from '../../api/auth'
+import { LoginUserContext } from '../../App'
+import { SignUpType } from '../../types'
 
 const Header = styled.header`
   padding: 20px 0;
@@ -57,7 +64,40 @@ const SubmitButton = styled.button`
   cursor: pointer;
 
 `
-export const SignUp = () => {
+export const SignUp: VFC = memo(() => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordConfirmation, setPasswordConfirmation] = useState('')
+
+  const { currentUser, setCurrentUser } = useContext(LoginUserContext)
+
+  const history = useHistory()
+
+  // SignUp関数の引数
+  const params: SignUpType = {
+    email: email,
+    password: password,
+    passwordConfirmation: passwordConfirmation
+  }
+
+  // 新規登録&Cookie保存の関数
+  const submitSignUp = () => {
+    signUp(params)
+    .then((res) => {
+      if (res.status === 200) {
+        Cookies.set('access-token', res.headers['access-token']);
+        Cookies.set('client', res.headers['client']);
+        Cookies.set('uid', res.headers['uid']);
+        setCurrentUser(res.data.data)
+        console.log("新規登録完了")
+        history.push("/auditions")
+      } else {
+        alert("登録出来ませんでした")
+      }
+    })
+    .catch(() => alert("もう一度入力してください"))
+  }
+
   return (
     <>
       <Header>
@@ -65,22 +105,23 @@ export const SignUp = () => {
       </Header>
       <SignUpWrapper>
         <PageTittle>新規登録</PageTittle>
+        {currentUser ? currentUser.email : "xxx"}
         <SignUpContainer>
           <InputContainer>
             <LabelTag htmlFor="formEmail">Eメール</LabelTag>
-            <InputTag id="formEmail"></InputTag>
+            <InputTag id="formEmail" value={email} onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
           </InputContainer>
           <InputContainer>
             <LabelTag htmlFor="formPassword">Password</LabelTag>
-            <InputTag id="formPassword"></InputTag>
+            <InputTag type="password" id="formPassword" value={password} onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
           </InputContainer>
           <InputContainer>
             <LabelTag htmlFor="formPasswordConfirmation">Password Confirmation</LabelTag>
-            <InputTag id="formPasswordConfirmation"></InputTag>
+            <InputTag type="password" id="formPasswordConfirmation" value={passwordConfirmation} onChange={(e: ChangeEvent<HTMLInputElement>) => setPasswordConfirmation(e.target.value)}></InputTag>
           </InputContainer>
-          <SubmitButton>登録</SubmitButton>
+          <SubmitButton onClick={submitSignUp} disabled={!email || !password || !passwordConfirmation ? true : false}>登録</SubmitButton>
         </SignUpContainer>
       </SignUpWrapper>
     </>
   )
-}
+})

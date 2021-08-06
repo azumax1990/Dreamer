@@ -1,5 +1,10 @@
-import React from 'react'
+import React, { ChangeEvent, memo, useContext, useState, VFC } from 'react'
+import Cookies from 'js-cookie'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import { signIn } from '../../api/auth'
+import { LoginUserContext } from '../../App'
+import { SignInType } from '../../types'
 
 const Header = styled.header`
   padding: 20px 0;
@@ -55,9 +60,36 @@ const SubmitButton = styled.button`
   font-size: 15px;
   box-shadow:  0 0 3px gray;
   cursor: pointer;
-
 `
-export const SignIn = () => {
+export const SignIn: VFC = memo(() => {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const { setCurrentUser } = useContext(LoginUserContext)
+  const history = useHistory()
+
+  // signIn関数の引数
+  const params: SignInType = {
+    email: email,
+    password: password
+  }
+
+  // ログイン&Cookie保存
+  const submitSignIn = () => {
+    signIn(params)
+    .then((res) => {
+      if (res.status === 200) {
+        Cookies.set('access-token', res.headers['access-token']);
+        Cookies.set('client', res.headers['client']);
+        Cookies.set('uid', res.headers['uid']);
+        setCurrentUser(res.data.data)
+        history.push("/auditions")
+      } else {
+        alert("ログイン出来ませんでした")
+      }
+    })
+    .catch(() => alert("もう一度入力してください"))
+  }
   return (
     <>
       <Header>
@@ -68,15 +100,15 @@ export const SignIn = () => {
         <SignUpContainer>
           <InputContainer>
             <LabelTag htmlFor="formEmail">Eメール</LabelTag>
-            <InputTag id="formEmail"></InputTag>
+            <InputTag id="formEmail" value={email} onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}/>
           </InputContainer>
           <InputContainer>
             <LabelTag htmlFor="formPassword">Password</LabelTag>
-            <InputTag id="formPassword"></InputTag>
+            <InputTag type="password" id="formPassword" value={password} onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}/>
           </InputContainer>
-          <SubmitButton>ログイン</SubmitButton>
+          <SubmitButton onClick={submitSignIn}>ログイン</SubmitButton>
         </SignUpContainer>
       </SignUpWrapper>
     </>
   )
-}
+})

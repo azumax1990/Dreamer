@@ -1,12 +1,12 @@
 // サインアップ
-export type SignUp = {
+export type SignUpType = {
   email: string
   password: string
   passwordConfirmation: string
 }
 
 // サインイン
-export type SignIn = {
+export type SignInType = {
   email: string
   password: string
 }
