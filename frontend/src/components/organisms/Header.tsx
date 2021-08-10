@@ -33,7 +33,7 @@ const HeaderItems = styled.p`
   } 
 `
 export const Header: VFC = memo(() => {
-  const { setCurrentUser } = useContext(LoginUserContext)
+  const { currentUser, setCurrentUser } = useContext(LoginUserContext)
 
   // ログアウト&Cookie削除
   const submitSignOut = () => {
@@ -50,19 +50,39 @@ export const Header: VFC = memo(() => {
   }
 
   return (
-    <HeaderWrapper>
-      <HeaderLeft>
-        <HeaderTittle>Dreamer</HeaderTittle>
-      </HeaderLeft>
-      <HeaderRight>
-        <Link to="/" style={{ textDecoration: "none", color: "black"}}>
-          <HeaderItems>新規登録</HeaderItems>
-        </Link> 
-        <Link to="/sign_in" style={{ textDecoration: "none", color: "black"}}>
-          <HeaderItems>ログイン</HeaderItems>
-        </Link>
-        <HeaderItems onClick={submitSignOut}>ログアウト</HeaderItems>
-      </HeaderRight>
-    </HeaderWrapper>
+      <HeaderWrapper>
+        {currentUser ? (
+          <>
+            <HeaderLeft>
+              <Link to="/auditions" style={{ textDecoration: "none", color: "black"}}>
+                <HeaderTittle>Dreamer</HeaderTittle>
+              </Link>
+            </HeaderLeft>
+            <HeaderRight>
+              <Link to={`/user/${currentUser.id}/profile`} style={{ textDecoration: "none", color: "black"}}>
+                <HeaderItems >Myページ</HeaderItems>
+              </Link>
+              <HeaderItems onClick={submitSignOut}>ログアウト</HeaderItems>
+            </HeaderRight>
+          </>
+        ) : (
+          <>
+            <HeaderLeft>
+              <Link to="/auditions" style={{ textDecoration: "none", color: "black"}}>
+                <HeaderTittle>Dreamer</HeaderTittle>
+              </Link>
+            </HeaderLeft>
+            <HeaderRight>
+              <Link to="/" style={{ textDecoration: "none", color: "black"}}>
+                <HeaderItems>新規登録</HeaderItems>
+              </Link> 
+              <Link to="/sign_in" style={{ textDecoration: "none", color: "black"}}>
+                <HeaderItems>ログイン</HeaderItems>
+              </Link>
+              <HeaderItems onClick={submitSignOut}>ログアウト</HeaderItems>
+            </HeaderRight>
+          </>
+        )}
+      </HeaderWrapper>
   )
 })
