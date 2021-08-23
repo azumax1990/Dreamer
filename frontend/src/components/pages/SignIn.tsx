@@ -106,7 +106,7 @@ export const SignIn: VFC = memo(() => {
             <LabelTag htmlFor="formPassword">Password</LabelTag>
             <InputTag type="password" id="formPassword" value={password} onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}/>
           </InputContainer>
-          <SubmitButton onClick={submitSignIn}>ログイン</SubmitButton>
+          <SubmitButton onClick={submitSignIn} disabled={ email && password ? false : true}>ログイン</SubmitButton>
         </SignUpContainer>
       </SignUpWrapper>
     </>

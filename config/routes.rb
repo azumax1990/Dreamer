@@ -9,5 +9,9 @@ Rails.application.routes.draw do
     namespace :auth do
       resources :sessions, only: [:index]
     end
+
+    scope module: :apps do
+      resources :profiles, only: [:show, :edit, :update]
+    end
   end
 end

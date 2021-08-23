@@ -6,4 +6,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
+
+  has_one :profile, dependent: :destroy
+
+  def prepare_profile
+    profile || build_profile
+  end
+
 end
