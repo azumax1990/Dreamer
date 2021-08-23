@@ -24,3 +24,28 @@ export type User = {
   created_at: Date
   updated_at: Date
 }
+// プロフィール
+export type Profile = {
+  id?: number;
+  userId?: number;
+  name?: string;
+  avatar_url: string;
+  gender?: string;
+  age?: number;
+  tall?: number;
+  prefecture?: string;
+  introduction?: string;
+  created_at?: Date
+  updated_at?: Date
+}
+
+export type ParamsProfile = {
+  id: number | undefined,
+  name: string | undefined,
+  age: number | undefined, 
+  gender: string | undefined,
+  tall: number | undefined, 
+  prefecture: string | undefined,
+  introduction: string | undefined, 
+  avatar: {} | undefined,
+}
