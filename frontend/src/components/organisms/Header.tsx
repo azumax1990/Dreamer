@@ -2,6 +2,7 @@ import React, { memo, useContext, VFC } from 'react'
 import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
 import { signOut } from '../../api/auth';
 import { LoginUserContext } from '../../App';
 
@@ -59,6 +60,7 @@ export const Header: VFC = memo(() => {
               </Link>
             </HeaderLeft>
             <HeaderRight>
+              <p>{currentUser.id}</p>
               <Link to={`/user/${currentUser.id}/profile`} style={{ textDecoration: "none", color: "black"}}>
                 <HeaderItems >Myページ</HeaderItems>
               </Link>
