@@ -37,9 +37,9 @@ ActiveRecord::Schema.define(version: 2021_08_10_111406) do
     t.integer "user_id", null: false
     t.string "name"
     t.integer "age"
-    t.integer "gender"
+    t.string "gender"
     t.integer "tall"
-    t.integer "prefecture"
+    t.string "prefecture"
     t.text "introduction"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

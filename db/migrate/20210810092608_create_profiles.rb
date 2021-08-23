@@ -4,9 +4,9 @@ class CreateProfiles < ActiveRecord::Migration[6.0]
       t.references :user, null: false
       t.string :name
       t.integer :age
-      t.integer :gender
+      t.string :gender
       t.integer :tall
-      t.integer :prefecture
+      t.string :prefecture
       t.text :introduction
       t.timestamps
     end
