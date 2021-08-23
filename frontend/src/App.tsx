@@ -5,9 +5,12 @@ import { SignIn } from './components/pages/SignIn';
 import { SignUp } from './components/pages/SignUp';
 import { HeaderLayout } from './components/templates/HeaderLayout';
 import { Auditions } from './components/pages/Auditions';
+import { UserProfile } from './components/pages/UserProfile';
+import { EditProfile } from './components/pages/EditProfile'; 
 
 import { User } from './types';
 import { getCurrentUser } from './api/auth';
+
 
 // ログインユーザーContextのtype型
 export type LoginUserContextType = {
@@ -55,10 +58,30 @@ function App() {
               <Auditions />
             </HeaderLayout>
           </Route>
+          <Route 
+            exact 
+            path="/user/:userId/profile"
+            render={({ match }) => (
+              <UserProfile id={match.params.userId}/>
+            )}
+           />
+           <Route
+            exact 
+            path="/user/:userId/profile/edit"
+            render={({ match }) => (
+              <HeaderLayout>
+                <EditProfile id={match.params.userId} />
+              </HeaderLayout>
+            )}
+           />
+          <Route exact path="/responsive">
+            <HeaderLayout>
+              
+            </HeaderLayout>
+          </Route>
         </BrowserRouter>
       </LoginUserContext.Provider>
     </>
   );
 }
-
 export default App;
