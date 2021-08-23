@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
 
     scope module: :apps do
-      resource :profile, only: [:show, :edit, :update]
+      resources :profiles, only: [:show, :edit, :update]
     end
   end
 end
