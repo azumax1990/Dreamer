@@ -7,7 +7,7 @@ export const getUserProfile = (id: string) => {
 }
 
 // 編集プロフィール取得
-export const getEditProfile = (id: number) => {
+export const getEditProfile = (id: number | string) => {
   return axios.get(`http://localhost:3000/api/profiles/${id}/edit`)
 }
 
