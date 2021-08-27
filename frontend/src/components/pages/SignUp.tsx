@@ -103,7 +103,6 @@ export const SignUp: VFC = memo(() => {
       </Header>
       <SignUpWrapper>
         <PageTittle>新規登録</PageTittle>
-        {currentUser ? currentUser.email : "xxx"}
         <SignUpContainer>
           <InputContainer>
             <LabelTag htmlFor="formEmail">Eメール</LabelTag>

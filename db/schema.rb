@@ -33,14 +33,26 @@ ActiveRecord::Schema.define(version: 2021_08_10_111406) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "name"
+    t.text "introduction"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_companies_on_user_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.integer "user_id", null: false
+    t.string "job", default: "演者"
     t.string "name"
     t.integer "age"
     t.string "gender"
     t.integer "tall"
     t.string "prefecture"
     t.text "introduction"
+    t.string "company"
+    t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"

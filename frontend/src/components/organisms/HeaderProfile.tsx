@@ -38,7 +38,12 @@ const LabelTag = styled.label`
 const InputTag = styled.input`
   display: none;
 `
-export const HeaderProfile: VFC = memo(() => {
+type Props = {
+  id: string;
+}
+
+export const HeaderProfile: VFC<Props> = memo((props) => {
+  const { id } = props;
   return (
     <>
       <HeaderWrapper>
@@ -50,7 +55,6 @@ export const HeaderProfile: VFC = memo(() => {
         <HeaderRight>
           <LabelTag htmlFor="formImage">写真投稿する</LabelTag>
           <InputTag type="file" id="formImage"/>
-          <HeaderItems>Company</HeaderItems>
           <HeaderItems>ログアウト</HeaderItems>
         </HeaderRight>
       </HeaderWrapper>

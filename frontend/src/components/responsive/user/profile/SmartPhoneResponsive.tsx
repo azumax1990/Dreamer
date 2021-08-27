@@ -1,8 +1,10 @@
 import React, { memo, useContext, VFC } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { LoginUserContext } from '../../../App'
-import { Profile } from '../../../types'
+import { LoginUserContext } from '../../../../App'
+import { Profile } from '../../../../types'
+import avatarImage from '../../../../images/no-avatar.jpeg'
+
 
 const ProfileWrapper = styled.div`
   padding: 50px 50px;
@@ -16,11 +18,11 @@ const ProfileNameContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 10px;
 `
 const UserName = styled.h2`
-  font-size: 28px;
+  font-size: 20px;
   font-weight: lighter;
-  padding-bottom: 5px;
   margin: 0;
 `
 const EditButton = styled.button`
@@ -74,12 +76,21 @@ export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
       <ProfileWrapper>
         <ProfileLeftWrapper>
           <ProfileNameContainer>
-            <UserName>{profile.name}</UserName>
-            <Link to={`/user/${currentUser?.id}/profile/edit`}>
-              <EditButton>編集する</EditButton>
-            </Link>
+            { profile.name ? (<UserName>{profile.name}</UserName>) : (<UserName>未設定</UserName>)}
+            { currentUser?.id === profile?.user_id ? (
+              <Link to={`/user/${currentUser?.id}/profile/edit`}>
+                <EditButton>編集する</EditButton>
+              </Link>
+              ) : (
+              <></>
+              )
+            }
           </ProfileNameContainer>
-          <ProfileAvatar src={profile.avatar_url} />
+          {profile.avatar_url ? (<ProfileAvatar src={profile.avatar_url} alt="プロフィール"/>)
+            : (
+                <ProfileAvatar src={avatarImage} alt="プロフィール"/>
+              )
+          }
         </ProfileLeftWrapper>
         <ProfileRightWrapper>
           <ProfileInfoContainer>
@@ -100,16 +111,16 @@ export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
           <ImageTag src="https://source.unsplash.com/random"/>
         </ImageContainer>
         <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/6GgCyNnF6Zs"/>
+          <ImageTag src="https://source.unsplash.com/random"/>
         </ImageContainer>
         <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/aRKA9tyySgE"/>
+          <ImageTag src="https://source.unsplash.com/random"/>
         </ImageContainer>
         <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/aRKA9tyySgE"/>
+          <ImageTag src="https://source.unsplash.com/random"/>
         </ImageContainer>
         <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/aRKA9tyySgE"/>
+          <ImageTag src="https://source.unsplash.com/random"/>
         </ImageContainer>
       </ImagesWrapper>
     </>

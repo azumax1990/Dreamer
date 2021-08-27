@@ -29,6 +29,6 @@ class ::Api::Apps::ProfilesController < ApplicationController
 
   private
   def profile_params
-    params.permit(:name, :age, :gender, :tall, :prefecture, :introduction, :avatar)
+    params.permit(:job, :name, :age, :gender, :tall, :prefecture, :introduction, :avatar, :company, :description)
   end
 end
