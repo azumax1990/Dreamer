@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
 
+  has_many :posts, dependent: :destroy
   has_one :profile, dependent: :destroy
   
   def prepare_profile
