@@ -14,19 +14,19 @@ import { getCurrentUser } from './api/auth';
 
 // ログインユーザーContextのtype型
 export type LoginUserContextType = {
-  loading: boolean;
-  setLoading: Dispatch<SetStateAction<boolean>>;
-  isSignedIn: boolean;
-  setIsSignedIn: React.Dispatch<React.SetStateAction<boolean>>;
-  currentUser: User | undefined;
-  setCurrentUser: Dispatch<SetStateAction<User | undefined>>;
+  loading:               boolean;
+  setLoading:            Dispatch<SetStateAction<boolean>>;
+  isSignedIn:            boolean;
+  setIsSignedIn:         Dispatch<SetStateAction<boolean>>;
+  currentUser:           User | undefined;
+  setCurrentUser:        Dispatch<SetStateAction<User | undefined>>;
 }
 export const LoginUserContext = createContext<LoginUserContextType>({} as LoginUserContextType);
 
 function App() {
-  const [ loading, setLoading ] = useState<boolean>(true);
-  const [ isSignedIn, setIsSignedIn ] = useState<boolean>(false);
-  const [ currentUser, setCurrentUser ] = useState<User | undefined>();
+  const [loading, setLoading]                      = useState<boolean>(true);
+  const [isSignedIn, setIsSignedIn]                = useState<boolean>(false);
+  const [currentUser, setCurrentUser]              = useState<User | undefined>();
 
   // ログインユーザーの取得
   useEffect(() => {
@@ -40,7 +40,6 @@ function App() {
     })
     .catch(() => alert("エラー"))
   }, [setCurrentUser])
-  
   return (
     <>
       <LoginUserContext.Provider value={{ loading, setLoading, isSignedIn, setIsSignedIn, currentUser, setCurrentUser }}>
@@ -74,11 +73,6 @@ function App() {
               </HeaderLayout>
             )}
            />
-          <Route exact path="/responsive">
-            <HeaderLayout>
-              
-            </HeaderLayout>
-          </Route>
         </BrowserRouter>
       </LoginUserContext.Provider>
     </>
