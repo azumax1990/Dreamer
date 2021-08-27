@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_23_133048) do
+ActiveRecord::Schema.define(version: 2021_08_10_111406) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -44,12 +44,15 @@ ActiveRecord::Schema.define(version: 2021_08_23_133048) do
 
   create_table "profiles", force: :cascade do |t|
     t.integer "user_id", null: false
+    t.string "job", default: "演者"
     t.string "name"
     t.integer "age"
     t.string "gender"
     t.integer "tall"
     t.string "prefecture"
     t.text "introduction"
+    t.string "company"
+    t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
