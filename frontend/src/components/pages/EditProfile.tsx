@@ -1,15 +1,14 @@
-import React, { ChangeEvent, memo, useContext, useState, useEffect, useCallback, VFC } from 'react'
+import React, { memo, useContext, useEffect, VFC } from 'react'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
 
 import { LoginUserContext } from '../../App'
-import { getEditProfile, PostProfile } from '../../api/profile'
-import { ParamsProfile } from '../../types'
+import { getEditProfile } from '../../api/profile'
 
 import { EditPlayerProfile } from '../organisms/edit/EditPlayerProfile'
 import { EditCompanyProfile } from '../organisms/edit/EditCompanyProfile'
 import { useEditProfile } from '../../hooks/useEditProfile'
 import MediaQuery from 'react-responsive'
+import { EditPageHeader } from '../organisms/header/EditPageHeader'
 
 const SignUpWrapper = styled.div`
   background-color: #F5F5F5;
@@ -104,6 +103,7 @@ export const EditProfile: VFC<Props> = memo((props) => {
 
   return (
     <>
+      <EditPageHeader />
       <MediaQuery query="(min-width: 768px)">
         <SignUpWrapper>
           <PageTittle>プロフィール</PageTittle>

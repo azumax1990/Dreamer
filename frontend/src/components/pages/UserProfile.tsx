@@ -2,8 +2,8 @@ import React, { VFC, memo, useEffect, useState } from 'react'
 
 import { getUserProfile } from '../../api/profile';
 import { Profile } from '../../types';
+import { ProfilePageHeader } from '../organisms/header/ProfilePageHeader';
 
-import { HeaderProfile } from '../organisms/HeaderProfile'
 import { CompanyProfile } from '../organisms/profile/CompanyProfile';
 import { PlayerProfile } from '../organisms/profile/PlayerProfile';
 
@@ -25,7 +25,7 @@ export const UserProfile: VFC<Props> = memo((props) => {
   
   return (
     <>
-      <HeaderProfile id={id}/>
+      <ProfilePageHeader />
       {profile?.job === "演者" ? (
         <>
           <PlayerProfile profile={profile}/>
