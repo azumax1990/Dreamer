@@ -1,13 +1,18 @@
 class ::Api::Apps::PostsController < ApplicationController
 
-  def index
+  def show
     user = User.find(params[:id])
     posts = user.posts
-    render json: posts
+    render json: posts, methods: [:image_url]
   end
 
   def create
-    post = current_api_user.posts.build(post_params)
+    user = User.find(params[:id])
+    post = user.posts.new(post_params)
+    if params[:image][:data] != ""
+      post.image.attach(io: StringIO.new(decode(params[:image][:data]) + "\n"),
+                            filename: params[:image][:name])
+    end
     post.save
     render json: { status: 'ok' }
   end
@@ -18,8 +23,12 @@ class ::Api::Apps::PostsController < ApplicationController
     render json: { status: 'ok' }
   end
 
+  def decode(str)
+    Base64.decode64(str.split(',').last)
+  end
+
   private
   def post_params
-    params.require(:post).permit(:content, :image)
+    params.require(:post).permit(:content, :image, :id)
   end
 end
