@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       resources :profiles, only: [:show, :edit, :update]
     end
     scope module: :apps do
-      resources :posts, only: [:index, :create, :destroy]
+      resources :posts, only: [:show, :create, :destroy]
     end
   end
 end
