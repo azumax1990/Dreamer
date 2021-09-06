@@ -2,13 +2,12 @@ import React, { memo, useContext, VFC } from 'react'
 import Cookies from 'js-cookie'
 import styled from 'styled-components'
 
-import { useHistory } from 'react-router-dom'
-import { signOut } from '../../../api/auth'
-import { LoginUserContext } from '../../../App'
+import { signOut } from '../../../../api/auth'
+import { LoginUserContext } from '../../../../App'
 
-import { HeaderItems } from '../../atoms/HeaderItems'
-import { HeaderLeft } from '../../Molecules/header/HeaderLeft'
-import { HeaderRight } from '../../Molecules/header/HeaderRight'
+import { HeaderItems } from '../../../atoms/HeaderItems'
+import { HeaderLeft } from '../../../Molecules/header/HeaderLeft'
+import { HeaderRight } from '../../../Molecules/header/HeaderRight'
 
 const HeaderWrapper = styled.header`
   height: 70px;
@@ -19,10 +18,12 @@ const HeaderWrapper = styled.header`
   background-color: #E0FFFF;
 `
 
-export const ProfilePageHeader: VFC = memo(() => {
-  
+type Props = {
+  changeIsOpen: () => void;
+}
+export const ProfilePageHeader: VFC<Props> = memo((props) => {
+  const { changeIsOpen } = props;
   const { setCurrentUser } = useContext(LoginUserContext)
-  const history = useHistory()
 
   // ログアウト&Cookie削除
   const submitSignOut = () => {
@@ -37,14 +38,13 @@ export const ProfilePageHeader: VFC = memo(() => {
     })
     .catch(() => alert("ログアウト出来ませんでした。"))
   }
-  const moveToSignUpPage =  () => (history.push("/auditions"))
 
   return (
     <>
       <HeaderWrapper>
         <HeaderLeft />
         <HeaderRight>
-          <HeaderItems onClick={moveToSignUpPage}>写真を追加する</HeaderItems>
+          <HeaderItems onClick={changeIsOpen}>写真を追加する</HeaderItems>
           <HeaderItems onClick={submitSignOut}>ログアウト</HeaderItems>
         </HeaderRight>
       </HeaderWrapper>

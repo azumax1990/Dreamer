@@ -2,11 +2,11 @@ import Cookies from 'js-cookie'
 import React, { useContext, VFC } from 'react'
 import { useHistory } from 'react-router'
 import styled from 'styled-components'
-import { signOut } from '../../../api/auth'
-import { LoginUserContext } from '../../../App'
-import { HeaderItems } from '../../atoms/HeaderItems'
-import { HeaderLeft } from '../../Molecules/header/HeaderLeft'
-import { HeaderRight } from '../../Molecules/header/HeaderRight'
+import { signOut } from '../../../../api/auth'
+import { LoginUserContext } from '../../../../App'
+import { HeaderItems } from '../../../atoms/HeaderItems'
+import { HeaderLeft } from '../../../Molecules/header/HeaderLeft'
+import { HeaderRight } from '../../../Molecules/header/HeaderRight'
 
 const HeaderWrapper = styled.header`
   height: 70px;

@@ -1,14 +1,14 @@
 import React, { memo, useContext, VFC } from 'react'
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import styled from 'styled-components';
 
-import { signOut } from '../../../api/auth';
-import { LoginUserContext } from '../../../App';
+import { signOut } from '../../../../api/auth';
+import { LoginUserContext } from '../../../../App';
 
-import { HeaderItems } from '../../atoms/HeaderItems';
-import { HeaderLeft } from '../../Molecules/header/HeaderLeft';
-import { HeaderRight } from '../../Molecules/header/HeaderRight';
+import { HeaderItems } from '../../../atoms/HeaderItems';
+import { HeaderLeft } from '../../../Molecules/header/HeaderLeft';
+import { HeaderRight } from '../../../Molecules/header/HeaderRight';
 
 const HeaderWrapper = styled.header`
   height: 70px;
