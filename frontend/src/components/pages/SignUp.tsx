@@ -68,7 +68,7 @@ export const SignUp: VFC = memo(() => {
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
 
-  const { currentUser, setCurrentUser } = useContext(LoginUserContext)
+  const { setCurrentUser } = useContext(LoginUserContext)
 
   const history = useHistory()
 

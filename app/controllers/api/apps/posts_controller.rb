@@ -2,13 +2,13 @@ class ::Api::Apps::PostsController < ApplicationController
 
   def show
     user = User.find(params[:id])
-    posts = user.posts
+    posts = user.posts.order(id: "DESC")
     render json: posts, methods: [:image_url]
   end
 
   def create
     user = User.find(params[:id])
-    post = user.posts.new(post_params)
+    post = user.posts.new(content: params[:content])
     if params[:image][:data] != ""
       post.image.attach(io: StringIO.new(decode(params[:image][:data]) + "\n"),
                             filename: params[:image][:name])

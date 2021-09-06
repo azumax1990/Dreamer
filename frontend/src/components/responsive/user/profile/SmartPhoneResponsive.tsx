@@ -2,12 +2,13 @@ import React, { memo, useContext, VFC } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { LoginUserContext } from '../../../../App'
-import { Profile } from '../../../../types'
+import { Post, Profile } from '../../../../types'
 import avatarImage from '../../../../images/no-avatar.jpeg'
+import { Images } from '../../../organisms/profile/smartPhoneResponsive/Images'
 
 
 const ProfileWrapper = styled.div`
-  padding: 50px 50px;
+  padding: 50px 0;
   
 `
 const ProfileLeftWrapper = styled.div`
@@ -18,7 +19,7 @@ const ProfileNameContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 10px;
+  padding: 0 10px 10px 10px;
 `
 const UserName = styled.h2`
   font-size: 20px;
@@ -34,9 +35,9 @@ const ProfileAvatar = styled.img`
 `
 const ProfileRightWrapper = styled.div`
   width: 100%;
-  
 `
 const ProfileInfoContainer = styled.div`
+  padding: 0 10px 0 10px;
   border-bottom: solid 1px #DCDCDC;
 `
 const ProfileText = styled.p`
@@ -44,33 +45,24 @@ const ProfileText = styled.p`
   opacity: 0.8;
 `
 const IntroductionContainer = styled.div`
+  padding: 0 10px 0 10px;
 `
 const IntroductionText= styled.p`
   letter-spacing: 8px;
 `
 const ImagesWrapper = styled.div`
-  padding: 0 50px;
-`
-const ImageContainer = styled.div`
-  width: 100%;
-  margin-top: 20px;
-  &:hover {
-    cursor: pointer;
-    opacity: 0.7;
-  }
-`
-const ImageTag = styled.img`
-  width: 100%;
-  height: 300px;
+  padding-bottom: 20px;
 `
 
 type Props = {
   profile: Profile;
+  posts: Array<Post>;
 }
 
 export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
-  const { profile } = props
+  const { profile, posts } = props
   const { currentUser } = useContext(LoginUserContext)
+  
   return (
     <>
       <ProfileWrapper>
@@ -100,28 +92,14 @@ export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
             {profile.prefecture ? (<ProfileText>出身地 : {profile.prefecture}</ProfileText>) : (<ProfileText>出身地 : 未設定</ProfileText>)}
           </ProfileInfoContainer>
           <IntroductionContainer>
-            <IntroductionText>
-              <IntroductionText>{profile.introduction}</IntroductionText>
-            </IntroductionText>
+            <IntroductionText>{profile.introduction}</IntroductionText>
           </IntroductionContainer>
         </ProfileRightWrapper>
       </ProfileWrapper>
       <ImagesWrapper>
-        <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/random"/>
-        </ImageContainer>
-        <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/random"/>
-        </ImageContainer>
-        <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/random"/>
-        </ImageContainer>
-        <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/random"/>
-        </ImageContainer>
-        <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/random"/>
-        </ImageContainer>
+        {posts.map((post) => (
+          <Images post={post} key={post.id}/>
+        ))}
       </ImagesWrapper>
     </>
   )

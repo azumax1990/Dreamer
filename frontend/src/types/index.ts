@@ -60,8 +60,8 @@ export type ParamsProfile = {
 export type Post = {
   id?: number;
   user_id?: number;
-  content?: string;
-  image_url?: string;
+  content: string;
+  image_url: string;
   created_at?: Date;
   updated_at?: Date;
 }
