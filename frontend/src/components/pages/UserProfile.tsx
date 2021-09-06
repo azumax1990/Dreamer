@@ -1,11 +1,11 @@
 import React, { VFC, memo, useEffect, useState } from 'react'
+import { getAllImages } from '../../api/post';
 
 import { getUserProfile } from '../../api/profile';
-import { Profile } from '../../types';
-import { ProfilePageHeader } from '../organisms/header/ProfilePageHeader';
+import { Post, Profile } from '../../types';
 
-import { CompanyProfile } from '../organisms/profile/CompanyProfile';
-import { PlayerProfile } from '../organisms/profile/PlayerProfile';
+import { CompanyProfile } from '../organisms/template/CompanyProfile';
+import { PlayerProfile } from '../organisms/template/PlayerProfile';
 
 
 type Props = {
@@ -15,23 +15,32 @@ type Props = {
 export const UserProfile: VFC<Props> = memo((props) => {
   const { id } = props;
   const [profile, setProfile] = useState<Profile | undefined>()
-  
+  const [isOpen, setIsOpen] = useState(false)
+  const [posts, setPosts]  = useState<Array<Post>>([])
+
   useEffect(() => {
     getUserProfile(id)
     .then((res) => {
       setProfile(res.data)
     })
-  }, [setProfile])
+    .catch(() => alert('ユーザーを取得できませんでした'))
+  }, [setProfile, id])
+
+  useEffect(() => {
+    getAllImages(id)
+    .then((res) => {
+      setPosts(res.data)
+    })
+    .catch(() => alert('写真を取得できませんでした'))
+  }, [setPosts, setIsOpen, id])
   
+  const changeIsOpen = () => setIsOpen(true)
   return (
     <>
-      <ProfilePageHeader />
       {profile?.job === "演者" ? (
-        <>
-          <PlayerProfile profile={profile}/>
-        </>
+        <PlayerProfile profile={profile} isOpen={isOpen} setIsOpen={setIsOpen} posts={posts} setPosts={setPosts} changeIsOpen={changeIsOpen}/>
       ) : (
-        <CompanyProfile profile={profile}/>
+        <CompanyProfile profile={profile} isOpen={isOpen} setIsOpen={setIsOpen} posts={posts} setPosts={setPosts} changeIsOpen={changeIsOpen}/>
       )}
     </>
   )
