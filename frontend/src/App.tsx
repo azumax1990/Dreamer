@@ -9,6 +9,7 @@ import { EditProfile } from './components/pages/EditProfile';
 
 import { User } from './types';
 import { getCurrentUser } from './api/auth';
+import { CreatePost } from './components/pages/smartPhone/CreatePost';
 
 
 // ログインユーザーContextのtype型
@@ -68,6 +69,9 @@ function App() {
               <EditProfile id={match.params.userId} />
             )}
            />
+           <Route exact path="/post">
+            <CreatePost />
+           </Route>
         </BrowserRouter>
       </LoginUserContext.Provider>
     </>
