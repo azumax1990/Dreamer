@@ -1,25 +1,6 @@
 import React, { ChangeEvent, memo, VFC } from 'react'
 import styled from 'styled-components'
 
-const SignUpWrapper = styled.div`
-  background-color: #F5F5F5;
-  padding: 40px 0;
-  min-height: 100vh;
-`
-const PageTittle = styled.h1`
-  font-size: 30px;
-  padding-bottom: 25px;
-  margin: 0 ;
-  text-align: center;
-`
-const SignUpContainer = styled.div`
-  width: 500px;
-  background-color: #fff;
-  padding: 50px 40px;
-  margin: 0 auto;
-  box-shadow:  0 0 3px gray;
-`
-
 const LabelTag = styled.label`
   font-size: 20px;
 `

@@ -2,10 +2,11 @@ import React, { memo, useContext, VFC } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { LoginUserContext } from '../../../../App'
-import { Profile } from '../../../../types'
+import { Post, Profile } from '../../../../types'
+import { Images } from '../../../organisms/profile/smartPhoneResponsive/Images'
 
 const ProfileWrapper = styled.div`
-  padding: 50px 50px;
+  padding: 50px 30px;
 `
 const ProfileNameContainer = styled.div`
   display: flex;
@@ -18,38 +19,25 @@ const CompanyName = styled.h2`
   font-size: 20px;
   font-weight: bold;
   margin: 0;
-  
 `
 const EditButton = styled.button`
   cursor: pointer;
 `
 const IntroductionContainer = styled.div`
-  padding: 25px 20px;
+  padding-top: 25px;
 `
 const IntroductionText = styled.p`
   font-size: 16px;
-  // font-weight: bold;
   letter-spacing: 8px;
 `
 const ImagesWrapper = styled.div`
-  padding: 0 50px;
-`
-const ImageContainer = styled.div`
-  width: 100%;
-  margin-top: 20px;
-  &:hover {
-    cursor: pointer;
-    opacity: 0.7;
-  }
-`
-const ImageTag = styled.img`
-  width: 100%;
-  height: 300px;
 `
 type Props = {
-  profile: Profile | undefined
+  profile: Profile | undefined;
+  posts: Array<Post>;
 }
 export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
+  const { posts } = props;
   const { currentUser } = useContext(LoginUserContext)
 
   const { profile } = props;
@@ -57,7 +45,7 @@ export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
     <>
       <ProfileWrapper>
         <ProfileNameContainer>
-          { profile?.company ? (<CompanyName>{profile?.company}</CompanyName>) : (<CompanyName>未設定</CompanyName>)}
+          { profile?.company ? (<CompanyName>{profile.company}</CompanyName>) : (<CompanyName>未設定</CompanyName>)}
           { currentUser?.id === profile?.user_id ? (
             <Link to={`/user/${currentUser?.id}/profile/edit`}>
               <EditButton>編集する</EditButton>
@@ -72,21 +60,9 @@ export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
         </IntroductionContainer>
       </ProfileWrapper>
       <ImagesWrapper>
-        <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/random"/>
-        </ImageContainer>
-        <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/random"/>
-        </ImageContainer>
-        <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/random"/>
-        </ImageContainer>
-        <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/random"/>
-        </ImageContainer>
-        <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/random"/>
-        </ImageContainer>
+        {posts.map((post) => (
+          <Images post={post} key={post.id}/>
+        ))}
       </ImagesWrapper>
     </>
   )

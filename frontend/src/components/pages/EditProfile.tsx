@@ -1,15 +1,14 @@
-import React, { ChangeEvent, memo, useContext, useState, useEffect, useCallback, VFC } from 'react'
+import React, { memo, useContext, useEffect, VFC } from 'react'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
+import MediaQuery from 'react-responsive'
 
 import { LoginUserContext } from '../../App'
-import { getEditProfile, PostProfile } from '../../api/profile'
-import { ParamsProfile } from '../../types'
+import { getEditProfile } from '../../api/profile'
 
 import { EditPlayerProfile } from '../organisms/edit/EditPlayerProfile'
 import { EditCompanyProfile } from '../organisms/edit/EditCompanyProfile'
 import { useEditProfile } from '../../hooks/useEditProfile'
-import MediaQuery from 'react-responsive'
+import { EditPageHeader } from '../organisms/header/pcResponsive/EditPageHeader'
 
 const SignUpWrapper = styled.div`
   background-color: #F5F5F5;
@@ -55,7 +54,7 @@ export const EditProfile: VFC<Props> = memo((props) => {
   const { id } = props;
   const { currentUser } = useContext(LoginUserContext)
 
-  // カスタムフック
+  //hooks
   const { job,
           name,
           setName,
@@ -97,13 +96,13 @@ export const EditProfile: VFC<Props> = memo((props) => {
       setPrefecture(res.data.prefecture)
       setIntroduction(res.data.introduction)
       setCompany(res.data.company)
-      setDescription(res.data.decription)
+      setDescription(res.data.description)
     })
     .catch(() => alert('エラー'))
-  }, [currentUser])
-
+  }, [currentUser, id, setAge, setCompany, setDescription, setGender, setIntroduction, setName, setPrefecture, setTall])
   return (
     <>
+      <EditPageHeader />
       <MediaQuery query="(min-width: 768px)">
         <SignUpWrapper>
           <PageTittle>プロフィール</PageTittle>
@@ -172,7 +171,6 @@ export const EditProfile: VFC<Props> = memo((props) => {
           </SignUpContain>
         </SignUpWrap>
       </MediaQuery>
-    
     </>
   )
 })

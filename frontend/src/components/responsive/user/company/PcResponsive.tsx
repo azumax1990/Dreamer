@@ -1,13 +1,16 @@
-import React, { VFC, memo, useContext } from 'react'
+import React, { VFC, memo, useContext, Dispatch, SetStateAction, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { LoginUserContext } from '../../../../App'
-import { Profile } from '../../../../types'
+import { useSelectUser } from '../../../../hooks/useSelectUser'
+import { Post, Profile } from '../../../../types'
+import { AddImageModal } from '../../../organisms/profile/pcResponsive/AddImageModal'
+import { Images } from '../../../organisms/profile/pcResponsive/Images'
+import { ModalImages } from '../../../organisms/profile/pcResponsive/ModalImages'
 
 
 const ProfileWrapper = styled.div`
 padding: 100px 170px;
-
 `
 const ProfileNameContainer = styled.div`
   display: flex;
@@ -37,61 +40,49 @@ const ImagesWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
 `
-const ImageContainer = styled.div`
-  width: 30%;
-  margin-top: 20px;
-  margin-left: 28px;
-  &:hover {
-    cursor: pointer;
-    opacity: 0.7;
-  }
-`
-const ImageTag = styled.img`
-  width: 100%;
-  height: 300px;
-`
 type Props ={
   profile: Profile | undefined;
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  posts: Array<Post>;
+  setPosts: Dispatch<React.SetStateAction<Array<Post>>>;
 }
 export const PcResponsive: VFC<Props> = memo((props) => {
-  const { profile } = props;
+  const { profile, isOpen, setIsOpen, posts, setPosts } = props;
   const { currentUser } = useContext(LoginUserContext)
+  const { onSelectedPost, selectedPost, modalOpen, setModalOpen } = useSelectUser()
+
+  const onClickOpen = useCallback((id: number | undefined) => {
+    onSelectedPost({ id, posts })
+  }, [posts, onSelectedPost])
 
   return (
     <>
       <ProfileWrapper>
         <ProfileNameContainer>
-          { profile?.company ? (<CompanyName>{profile?.company}</CompanyName>) : (<CompanyName>未設定</CompanyName>)}
+          { profile?.company ? (<CompanyName>{profile.company}</CompanyName>) : (<CompanyName>未設定</CompanyName>)}
           { currentUser?.id === profile?.user_id ? (
             <Link to={`/user/${currentUser?.id}/profile/edit`}>
               <EditButton>編集する</EditButton>
             </Link>
-            ) : (
-            <></>
-            )
+            ) : (null)
           }
         </ProfileNameContainer>
         <IntroductionContainer>
-          { profile?.description ? (<IntroductionText>{profile?.description}</IntroductionText>) : (<IntroductionText></IntroductionText>) }
+          { profile?.description ? (<IntroductionText>{profile.description}</IntroductionText>) : (<IntroductionText></IntroductionText>) }
         </IntroductionContainer>
       </ProfileWrapper>
       <ImagesWrapper>
-        <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/random"/>
-        </ImageContainer>
-        <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/random"/>
-        </ImageContainer>
-        <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/random"/>
-        </ImageContainer>
-        <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/random"/>
-        </ImageContainer>
-        <ImageContainer>
-          <ImageTag src="https://source.unsplash.com/random"/>
-        </ImageContainer>
+        {posts.map((post) => (
+          <Images imageUrl={post.image_url} id={post.id} onClickOpen={onClickOpen} key={post.id}/>
+        ))}
       </ImagesWrapper>
+      {modalOpen ? (
+        <ModalImages selectedPost={selectedPost} setModalOpen={setModalOpen}/>
+      ) : (null)}
+      {isOpen ? (
+        <AddImageModal setIsOpen={setIsOpen} posts={posts} setPosts={setPosts}/>
+      ) : (null)}
     </>
   )
 })

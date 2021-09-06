@@ -3,13 +3,13 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { SignIn } from './components/pages/SignIn';
 import { SignUp } from './components/pages/SignUp';
-import { HeaderLayout } from './components/templates/HeaderLayout';
 import { Auditions } from './components/pages/Auditions';
 import { UserProfile } from './components/pages/UserProfile';
 import { EditProfile } from './components/pages/EditProfile'; 
 
 import { User } from './types';
 import { getCurrentUser } from './api/auth';
+import { CreatePost } from './components/pages/smartPhone/CreatePost';
 
 
 // ログインユーザーContextのtype型
@@ -53,9 +53,7 @@ function App() {
             <SignIn/>
           </Route>
           <Route exact path="/auditions">
-            <HeaderLayout>
-              <Auditions />
-            </HeaderLayout>
+            <Auditions />
           </Route>
           <Route 
             exact 
@@ -68,11 +66,12 @@ function App() {
             exact 
             path="/user/:userId/profile/edit"
             render={({ match }) => (
-              <HeaderLayout>
-                <EditProfile id={match.params.userId} />
-              </HeaderLayout>
+              <EditProfile id={match.params.userId} />
             )}
            />
+           <Route exact path="/post">
+            <CreatePost />
+           </Route>
         </BrowserRouter>
       </LoginUserContext.Provider>
     </>

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useContext, useState } from 'react'
+import { ChangeEvent, useCallback, useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { PostProfile } from '../api/profile'
 import { LoginUserContext } from '../App'

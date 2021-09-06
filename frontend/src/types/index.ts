@@ -56,3 +56,18 @@ export type ParamsProfile = {
   company:      string | undefined;
   description:  string | undefined;
 }
+
+export type Post = {
+  id?: number;
+  user_id?: number;
+  content: string;
+  image_url: string;
+  created_at?: Date;
+  updated_at?: Date;
+}
+
+export type paramsPost = {
+  id: number | undefined;
+  content: string;
+  image: {};
+}

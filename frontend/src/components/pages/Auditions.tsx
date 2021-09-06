@@ -1,5 +1,6 @@
 import React, { memo, useContext, VFC } from 'react'
 import { LoginUserContext } from '../../App'
+import { TopPageHeader } from '../organisms/header/pcResponsive/TopPageHeader'
 
 
 export const Auditions: VFC = memo(() => {
@@ -7,6 +8,7 @@ export const Auditions: VFC = memo(() => {
   
   return (
     <>
+      <TopPageHeader />
       auditionページ
       {currentUser ? (
         <>
