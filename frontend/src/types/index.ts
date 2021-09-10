@@ -1,7 +1,7 @@
 // サインアップ
 export type SignUpType = {
-  email: string;
-  password: string;
+  email:                string;
+  password:             string;
   passwordConfirmation: string;
 }
 
@@ -13,33 +13,34 @@ export type SignInType = {
 
 // ユーザー
 export type User = {
-  id: number;
-  uid: string;
-  provider: string;
-  email: string;
-  name?: string;
-  nickname?: string;
-  image?: string;
+  id:                  number;
+  uid:                 string;
+  provider:            string;
+  email:               string;
+  name?:               string;
+  nickname?:           string;
+  image?:              string;
   allowPasswordChange: boolean;
-  created_at: Date;
-  updated_at: Date;
+  created_at:          Date;
+  updated_at:          Date;
 }
+
 // プロフィール
 export type Profile = {
-  id?: number;
-  user_id?: number;
-  name?: string;
-  job: string;
-  avatar_url: string;
-  gender?: string;
-  age?: number;
-  tall?: number;
-  prefecture?: string;
+  id?:           number;
+  user_id?:      number;
+  name?:         string;
+  job:           string;
+  avatar_url:    string;
+  gender?:       string;
+  age?:          number;
+  tall?:         number;
+  prefecture?:   string;
   introduction?: string;
   company?:      string;
   description?:  string;
-  created_at?: Date;
-  updated_at?: Date;
+  created_at?:   Date;
+  updated_at?:   Date;
 }
 
 // プロフィール更新
@@ -57,17 +58,37 @@ export type ParamsProfile = {
   description:  string | undefined;
 }
 
+// Post
 export type Post = {
-  id?: number;
-  user_id?: number;
-  content: string;
-  image_url: string;
+  id?:         number;
+  user_id?:    number;
+  content:     string;
+  image_url:   string;
   created_at?: Date;
   updated_at?: Date;
 }
 
+// Post投稿
 export type paramsPost = {
-  id: number | undefined;
+  id:      number | undefined;
   content: string;
-  image: {};
+  image:   {};
+}
+
+// audition
+export type Audition = {
+  id?:          number;
+  user_id?:     number;
+  title:      string;
+  description: string;
+  image_url?:   string;
+  created_at?:  Date;
+  updated_at?:  Date;
+}
+
+export type AuditionParams = {
+  id:          number | undefined;
+  title:      string;
+  description: string;
+  image:   {};
 }

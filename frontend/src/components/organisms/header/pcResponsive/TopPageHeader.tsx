@@ -18,7 +18,11 @@ const HeaderWrapper = styled.header`
   padding: 0 80px;
   background-color: #E0FFFF;
 `
-export const TopPageHeader: VFC = memo(() => {
+type Props = {
+  ChangeIsOpen: () => void;
+}
+export const TopPageHeader: VFC<Props> = memo((props) => {
+  const { ChangeIsOpen } = props;
   const { currentUser, setCurrentUser } = useContext(LoginUserContext)
   const history = useHistory()
 
@@ -35,8 +39,9 @@ export const TopPageHeader: VFC = memo(() => {
     })
     .catch(() => alert("ログアウト出来ませんでした。"))
   }
-  const moveToSignUpPage =  () => (history.push("/auditions"))
-  const moveToSignInPage =  () => (history.push("/sign_in"))
+
+  const moveToSignUpPage  = () => (history.push("/sign_up"))
+  const moveToSignInPage  = () => (history.push("/sign_in"))
   const moveToProfilePage = () => (history.push(`/user/${currentUser?.id}/profile`))
   
   return (
@@ -45,6 +50,7 @@ export const TopPageHeader: VFC = memo(() => {
         <HeaderRight>
         {currentUser ? (
           <>
+            <HeaderItems onClick={ChangeIsOpen}>募集する</HeaderItems>
             <HeaderItems onClick={moveToProfilePage}>Myページ</HeaderItems>
             <HeaderItems onClick={submitSignOut}>ログアウト</HeaderItems>
           </>

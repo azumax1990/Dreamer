@@ -66,7 +66,7 @@ type Props = {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   posts: Array<Post>;
-  setPosts: Dispatch<React.SetStateAction<Array<Post>>>;
+  setPosts: Dispatch<SetStateAction<Array<Post>>>;
 }
 
 export const PcResponsive: VFC<Props> = memo((props) => {

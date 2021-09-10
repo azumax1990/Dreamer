@@ -7,7 +7,6 @@ import { Post, Profile } from '../../types';
 import { CompanyProfile } from '../organisms/template/CompanyProfile';
 import { PlayerProfile } from '../organisms/template/PlayerProfile';
 
-
 type Props = {
   id: string;
 }

@@ -10,6 +10,7 @@ import { EditProfile } from './components/pages/EditProfile';
 import { User } from './types';
 import { getCurrentUser } from './api/auth';
 import { CreatePost } from './components/pages/smartPhone/CreatePost';
+import { AuditionShow } from './components/pages/AuditionShow';
 
 
 // ログインユーザーContextのtype型
@@ -40,12 +41,13 @@ function App() {
     })
     .catch(() => alert("エラー"))
   }, [setCurrentUser])
+  
   return (
     <>
       <LoginUserContext.Provider value={{ loading, setLoading, isSignedIn, setIsSignedIn, currentUser, setCurrentUser }}>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/sign_up">
               <SignUp/>
             </Route>
           </Switch>
@@ -55,6 +57,13 @@ function App() {
           <Route exact path="/auditions">
             <Auditions />
           </Route>
+          <Route 
+            exact 
+            path="/audition/:id"
+            render={({ match }) => (
+              <AuditionShow id={match.params.id}/>
+            )}
+           />
           <Route 
             exact 
             path="/user/:userId/profile"
