@@ -5,7 +5,7 @@ import { paramsPost, Post } from '../types'
 export const usePostImages = () => {
   const [content, setContent] = useState('')
   const [image, setImage]     = useState({data: '', name: ''})
-  const { currentUser } = useContext(LoginUserContext)
+  const { currentUser }       = useContext(LoginUserContext)
   
   const params: paramsPost = {
     content: content,

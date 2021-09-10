@@ -1,9 +1,10 @@
-import React, { ChangeEvent, Dispatch, SetStateAction, VFC } from 'react'
+import React, { Dispatch, VFC } from 'react'
 import styled from 'styled-components'
 import { FaCamera } from 'react-icons/fa'
-import { PostImages } from '../../../../api/post'
-import { Post } from '../../../../types'
-import { usePostImages } from '../../../../hooks/usePostImages'
+
+import { PostAudition } from '../../../api/audition'
+import { Audition } from '../../../types'
+import { usePostAudition } from '../../../hooks/usePostAudition'
 
 const ModalWrapper = styled.div`
 `
@@ -36,6 +37,15 @@ const LabelTag = styled.label`
 `
 const InputContainer = styled.div`
   padding-bottom: 25px;
+`
+const InputTittle = styled.input`
+  width: 100%;
+  font-size: 16px;
+  box-sizing:border-box;
+  padding: 5px;
+  margin-top: 10px;
+  border-color: #f5f5f5;
+  outline: none;
 `
 const InputImageTag = styled.input`
   display: none;
@@ -74,42 +84,49 @@ const SpanTag = styled.span`
   padding-left: 10px;
   margin-bottom: 5px;
 `
-type Props = {
-  posts: Array<Post>;
-  setPosts: Dispatch<SetStateAction<Array<Post>>>;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+
+type  Props = {
+  setIsOpen: Dispatch<React.SetStateAction<boolean>>;
+  auditions: Array<Audition>;
+  setAuditions: Dispatch<React.SetStateAction<Array<Audition>>>;
 }
 
-export const AddImageModal: VFC<Props> = (props) => {
-  const { setIsOpen, posts, setPosts } = props;
-  
-  const { content, setContent, image, params, onChangeImage, post } = usePostImages()
+export const AddAuditionModal: VFC<Props> = (props) => {
+  const { setIsOpen, auditions, setAuditions } = props;
+  const { onChangeImage, params, audition, title, setTitle, description, setDescription, image, setImage } = usePostAudition()
 
-  const SubmitPosts = () => {
-    PostImages(params)
+  const SubmitPostAudition = () => {
+    PostAudition(params)
     .then((res) => {
+      const newAuditions = [audition, ...auditions]
+      setAuditions(newAuditions)
+      setTitle('')
+      setDescription('')
+      setImage({data: '', name: ''})
       setIsOpen(false)
-      const newPosts = [post, ...posts]
-      setPosts(newPosts)
     })
-    .catch(() => alert("写真を追加出来ませんでした"))
   }
+  
   return (
     <ModalWrapper>
       <OverLay>
         <Modal>
           <InputContainer>
-            <LabelIconTag htmlFor="formImage"><FaCamera /><SpanTag>写真を追加する</SpanTag></LabelIconTag>
-            <InputImageTag type="file" id="formImage" name="image"onChange={onChangeImage}/>
+            <LabelTag htmlFor="formTittle">タイトル</LabelTag>
+            <InputTittle id="formTittle" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
           </InputContainer>
-          {image.data !== '' ? (<ImgPreview src={image.data}/>) : (null)}
           <InputContainer>
-            <LabelTag htmlFor="formContent">コメント</LabelTag>
-            <InputTag id="formContent" value={content} onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value)}/>
+            <LabelIconTag htmlFor="formImage"><FaCamera /><SpanTag>写真を追加する</SpanTag></LabelIconTag>
+            <InputImageTag type="file" id="formImage" onChange={onChangeImage} />
+          </InputContainer>
+            {image.data ? (<ImgPreview src={image.data}/>) : (null)}
+          <InputContainer>
+            <LabelTag htmlFor="formDescription">募集内容</LabelTag>
+            <InputTag id="formDescription" value={description} onChange={(e) => setDescription(e.target.value)} />
           </InputContainer>
           <ButtonContainer>
             <ButtonTag onClick={() => setIsOpen(false)}>閉じる</ButtonTag>
-            <ButtonTag onClick={SubmitPosts} disabled={image.data === '' && image.name === ''}>保存</ButtonTag>
+            <ButtonTag onClick={SubmitPostAudition} disabled={!title || !description ? true : false} >保存</ButtonTag>
           </ButtonContainer>
         </Modal>
       </OverLay>
