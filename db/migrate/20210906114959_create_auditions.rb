@@ -3,7 +3,6 @@ class CreateAuditions < ActiveRecord::Migration[6.0]
     create_table :auditions do |t|
       t.string :title, null: false
       t.text :description, null: false
-      t.boolean :hiring, null: false
       t.references :user, null: false
       t.timestamps
     end
