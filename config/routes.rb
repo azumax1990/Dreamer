@@ -16,6 +16,6 @@ Rails.application.routes.draw do
     scope module: :apps do
       resources :posts, only: [:show, :create, :destroy]
     end
-    resources :auditions, only: [:index, :create, :edit, :destroy]
+    resources :auditions, only: [:index, :show, :create, :edit, :destroy]
   end
 end
