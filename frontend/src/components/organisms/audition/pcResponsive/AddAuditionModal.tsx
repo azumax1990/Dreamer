@@ -2,9 +2,9 @@ import React, { Dispatch, VFC } from 'react'
 import styled from 'styled-components'
 import { FaCamera } from 'react-icons/fa'
 
-import { PostAudition } from '../../../api/audition'
-import { Audition } from '../../../types'
-import { usePostAudition } from '../../../hooks/usePostAudition'
+import { PostAudition } from '../../../../api/audition'
+import { Audition } from '../../../../types'
+import { usePostAudition } from '../../../../hooks/usePostAudition'
 
 const ModalWrapper = styled.div`
 `
@@ -93,8 +93,16 @@ type  Props = {
 
 export const AddAuditionModal: VFC<Props> = (props) => {
   const { setIsOpen, auditions, setAuditions } = props;
-  const { onChangeImage, params, audition, title, setTitle, description, setDescription, image, setImage } = usePostAudition()
+  const { onChangeImage, params, title, setTitle, description, setDescription, image, setImage } = usePostAudition()
 
+  const id: number = auditions.length + 1
+  
+  const audition: Audition = {
+    id: id,
+    title: title,
+    description: description,
+    image_url: image.data
+  }
   const SubmitPostAudition = () => {
     PostAudition(params)
     .then((res) => {

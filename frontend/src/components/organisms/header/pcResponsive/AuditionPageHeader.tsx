@@ -5,9 +5,9 @@ import Cookies from 'js-cookie'
 import { signOut } from '../../../../api/auth'
 import { LoginUserContext } from '../../../../App'
 
-import { HeaderItems } from '../../../atoms/HeaderItems'
-import { HeaderLeft } from '../../../Molecules/header/HeaderLeft'
-import { HeaderRight } from '../../../Molecules/header/HeaderRight'
+import { HeaderItems } from '../../../atoms/header/pc/HeaderItems'
+import { HeaderLeft } from '../../../Molecules/header/pcResponsive/HeaderLeft'
+import { HeaderRight } from '../../../Molecules/header/pcResponsive/HeaderRight'
 import { useHistory } from 'react-router'
 
 const HeaderWrapper = styled.header`
@@ -21,7 +21,7 @@ const HeaderWrapper = styled.header`
 export const AuditionPageHeader: VFC = memo(() => {
   const { currentUser, setCurrentUser } = useContext(LoginUserContext)
   const history = useHistory()
-  
+
   // ログアウト&Cookie削除
   const submitSignOut = () => {
     signOut()
@@ -40,9 +40,9 @@ export const AuditionPageHeader: VFC = memo(() => {
     <HeaderWrapper>
       <HeaderLeft />
       <HeaderRight>
-          <HeaderItems onClick={moveToProfilePage}>Myページ</HeaderItems>
-          <HeaderItems onClick={submitSignOut}>ログアウト</HeaderItems>
-        </HeaderRight>
+        <HeaderItems onClick={moveToProfilePage}>Myページ</HeaderItems>
+        <HeaderItems onClick={submitSignOut}>ログアウト</HeaderItems>
+      </HeaderRight>
     </HeaderWrapper>
   )
 })
