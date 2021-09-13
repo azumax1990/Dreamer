@@ -5,9 +5,10 @@ import styled from 'styled-components'
 import { LoginUserContext } from '../../../../App'
 import { Post, Profile } from '../../../../types'
 import avatarImage from '../../../../images/no-avatar.jpeg'
+import { useSelectPost } from '../../../../hooks/useSelectPost'
+
 import { AddImageModal } from '../../../organisms/profile/pcResponsive/AddImageModal'
 import { Images } from '../../../organisms/profile/pcResponsive/Images'
-import { useSelectUser } from '../../../../hooks/useSelectUser'
 import { ModalImages } from '../../../organisms/profile/pcResponsive/ModalImages'
 
 const ProfileWrapper = styled.div`
@@ -73,7 +74,7 @@ export const PcResponsive: VFC<Props> = memo((props) => {
   const { profile, isOpen, setIsOpen, posts, setPosts } = props
 
   const { currentUser } = useContext(LoginUserContext)
-  const { onSelectedPost, selectedPost, modalOpen, setModalOpen } = useSelectUser()
+  const { onSelectedPost, selectedPost, modalOpen, setModalOpen } = useSelectPost()
 
   const onClickOpen = useCallback((id: number | undefined) => {
     onSelectedPost({ id, posts })

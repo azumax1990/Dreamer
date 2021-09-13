@@ -1,7 +1,7 @@
 import React, { VFC } from 'react'
 import styled from 'styled-components'
-import { Audition } from '../../../types'
-import avatarImage from '../../../images/no-avatar.jpeg'
+import { Audition } from '../../../../types'
+import avatarImage from '../../../../images/no-avatar.jpeg'
 
 const AuditionContainer = styled.div`
   width: 100%;

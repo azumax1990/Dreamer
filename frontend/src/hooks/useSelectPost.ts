@@ -6,7 +6,7 @@ type Props = {
   posts: Array<Post>;
 }
 
-export const useSelectUser = () => {
+export const useSelectPost = () => {
   const [selectedPost, setSelectedPost] = useState<Post>()
   const [modalOpen, setModalOpen]       = useState(false)
 
@@ -16,5 +16,6 @@ export const useSelectUser = () => {
     setSelectedPost(selectPost)
     setModalOpen(true)
   }, [])
+  
   return { onSelectedPost, selectedPost, modalOpen, setModalOpen }
 }

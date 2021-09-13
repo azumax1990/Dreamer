@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback, useContext, useState } from "react"
 import { LoginUserContext } from "../App"
-import { Audition, AuditionParams } from "../types"
+import { AuditionParams } from "../types"
 
 export const usePostAudition = () => {
   const [title, setTitle]             = useState('')
@@ -29,11 +29,5 @@ export const usePostAudition = () => {
     image: image
   }
 
-  const audition: Audition = {
-    title: title,
-    description: description,
-    image_url: image.data
-  }
-
-  return { onChangeImage, params, audition, title, setTitle, description, setDescription, image, setImage }
+  return { onChangeImage, params, title, setTitle, description, setDescription, image, setImage }
 }

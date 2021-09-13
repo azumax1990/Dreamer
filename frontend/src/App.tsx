@@ -1,16 +1,17 @@
 import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { User } from './types';
+import { getCurrentUser } from './api/auth';
 
 import { SignIn } from './components/pages/SignIn';
 import { SignUp } from './components/pages/SignUp';
 import { Auditions } from './components/pages/Auditions';
 import { UserProfile } from './components/pages/UserProfile';
 import { EditProfile } from './components/pages/EditProfile'; 
-
-import { User } from './types';
-import { getCurrentUser } from './api/auth';
-import { CreatePost } from './components/pages/smartPhone/CreatePost';
 import { AuditionShow } from './components/pages/AuditionShow';
+import { CreateAudition } from './components/pages/smartPhone/CreateAudition';
+import { CreatePost } from './components/pages/smartPhone/CreatePost';
+
 
 
 // ログインユーザーContextのtype型
@@ -57,6 +58,9 @@ function App() {
           <Route exact path="/auditions">
             <Auditions />
           </Route>
+          <Route exact path="/audition">
+            <CreateAudition />
+           </Route>
           <Route 
             exact 
             path="/audition/:id"

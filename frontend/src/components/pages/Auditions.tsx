@@ -1,24 +1,13 @@
 import React, { memo, useState, useEffect, VFC } from 'react'
-import styled from 'styled-components'
+import MediaQuery from 'react-responsive'
 
 import { Audition } from '../../types'
 import { getAllAuditions } from '../../api/audition'
 
 import { TopPageHeader } from '../organisms/header/pcResponsive/TopPageHeader'
-import { AddAuditionModal } from '../organisms/audition/AddAuditionModal'
-import { AuditionInfo } from '../organisms/audition/AuditionInfo'
-import { Link } from 'react-router-dom'
-
-const AuditionsWrapper = styled.div`
-  padding: 40px 0;
-  background-color: #F5F5F5;
-  min-height: 100vh;
-`
-const AuditionsContainer = styled.div`
-  background-color: #fff;
-  width: 700px;
-  margin: 0 auto;
-`
+import { TopPageSmartPhoneHeader } from '../organisms/header/smartPhoneResponsive/TopPageSmartPhoneHeader'
+import { PcResponsive } from '../responsive/audition/index/PcResponsive'
+import { SmartPhoneResponsive } from '../responsive/audition/index/SmartPhoneResponsive'
 
 export const Auditions: VFC = memo(() => {
   const [isOpen, setIsOpen]           = useState(false)
@@ -35,19 +24,14 @@ export const Auditions: VFC = memo(() => {
 
   return (
     <>
-      <TopPageHeader ChangeIsOpen={ChangeIsOpen} />
-      <AuditionsWrapper>
-        <AuditionsContainer>
-          {auditions.map((audition) => (
-            <Link to={`/audition/${audition.id}`} key={audition.id} style={{ color: "black", textDecoration: "none"}}>
-              <AuditionInfo audition={audition} />
-            </Link>
-          ))}
-        </AuditionsContainer>
-        {isOpen ? (
-          <AddAuditionModal setIsOpen={setIsOpen} auditions={auditions} setAuditions={setAuditions}/>
-        ): (null)}
-      </AuditionsWrapper>
+      <MediaQuery query="(min-width: 768px)">
+        <TopPageHeader ChangeIsOpen={ChangeIsOpen} />
+        <PcResponsive auditions={auditions} isOpen={isOpen} setIsOpen={setIsOpen} setAuditions={setAuditions}/>
+      </MediaQuery>
+      <MediaQuery query="(max-width: 767px)">
+        <TopPageSmartPhoneHeader />
+        <SmartPhoneResponsive auditions={auditions}/>
+      </MediaQuery>
     </>
   )
 })
