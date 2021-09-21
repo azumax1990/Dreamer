@@ -1,8 +1,22 @@
 class ::Api::Apps::ProfilesController < ApplicationController
+
   def show
     user = User.find(params[:id])
     profile = user.prepare_profile
-    render json: profile, methods: [:avatar_url]
+
+    groups = user.groups
+    group_users = []
+    groups.each do |group|
+      group_users << group.group_users
+    end
+
+    group_members = []
+    group_users.each do |group_user|
+      group_members << group_user[0]
+      group_members << group_user[1]
+    end
+
+    render json: {profile: profile, group_members: group_members}, methods: [:avatar_url]
   end
 
   def edit

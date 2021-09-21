@@ -14,9 +14,10 @@ type Props = {
 
 export const AuditionShow: VFC<Props>= memo((props) => {
   const { id } = props;
+
   const [audition, setAudition] = useState<Audition>()
   const [profile, setProfile]   = useState<Profile>()
-  
+
   useEffect(() => {
     getAudition(id)
     .then((res) => {
