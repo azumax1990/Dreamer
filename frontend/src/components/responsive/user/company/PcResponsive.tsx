@@ -1,10 +1,11 @@
 import React, { VFC, memo, useContext, Dispatch, SetStateAction, useCallback } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import { PostGroup } from '../../../../api/group'
 import { LoginUserContext } from '../../../../App'
 import { useSelectPost } from '../../../../hooks/useSelectPost'
 
-import { Post, Profile } from '../../../../types'
+import { GroupUserParams, Post, Profile } from '../../../../types'
 import { AddImageModal } from '../../../organisms/profile/pcResponsive/AddImageModal'
 import { Images } from '../../../organisms/profile/pcResponsive/Images'
 import { ModalImages } from '../../../organisms/profile/pcResponsive/ModalImages'
@@ -42,21 +43,40 @@ const ImagesWrapper = styled.div`
   flex-wrap: wrap;
 `
 type Props ={
-  profile: Profile | undefined;
-  isOpen: boolean;
+  profile:   Profile | undefined;
+  isOpen:    boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  posts: Array<Post>;
-  setPosts: Dispatch<React.SetStateAction<Array<Post>>>;
+  posts:     Array<Post>;
+  setPosts:  Dispatch<React.SetStateAction<Array<Post>>>;
+  groupId:   number | undefined;
 }
 export const PcResponsive: VFC<Props> = memo((props) => {
-  const { profile, isOpen, setIsOpen, posts, setPosts } = props;
+  const { profile, isOpen, setIsOpen, posts, setPosts, groupId } = props;
+
   const { currentUser } = useContext(LoginUserContext)
+  const history = useHistory()
   const { onSelectedPost, selectedPost, modalOpen, setModalOpen } = useSelectPost()
 
   const onClickOpen = useCallback((id: number | undefined) => {
     onSelectedPost({ id, posts })
   }, [posts, onSelectedPost])
 
+  const params: GroupUserParams = {
+    userId: currentUser?.id,
+    profileId: profile?.user_id
+  }
+
+  const onClickPostGroup = () => {
+    PostGroup(params)
+    .then((res) => {
+      const groupId = res.data.id
+      history.push(`/group/${groupId}`)
+    })
+    .catch(() => alert('エラーが発生しました。もう一度お試しください。'))
+  }
+
+  const moveToMessageGroup = () => history.push(`/group/${groupId}`)
+  
   return (
     <>
       <ProfileWrapper>
@@ -66,7 +86,10 @@ export const PcResponsive: VFC<Props> = memo((props) => {
             <Link to={`/user/${currentUser?.id}/profile/edit`}>
               <EditButton>編集する</EditButton>
             </Link>
-            ) : (null)
+            ) : groupId ? (
+              <EditButton onClick={moveToMessageGroup}>メールをする</EditButton>)
+               : (
+              <EditButton onClick={onClickPostGroup}>メールをする</EditButton>)
           }
         </ProfileNameContainer>
         <IntroductionContainer>

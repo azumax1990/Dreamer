@@ -12,10 +12,12 @@ Rails.application.routes.draw do
 
     scope module: :apps do
       resources :profiles, only: [:show, :edit, :update]
-    end
-    scope module: :apps do
       resources :posts, only: [:show, :create, :destroy]
+      resources :groups, only: [:index, :show, :create, :destroy] do
+        resources :messages, only: [:index, :create, :destroy]
+      end
     end
+
     resources :auditions, only: [:index, :show, :create, :edit, :destroy]
   end
 end

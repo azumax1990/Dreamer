@@ -35,6 +35,6 @@ class ::Api::AuditionsController < ApplicationController
 
   private
   def audition_params
-    params.require(:audition).permit(:title, :description, :id, :image)
+    params.require(:audition).permit(:title, :description, :id, :image, :user_id)
   end
 end

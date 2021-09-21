@@ -77,18 +77,54 @@ export type paramsPost = {
 
 // audition
 export type Audition = {
-  id?:          number;
-  user_id?:     number;
-  title:      string;
+  id?:         number;
+  user_id?:    number;
+  title:       string;
   description: string;
-  image_url?:   string;
-  created_at?:  Date;
-  updated_at?:  Date;
+  image_url?:  string;
+  created_at?: Date;
+  updated_at?: Date;
 }
 
 export type AuditionParams = {
   id:          number | undefined;
-  title:      string;
+  title:       string;
   description: string;
-  image:   {};
+  image:       {};
 }
+
+// group
+export type Group = {
+  id:         number;
+  created_at: Date;
+  updated_at: Date;
+}
+
+export type GroupUser = {
+  id:         number;
+  user_id:    number;
+  group_id:   number;
+  created_at: Date;
+  updated_at: Date;
+}
+
+export type GroupUserParams = {
+  userId:    number | undefined;
+  profileId: number | undefined;
+}
+
+// message
+export type Message = {
+  id:         number;
+  content:    string;
+  user_id:    number;
+  group_id:   number;
+  created_at: Date;
+  updated_at: Date;
+}
+export type MessageParams = {
+  user_id:  number | undefined;
+  group_id: number | string;
+  content:  string;
+}
+

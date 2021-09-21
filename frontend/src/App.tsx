@@ -11,24 +11,25 @@ import { EditProfile } from './components/pages/EditProfile';
 import { AuditionShow } from './components/pages/AuditionShow';
 import { CreateAudition } from './components/pages/smartPhone/CreateAudition';
 import { CreatePost } from './components/pages/smartPhone/CreatePost';
+import { ChatRoom } from './components/pages/ChatRoom';
 
 
 
 // ログインユーザーContextのtype型
 export type LoginUserContextType = {
-  loading:               boolean;
-  setLoading:            Dispatch<SetStateAction<boolean>>;
-  isSignedIn:            boolean;
-  setIsSignedIn:         Dispatch<SetStateAction<boolean>>;
-  currentUser:           User | undefined;
-  setCurrentUser:        Dispatch<SetStateAction<User | undefined>>;
+  loading:        boolean;
+  setLoading:     Dispatch<SetStateAction<boolean>>;
+  isSignedIn:     boolean;
+  setIsSignedIn:  Dispatch<SetStateAction<boolean>>;
+  currentUser:    User | undefined;
+  setCurrentUser: Dispatch<SetStateAction<User | undefined>>;
 }
 export const LoginUserContext = createContext<LoginUserContextType>({} as LoginUserContextType);
 
 function App() {
-  const [loading, setLoading]                      = useState<boolean>(true);
-  const [isSignedIn, setIsSignedIn]                = useState<boolean>(false);
-  const [currentUser, setCurrentUser]              = useState<User | undefined>();
+  const [loading, setLoading]         = useState<boolean>(true);
+  const [isSignedIn, setIsSignedIn]   = useState<boolean>(false);
+  const [currentUser, setCurrentUser] = useState<User | undefined>();
 
   // ログインユーザーの取得
   useEffect(() => {
@@ -85,6 +86,13 @@ function App() {
            <Route exact path="/post">
             <CreatePost />
            </Route>
+           <Route
+            exact 
+            path="/group/:groupId"
+            render={({ match }) => (
+              <ChatRoom id={match.params.groupId} />
+            )}
+           />
         </BrowserRouter>
       </LoginUserContext.Provider>
     </>

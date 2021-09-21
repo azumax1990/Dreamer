@@ -1,6 +1,8 @@
 import React, { memo, useContext, VFC } from 'react'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+
+
 import { LoginUserContext } from '../../../../App'
 import { Audition, Profile } from '../../../../types'
 
@@ -14,7 +16,6 @@ const AuditionContainer = styled.div`
   padding: 40px;
   margin: 0 auto;
   background-color: #fff;
-  
 `
 const TitleText = styled.h2`
   font-size: 28px;
@@ -74,13 +75,13 @@ const ApplyButton = styled.button`
 `
 type Props = {
   audition: Audition | undefined;
-  profile: Profile | undefined;
+  profile:  Profile | undefined;
 }
 
 export const PcResponsive: VFC<Props> = memo((props) => {
   const { audition, profile } = props;
   const { currentUser } = useContext(LoginUserContext)
-
+  
   return (
     <AuditionWrapper>
       <AuditionContainer>
@@ -107,7 +108,11 @@ export const PcResponsive: VFC<Props> = memo((props) => {
               <TableData></TableData>
             </TableRow>
           </Table>
-          <ApplyButton disabled={currentUser ? false : true}>応募する</ApplyButton>
+          {currentUser?.id === profile?.user_id ? (
+            <ApplyButton>応募を終了する</ApplyButton>
+          ) : ( 
+            <ApplyButton disabled={currentUser ? false : true}>応募する</ApplyButton>
+          )}
         </CompanyContainer>
       </AuditionContainer>
     </AuditionWrapper>

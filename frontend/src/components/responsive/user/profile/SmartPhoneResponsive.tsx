@@ -56,7 +56,7 @@ const ImagesWrapper = styled.div`
 
 type Props = {
   profile: Profile;
-  posts: Array<Post>;
+  posts:   Array<Post>;
 }
 
 export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
