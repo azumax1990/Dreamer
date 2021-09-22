@@ -23,12 +23,12 @@ export const CompanyProfile: VFC<Props> = memo((props) => {
   return (
     <>
       <MediaQuery query="(min-width: 768px)">
-        <ProfilePageHeader changeIsOpen={changeIsOpen} />
+        <ProfilePageHeader changeIsOpen={changeIsOpen} profile={profile}/>
         <PcResponsive profile={profile} isOpen={isOpen} setIsOpen={setIsOpen} posts={posts} setPosts={setPosts} groupId={groupId}/>
       </MediaQuery>
       <MediaQuery query="(max-width: 767px)">
-        <ProfileSmartPhoneHeader />
-        <SmartPhoneResponsive profile={profile} posts={posts}/>
+        <ProfileSmartPhoneHeader profile={profile}/>
+        <SmartPhoneResponsive profile={profile} posts={posts} groupId={groupId}/>
       </MediaQuery>
     </>
   )

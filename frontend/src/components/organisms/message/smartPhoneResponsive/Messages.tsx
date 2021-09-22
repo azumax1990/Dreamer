@@ -1,27 +1,29 @@
 import React, { memo, useContext, VFC } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { LoginUserContext } from '../../../App'
-import { Message, Profile } from '../../../types'
+import { LoginUserContext } from '../../../../App'
+import { Message, Profile } from '../../../../types'
 
 const CurrentUserMessageContainer = styled.div`
-  max-width: 300px;
+  max-width: 200px;
   margin-right: auto;
-  padding: 10px 15px;
+  padding: 5px 15px;
   box-shadow:  0 0 5px gray;
   border-radius: 10px;
   margin-bottom: 25px;
 `
 const MessageContainer = styled.div`
-  max-width: 300px;
+  max-width: 200px;
   margin-left: auto;
-  padding: 10px 15px;
+  padding: 5px 15px;
   box-shadow:  0 0 5px gray;
   border-radius: 10px;
   margin-bottom: 25px;
 `
 const UserNameText = styled.p`
   font-weight: bold;
+  padding-bottom: 5px;
+  margin: 0;
 `
 const TimeText = styled.p`
   opacity: 0.5;

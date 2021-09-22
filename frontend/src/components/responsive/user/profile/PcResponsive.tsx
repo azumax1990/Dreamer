@@ -97,7 +97,7 @@ export const PcResponsive: VFC<Props> = memo((props) => {
     .catch(() => alert('エラーが発生しました。もう一度お試しください。'))
   }
   const moveToMessageGroup = () => history.push(`/group/${groupId}`)
-  console.log(groupId)
+  
   return (
     <>
       <ProfileWrapper>
