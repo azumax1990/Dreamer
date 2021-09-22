@@ -4,7 +4,9 @@ import { LoginUserContext } from '../../App'
 import { useMessage } from '../../hooks/useMessage'
 import { MessageParams } from '../../types'
 import { MassagePageHeader } from '../organisms/header/pcResponsive/MassagePageHeader'
+import { MessagePageSmartPhoneHeader } from '../organisms/header/smartPhoneResponsive/MessagePageSmartPhoneHeader'
 import { PcResponsive } from '../responsive/message/PcResponsive'
+import { SmartPhoneResponsive } from '../responsive/message/SmartPhoneResponsive'
 
 type Props = {
   id: string;
@@ -35,7 +37,8 @@ export const ChatRoom: VFC<Props> = memo((props) => {
         <PcResponsive messages={messages} profiles={profiles} content={content} setContent={setContent} onCliCkPostMessage={onClickPostMessage} />
       </MediaQuery>
       <MediaQuery query="(max-width: 767px)">
-        
+        <MessagePageSmartPhoneHeader />
+        <SmartPhoneResponsive messages={messages} profiles={profiles} content={content} setContent={setContent} onCliCkPostMessage={onClickPostMessage}/>
       </MediaQuery>
     </>
   )

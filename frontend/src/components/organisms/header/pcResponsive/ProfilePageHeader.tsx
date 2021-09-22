@@ -8,6 +8,8 @@ import { LoginUserContext } from '../../../../App'
 import { HeaderItems } from '../../../atoms/header/pc/HeaderItems'
 import { HeaderLeft } from '../../../Molecules/header/pcResponsive/HeaderLeft'
 import { HeaderRight } from '../../../Molecules/header/pcResponsive/HeaderRight'
+import { Profile } from '../../../../types'
+import { useHistory } from 'react-router-dom'
 
 const HeaderWrapper = styled.header`
   height: 70px;
@@ -17,13 +19,14 @@ const HeaderWrapper = styled.header`
   padding: 0 80px;
   background-color: #E0FFFF;
 `
-
 type Props = {
   changeIsOpen: () => void;
+  profile:      Profile | undefined;
 }
 export const ProfilePageHeader: VFC<Props> = memo((props) => {
-  const { changeIsOpen } = props;
-  const { setCurrentUser } = useContext(LoginUserContext)
+  const { changeIsOpen, profile } = props;
+  const history = useHistory()
+  const { currentUser, setCurrentUser } = useContext(LoginUserContext)
 
   // ログアウト&Cookie削除
   const submitSignOut = () => {
@@ -38,13 +41,17 @@ export const ProfilePageHeader: VFC<Props> = memo((props) => {
     })
     .catch(() => alert("ログアウト出来ませんでした。"))
   }
-
+  const moveToMyPage = () => history.push(`{/user/${currentUser?.id}/profile}`)
   return (
     <>
       <HeaderWrapper>
         <HeaderLeft />
         <HeaderRight>
-          <HeaderItems onClick={changeIsOpen}>写真を投稿する</HeaderItems>
+          {currentUser?.id === profile?.user_id ? (
+            <HeaderItems onClick={changeIsOpen}>写真を投稿する</HeaderItems>
+          ) : (
+            <HeaderItems onClick={moveToMyPage}>Myページ</HeaderItems>
+          )}
           <HeaderItems onClick={submitSignOut}>ログアウト</HeaderItems>
         </HeaderRight>
       </HeaderWrapper>

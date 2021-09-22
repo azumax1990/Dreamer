@@ -1,6 +1,6 @@
 import React, { SetStateAction, VFC } from 'react'
 import styled from 'styled-components'
-import { Messages } from '../../organisms/message/Messages'
+import { Messages } from '../../organisms/message/pcResponsive/Messages'
 import { Message, Profile } from '../../../types'
 import { Dispatch } from 'react'
 
