@@ -38,7 +38,7 @@ type Props = {
   posts:   Array<Post>;
   groupId: number | undefined;
 }
-export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
+export const CompanyProfileSmartPhoneResponsive: VFC<Props> = memo((props) => {
   const { profile, posts, groupId } = props;
   const { currentUser } = useContext(LoginUserContext)
   const history = useHistory()

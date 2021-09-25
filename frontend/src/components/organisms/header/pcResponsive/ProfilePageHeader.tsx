@@ -21,10 +21,11 @@ const HeaderWrapper = styled.header`
 `
 type Props = {
   changeIsOpen: () => void;
+  ChangeMessageModalTrue: () => void;
   profile:      Profile | undefined;
 }
 export const ProfilePageHeader: VFC<Props> = memo((props) => {
-  const { changeIsOpen, profile } = props;
+  const { changeIsOpen, ChangeMessageModalTrue, profile } = props;
   const history = useHistory()
   const { currentUser, setCurrentUser } = useContext(LoginUserContext)
 
@@ -41,14 +42,18 @@ export const ProfilePageHeader: VFC<Props> = memo((props) => {
     })
     .catch(() => alert("ログアウト出来ませんでした。"))
   }
-  const moveToMyPage = () => history.push(`{/user/${currentUser?.id}/profile}`)
+  const moveToMyPage = () => (history.push(`/user/${currentUser?.id}/profile`))
+
   return (
     <>
       <HeaderWrapper>
         <HeaderLeft />
         <HeaderRight>
           {currentUser?.id === profile?.user_id ? (
-            <HeaderItems onClick={changeIsOpen}>写真を投稿する</HeaderItems>
+            <>
+              <HeaderItems onClick={changeIsOpen}>写真を投稿する</HeaderItems>
+              <HeaderItems onClick={ChangeMessageModalTrue}>メール</HeaderItems>
+            </>
           ) : (
             <HeaderItems onClick={moveToMyPage}>Myページ</HeaderItems>
           )}

@@ -16,7 +16,7 @@ export type User = {
   id:                  number;
   uid:                 string;
   provider:            string;
-  email:               string;
+  email?:               string;
   name?:               string;
   nickname?:           string;
   image?:              string;
@@ -86,6 +86,7 @@ export type Audition = {
   updated_at?: Date;
 }
 
+// audition作成
 export type AuditionParams = {
   id:          number | undefined;
   title:       string;
@@ -100,6 +101,7 @@ export type Group = {
   updated_at: Date;
 }
 
+// group_user取得
 export type GroupUser = {
   id:         number;
   user_id:    number;
@@ -108,6 +110,7 @@ export type GroupUser = {
   updated_at: Date;
 }
 
+// group_user作成
 export type GroupUserParams = {
   userId:    number | undefined;
   profileId: number | undefined;
@@ -122,6 +125,8 @@ export type Message = {
   created_at: Date;
   updated_at: Date;
 }
+
+// message作成
 export type MessageParams = {
   user_id:  number | undefined;
   group_id: number | string;
