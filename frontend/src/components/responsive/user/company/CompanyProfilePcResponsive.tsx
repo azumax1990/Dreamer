@@ -5,10 +5,11 @@ import { PostGroup } from '../../../../api/group'
 import { LoginUserContext } from '../../../../App'
 import { useSelectPost } from '../../../../hooks/useSelectPost'
 
-import { GroupUserParams, Post, Profile } from '../../../../types'
+import { Group, GroupUserParams, Message, Post, Profile } from '../../../../types'
 import { AddImageModal } from '../../../organisms/profile/pcResponsive/AddImageModal'
 import { Images } from '../../../organisms/profile/pcResponsive/Images'
 import { ModalImages } from '../../../organisms/profile/pcResponsive/ModalImages'
+import { ModalMessages } from '../../../organisms/profile/pcResponsive/ModalMessages'
 
 
 const ProfileWrapper = styled.div`
@@ -43,15 +44,20 @@ const ImagesWrapper = styled.div`
   flex-wrap: wrap;
 `
 type Props ={
-  profile:   Profile | undefined;
-  isOpen:    boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-  posts:     Array<Post>;
-  setPosts:  Dispatch<React.SetStateAction<Array<Post>>>;
-  groupId:   number | undefined;
+  profile:          Profile | undefined;
+  isOpen:           boolean;
+  setIsOpen:        Dispatch<SetStateAction<boolean>>;
+  posts:            Array<Post>;
+  setPosts:         Dispatch<React.SetStateAction<Array<Post>>>;
+  groupId:          number | undefined;
+  groups:           Array<Group>;
+  messages:         Array<Message>;
+  profiles:         Array<Profile>;
+  messageModalOpen: boolean;
+  ChangeMessageModalFalse: () => void;
 }
-export const PcResponsive: VFC<Props> = memo((props) => {
-  const { profile, isOpen, setIsOpen, posts, setPosts, groupId } = props;
+export const CompanyProfilePcResponsive: VFC<Props> = memo((props) => {
+  const { profile, isOpen, setIsOpen, posts, setPosts, groupId, groups, messageModalOpen, ChangeMessageModalFalse, messages, profiles } = props;
 
   const { currentUser } = useContext(LoginUserContext)
   const history = useHistory()
@@ -106,6 +112,9 @@ export const PcResponsive: VFC<Props> = memo((props) => {
       ) : (null)}
       {isOpen ? (
         <AddImageModal setIsOpen={setIsOpen} posts={posts} setPosts={setPosts}/>
+      ) : (null)}
+      {messageModalOpen ? (
+        <ModalMessages ChangeMessageModalFalse={ChangeMessageModalFalse} groups={groups} profile={profile} messages={messages} profiles={profiles}/>
       ) : (null)}
     </>
   )
