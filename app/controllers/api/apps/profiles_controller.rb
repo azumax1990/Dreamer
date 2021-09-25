@@ -5,9 +5,16 @@ class ::Api::Apps::ProfilesController < ApplicationController
     profile = user.prepare_profile
 
     groups = user.groups
+    messages    = []
+    profiles    = []
     group_users = []
     groups.each do |group|
       group_users << group.group_users
+      profiles    << group.users[0].profile
+      profiles    << group.users[1].profile
+      if group.messages
+        messages << group.messages.last
+      end
     end
 
     group_members = []
@@ -16,7 +23,7 @@ class ::Api::Apps::ProfilesController < ApplicationController
       group_members << group_user[1]
     end
 
-    render json: {profile: profile, group_members: group_members}, methods: [:avatar_url]
+    render json: { profile: profile, groups: groups, group_members: group_members, messages: messages, profiles: profiles }, methods: [:avatar_url]
   end
 
   def edit
