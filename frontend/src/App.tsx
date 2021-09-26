@@ -12,6 +12,7 @@ import { AuditionShow } from './components/pages/AuditionShow';
 import { CreateAudition } from './components/pages/smartPhone/CreateAudition';
 import { CreatePost } from './components/pages/smartPhone/CreatePost';
 import { ChatRoom } from './components/pages/ChatRoom';
+import { MessageIndex } from './components/pages/smartPhone/MessageIndex';
 
 
 
@@ -91,6 +92,13 @@ function App() {
             path="/group/:groupId"
             render={({ match }) => (
               <ChatRoom id={match.params.groupId} />
+            )}
+           />
+           <Route 
+            exact 
+            path="/user/:userId/groups"
+            render={({ match }) => (
+              <MessageIndex id={match.params.userId}/>
             )}
            />
         </BrowserRouter>
