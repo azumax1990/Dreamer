@@ -1,20 +1,16 @@
-class ::Api::Apps::ProfilesController < ApplicationController
+class ::Api::ProfilesController < ApplicationController
 
   def show
     user = User.find(params[:id])
-    profile = user.prepare_profile
-
-    groups = user.groups
+    profile = user.prepare_profile(user)
     messages    = []
     profiles    = []
     group_users = []
+    groups = user.groups
     groups.each do |group|
       group_users << group.group_users
-      profiles    << group.users[0].profile
-      profiles    << group.users[1].profile
-      if group.messages
-        messages << group.messages.last
-      end
+      group.profiles(profiles, group)
+      group.last_messages(messages, group)
     end
 
     group_members = []
@@ -22,19 +18,18 @@ class ::Api::Apps::ProfilesController < ApplicationController
       group_members << group_user[0]
       group_members << group_user[1]
     end
-
     render json: { profile: profile, groups: groups, group_members: group_members, messages: messages, profiles: profiles }, methods: [:avatar_url]
   end
 
   def edit
     user = User.find(params[:id])
-    profile = user.prepare_profile
+    profile = user.prepare_profile(user)
     render json: profile
   end
 
   def update
     user = User.find(params[:id])
-    profile = user.prepare_profile
+    profile = user.prepare_profile(user)
     profile.assign_attributes(profile_params)
     if params[:avatar][:data] != ""
       profile.avatar.attach(io: StringIO.new(decode(params[:avatar][:data]) + "\n"),

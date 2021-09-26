@@ -38,10 +38,14 @@ export const ProfilePageHeader: VFC<Props> = memo((props) => {
         Cookies.remove("client")
         Cookies.remove("uid")
         setCurrentUser(undefined)
+        history.push("/auditions")
+        alert("ログアウトしました")
       } 
     })
     .catch(() => alert("ログアウト出来ませんでした。"))
   }
+  const moveToSignUpPage  = () => (history.push("/sign_up"))
+  const moveToSignInPage  = () => (history.push("/sign_in"))
   const moveToMyPage = () => (history.push(`/user/${currentUser?.id}/profile`))
 
   return (
@@ -49,15 +53,24 @@ export const ProfilePageHeader: VFC<Props> = memo((props) => {
       <HeaderWrapper>
         <HeaderLeft />
         <HeaderRight>
-          {currentUser?.id === profile?.user_id ? (
+          { !currentUser ? (
+            <>
+              <HeaderItems onClick={moveToSignUpPage}>新規登録</HeaderItems>
+              <HeaderItems onClick={moveToSignInPage}>ログイン</HeaderItems>
+            </>
+          ) 
+           : currentUser?.id === profile?.user_id ? (
             <>
               <HeaderItems onClick={changeIsOpen}>写真を投稿する</HeaderItems>
-              <HeaderItems onClick={ChangeMessageModalTrue}>メール</HeaderItems>
+              <HeaderItems onClick={ChangeMessageModalTrue}>メッセージ</HeaderItems>
+              <HeaderItems onClick={submitSignOut}>ログアウト</HeaderItems>
             </>
           ) : (
-            <HeaderItems onClick={moveToMyPage}>Myページ</HeaderItems>
+            <>
+              <HeaderItems onClick={moveToMyPage}>Myページ</HeaderItems>
+              <HeaderItems onClick={submitSignOut}>ログアウト</HeaderItems>
+            </>
           )}
-          <HeaderItems onClick={submitSignOut}>ログアウト</HeaderItems>
         </HeaderRight>
       </HeaderWrapper>
     </>

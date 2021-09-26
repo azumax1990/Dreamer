@@ -1,15 +1,12 @@
 import React, { VFC } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import { Message, Profile, Group } from '../../../../types'
+import { Group, Message, Profile } from '../../../../types'
 
 const MessageContainer = styled.div`
   display: flex;
-  padding: 5px 0;
+  padding: 7px 0;
   cursor: pointer;
-  &:hover {
-    opacity: 0.7;
-  }
 `
 const AvatarContainer = styled.div`
 `
@@ -23,9 +20,11 @@ const ContentContainer = styled.div`
 `
 const MessageAccount = styled.p`
   font-weight: bold;
+  padding-top: 5px;
   margin: 0;
 `
 const MessageText = styled.p`
+  padding-top: 5px;
   margin: 0;
   opacity: 0.7;
   height: 24px;
@@ -37,7 +36,8 @@ type Props = {
   lastMessage:     Message | undefined;
   index:           number;
 }
-export const ModalMessage: VFC<Props> = (props) => {
+  
+export const GroupMessages: VFC<Props> = (props) => {
   const { group, lastMessage, selectedProfile, index } = props
   const history = useHistory()
   const moveToMessageGroup = () => (history.push(`/group/${group.id}`))

@@ -27,8 +27,8 @@ export type User = {
 
 // プロフィール
 export type Profile = {
-  id?:           number;
-  user_id?:      number;
+  id:            number;
+  user_id:       number;
   name?:         string;
   job:           string;
   avatar_url:    string;
@@ -39,8 +39,8 @@ export type Profile = {
   introduction?: string;
   company?:      string;
   description?:  string;
-  created_at?:   Date;
-  updated_at?:   Date;
+  created_at:    Date;
+  updated_at:    Date;
 }
 
 // プロフィール更新

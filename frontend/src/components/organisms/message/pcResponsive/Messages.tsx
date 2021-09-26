@@ -66,7 +66,7 @@ export const Messages: VFC<Props> = memo((props) => {
               <UserNameText>{selectedProfile?.name || selectedProfile?.company}</UserNameText>
             </Link>
           ) : (
-            <Link to={`/user/${selectedProfile?.id}/profile`} style={{ textDecoration: "none", color: "black" }} >
+            <Link to={`/user/${selectedProfile?.user_id}/profile`} style={{ textDecoration: "none", color: "black" }} >
               <UserNameText>ゲスト</UserNameText>
             </Link>
           )}

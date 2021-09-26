@@ -64,8 +64,8 @@ const SubmitButton = styled.button`
   cursor: pointer;
 `
 export const SignUp: VFC = memo(() => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail]                               = useState('')
+  const [password, setPassword]                         = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
 
   const { setCurrentUser } = useContext(LoginUserContext)
@@ -88,7 +88,7 @@ export const SignUp: VFC = memo(() => {
         Cookies.set('client', res.headers['client']);
         Cookies.set('uid', res.headers['uid']);
         setCurrentUser(res.data.data)
-        history.push("/auditions")
+        history.push(`/user/${res.data.data.id}/profile`)
       } else {
         alert("登録出来ませんでした")
       }

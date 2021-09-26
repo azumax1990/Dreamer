@@ -31,17 +31,29 @@ export const AuditionPageHeader: VFC = memo(() => {
         Cookies.remove("client")
         Cookies.remove("uid")
         setCurrentUser(undefined)
+        alert("ログアウトしました")
       } 
     })
     .catch(() => alert("ログアウト出来ませんでした。"))
   }
+  const moveToSignUpPage  = () => (history.push("/sign_up"))
+  const moveToSignInPage  = () => (history.push("/sign_in"))
   const moveToProfilePage = () => (history.push(`/user/${currentUser?.id}/profile`))
   return (
     <HeaderWrapper>
       <HeaderLeft />
       <HeaderRight>
-        <HeaderItems onClick={moveToProfilePage}>Myページ</HeaderItems>
-        <HeaderItems onClick={submitSignOut}>ログアウト</HeaderItems>
+        {!currentUser ? (
+            <>
+              <HeaderItems onClick={moveToSignUpPage}>新規登録</HeaderItems>
+              <HeaderItems onClick={moveToSignInPage}>ログイン</HeaderItems>
+            </>
+          ) : (
+            <>
+              <HeaderItems onClick={moveToProfilePage}>Myページ</HeaderItems>
+              <HeaderItems onClick={submitSignOut}>ログアウト</HeaderItems>
+            </>
+          )}
       </HeaderRight>
     </HeaderWrapper>
   )

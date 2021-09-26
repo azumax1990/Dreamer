@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { LoginUserContext } from '../../../../App'
-import { Group, GroupUserParams, Post, Profile, Message } from '../../../../types'
+import { Group, GroupUserParams, Post, Profile, Message, GroupUser } from '../../../../types'
 import avatarImage from '../../../../images/no-avatar.jpeg'
 import { useSelectPost } from '../../../../hooks/useSelectPost'
 
@@ -74,12 +74,13 @@ type Props = {
   groups:           Array<Group>;
   messages:         Array<Message>;
   profiles:         Array<Profile>;
+  groupUsers:       Array<GroupUser>;
   messageModalOpen: boolean;
   ChangeMessageModalFalse: () => void;
 }
 
 export const PcResponsive: VFC<Props> = memo((props) => {
-  const { profile, isOpen, setIsOpen, posts, setPosts, groupId, groups, messageModalOpen, ChangeMessageModalFalse, messages, profiles } = props
+  const { profile, isOpen, setIsOpen, posts, setPosts, groupId, groups, messageModalOpen, ChangeMessageModalFalse, messages, groupUsers, profiles } = props
 
   const { currentUser } = useContext(LoginUserContext)
   const history = useHistory()
@@ -117,7 +118,7 @@ export const PcResponsive: VFC<Props> = memo((props) => {
         <ProfileRightWrapper>
           <ProfileNameContainer>
             { profile.name ? (<UserName>{profile.name}</UserName>) : (<UserName>未設定</UserName>) }
-            { currentUser?.id === profile?.user_id ? (
+            {/* { currentUser?.id === profile?.user_id ? (
               <Link to={`/user/${currentUser?.id}/profile/edit`}>
                 <EditButton>編集する</EditButton>
               </Link>
@@ -125,7 +126,17 @@ export const PcResponsive: VFC<Props> = memo((props) => {
               <EditButton onClick={moveToMessageGroup}>メールをする</EditButton>)
                : (
               <EditButton onClick={onClickPostGroup}>メールをする</EditButton>)
-            }
+            } */}
+            { !currentUser ? (null) : currentUser.id === profile.user_id ? (
+                <Link to={`/user/${currentUser?.id}/profile/edit`}>
+                  <EditButton>編集する</EditButton>
+                </Link> 
+                ) : groupId ? (
+                  <EditButton onClick={moveToMessageGroup}>メールをする</EditButton>)
+                  : (
+                  <EditButton onClick={onClickPostGroup}>メールをする</EditButton>
+                  )
+             }
           </ProfileNameContainer>
           <ProfileInfoContainer>
             {profile.gender ? (<ProfileText>性別 : {profile.gender}</ProfileText>) : (<ProfileText>性別 : 未設定</ProfileText>)}
@@ -150,7 +161,7 @@ export const PcResponsive: VFC<Props> = memo((props) => {
         <AddImageModal setIsOpen={setIsOpen} posts={posts} setPosts={setPosts}/>
       ) : (null)}
       {messageModalOpen ? (
-        <ModalMessages ChangeMessageModalFalse={ChangeMessageModalFalse} groups={groups} profile={profile} messages={messages} profiles={profiles}/>
+        <ModalMessages ChangeMessageModalFalse={ChangeMessageModalFalse} groups={groups} profile={profile} messages={messages} profiles={profiles} groupUsers={groupUsers}/>
       ) : (null)}
     </>
   )

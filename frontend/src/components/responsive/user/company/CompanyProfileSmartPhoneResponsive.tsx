@@ -63,7 +63,7 @@ export const CompanyProfileSmartPhoneResponsive: VFC<Props> = memo((props) => {
       <ProfileWrapper>
         <ProfileNameContainer>
           { profile?.company ? (<CompanyName>{profile.company}</CompanyName>) : (<CompanyName>未設定</CompanyName>)}
-          { currentUser?.id === profile?.user_id ? (
+          { !currentUser ? (null): currentUser?.id === profile?.user_id ? (
             <Link to={`/user/${currentUser?.id}/profile/edit`}>
               <EditButton>編集する</EditButton>
             </Link>
