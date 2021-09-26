@@ -35,9 +35,10 @@ export const TopPageHeader: VFC<Props> = memo((props) => {
         Cookies.remove("client")
         Cookies.remove("uid")
         setCurrentUser(undefined)
+        alert("ログアウトしました")
       } 
     })
-    .catch(() => alert("ログアウト出来ませんでした。"))
+    .catch(() => alert("ログアウト出来ませんでした"))
   }
 
   const moveToSignUpPage  = () => (history.push("/sign_up"))
@@ -58,7 +59,6 @@ export const TopPageHeader: VFC<Props> = memo((props) => {
           <>
             <HeaderItems onClick={moveToSignUpPage}>新規登録</HeaderItems>
             <HeaderItems onClick={moveToSignInPage}>ログイン</HeaderItems>
-            <HeaderItems onClick={submitSignOut}>ログアウト</HeaderItems>
           </>
         )}
         </HeaderRight>
