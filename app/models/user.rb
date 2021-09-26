@@ -14,7 +14,13 @@ class User < ActiveRecord::Base
   has_many :groups, through: :group_users
   has_one :profile, dependent: :destroy
   
-  def prepare_profile
-    profile || build_profile
+  def prepare_profile(user)
+    if user.profile
+      return user.profile
+      else
+        profile = user.build_profile(user_id: user.id)
+        profile.save
+        return profile
+    end
   end
 end
