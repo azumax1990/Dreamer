@@ -88,7 +88,7 @@ export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
         <ProfileLeftWrapper>
           <ProfileNameContainer>
             { profile.name ? (<UserName>{profile.name}</UserName>) : (<UserName>未設定</UserName>)}
-            { currentUser?.id === profile?.user_id ? (
+            { !currentUser ? (null) : currentUser?.id === profile?.user_id ? (
               <Link to={`/user/${currentUser?.id}/profile/edit`}>
                 <EditButton>編集する</EditButton>
               </Link>

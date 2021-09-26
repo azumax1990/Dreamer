@@ -5,7 +5,7 @@ import { PostGroup } from '../../../../api/group'
 import { LoginUserContext } from '../../../../App'
 import { useSelectPost } from '../../../../hooks/useSelectPost'
 
-import { Group, GroupUserParams, Message, Post, Profile } from '../../../../types'
+import { Group, GroupUser, GroupUserParams, Message, Post, Profile } from '../../../../types'
 import { AddImageModal } from '../../../organisms/profile/pcResponsive/AddImageModal'
 import { Images } from '../../../organisms/profile/pcResponsive/Images'
 import { ModalImages } from '../../../organisms/profile/pcResponsive/ModalImages'
@@ -53,11 +53,12 @@ type Props ={
   groups:           Array<Group>;
   messages:         Array<Message>;
   profiles:         Array<Profile>;
+  groupUsers:       Array<GroupUser>;
   messageModalOpen: boolean;
   ChangeMessageModalFalse: () => void;
 }
 export const CompanyProfilePcResponsive: VFC<Props> = memo((props) => {
-  const { profile, isOpen, setIsOpen, posts, setPosts, groupId, groups, messageModalOpen, ChangeMessageModalFalse, messages, profiles } = props;
+  const { profile, isOpen, setIsOpen, posts, setPosts, groupId, groups, messageModalOpen, ChangeMessageModalFalse, messages, profiles, groupUsers } = props;
 
   const { currentUser } = useContext(LoginUserContext)
   const history = useHistory()
@@ -88,14 +89,15 @@ export const CompanyProfilePcResponsive: VFC<Props> = memo((props) => {
       <ProfileWrapper>
         <ProfileNameContainer>
           { profile?.company ? (<CompanyName>{profile.company}</CompanyName>) : (<CompanyName>未設定</CompanyName>)}
-          { currentUser?.id === profile?.user_id ? (
+          { !currentUser ? (null) : currentUser.id === profile?.user_id ? (
             <Link to={`/user/${currentUser?.id}/profile/edit`}>
               <EditButton>編集する</EditButton>
-            </Link>
+            </Link> 
             ) : groupId ? (
-              <EditButton onClick={moveToMessageGroup}>メールをする</EditButton>)
-               : (
-              <EditButton onClick={onClickPostGroup}>メールをする</EditButton>)
+              <EditButton onClick={moveToMessageGroup}>メールをする</EditButton>
+             ) : (
+              <EditButton onClick={onClickPostGroup}>メールをする</EditButton>
+              )
           }
         </ProfileNameContainer>
         <IntroductionContainer>
@@ -114,7 +116,7 @@ export const CompanyProfilePcResponsive: VFC<Props> = memo((props) => {
         <AddImageModal setIsOpen={setIsOpen} posts={posts} setPosts={setPosts}/>
       ) : (null)}
       {messageModalOpen ? (
-        <ModalMessages ChangeMessageModalFalse={ChangeMessageModalFalse} groups={groups} profile={profile} messages={messages} profiles={profiles}/>
+        <ModalMessages ChangeMessageModalFalse={ChangeMessageModalFalse} groups={groups} profile={profile} messages={messages} profiles={profiles} groupUsers={groupUsers}/>
       ) : (null)}
     </>
   )
