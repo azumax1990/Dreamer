@@ -31,5 +31,9 @@ export const usePostImages = () => {
       reader.readAsDataURL(file)
     }
   }, [setImage])
-  return { content, setContent, image, params, onChangeImage, post }
+
+  const resetImage = useCallback(() => {
+    setImage({ data: '', name: ''})
+  }, [image])
+  return { content, setContent, image, resetImage, params, onChangeImage, post }
 }

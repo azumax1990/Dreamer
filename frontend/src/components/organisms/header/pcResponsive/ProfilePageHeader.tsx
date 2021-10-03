@@ -17,15 +17,16 @@ const HeaderWrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 0 80px;
-  background-color: #E0FFFF;
+  border-bottom: 1px #cccccc solid;
 `
 type Props = {
   changeIsOpen: () => void;
-  ChangeMessageModalTrue: () => void;
+  ChangeMessageModalOpen: () => void;
+  ChangeAuditionModalOpen: () => void;
   profile:      Profile | undefined;
 }
 export const ProfilePageHeader: VFC<Props> = memo((props) => {
-  const { changeIsOpen, ChangeMessageModalTrue, profile } = props;
+  const { changeIsOpen, ChangeMessageModalOpen, ChangeAuditionModalOpen, profile } = props;
   const history = useHistory()
   const { currentUser, setCurrentUser } = useContext(LoginUserContext)
 
@@ -62,7 +63,8 @@ export const ProfilePageHeader: VFC<Props> = memo((props) => {
            : currentUser?.id === profile?.user_id ? (
             <>
               <HeaderItems onClick={changeIsOpen}>写真を投稿する</HeaderItems>
-              <HeaderItems onClick={ChangeMessageModalTrue}>メッセージ</HeaderItems>
+              <HeaderItems onClick={ChangeMessageModalOpen}>メッセージ</HeaderItems>
+              <HeaderItems onClick={ChangeAuditionModalOpen}>募集リスト</HeaderItems>
               <HeaderItems onClick={submitSignOut}>ログアウト</HeaderItems>
             </>
           ) : (

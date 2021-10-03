@@ -28,6 +28,9 @@ export const usePostAudition = () => {
     description: description,
     image: image
   }
+  const resetImage = useCallback(() => {
+    setImage({ data: '', name: ''})
+  }, [image])
 
-  return { onChangeImage, params, title, setTitle, description, setDescription, image, setImage }
+  return { onChangeImage, params, title, setTitle, description, setDescription, image, resetImage, setImage }
 }

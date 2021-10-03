@@ -77,7 +77,7 @@ export type paramsPost = {
 
 // audition
 export type Audition = {
-  id?:         number;
+  id:          number;
   user_id?:    number;
   title:       string;
   description: string;
@@ -131,5 +131,10 @@ export type MessageParams = {
   user_id:  number | undefined;
   group_id: number | string;
   content:  string;
+}
+
+// apply作成
+export type ApplyParams = {
+  user_id:     number | undefined;
 }
 

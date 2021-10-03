@@ -83,7 +83,8 @@ export const EditProfile: VFC<Props> = memo((props) => {
           onChangePrefecture,
           onChangeIntroduction,
           onChangeCompany,
-          onChangeDescription} = useEditProfile()
+          onChangeDescription,
+          resetImage} = useEditProfile()
 
   // 編集プロフィール取得
   useEffect(() => {
@@ -110,6 +111,7 @@ export const EditProfile: VFC<Props> = memo((props) => {
             {job === '演者' ? (
               <EditPlayerProfile job={job}
                                 name={name}
+                                avatar={avatar}
                                 age={age}
                                 gender={gender}
                                 tall={tall}
@@ -123,6 +125,7 @@ export const EditProfile: VFC<Props> = memo((props) => {
                                 onChangeTall={onChangeTall}
                                 onChangePrefecture={onChangePrefecture}
                                 onChangeIntroduction={onChangeIntroduction}
+                                resetImage={resetImage}
               />
             ) : (
               <EditCompanyProfile job={job}
@@ -144,6 +147,7 @@ export const EditProfile: VFC<Props> = memo((props) => {
             {job === '演者' ? (
               <EditPlayerProfile job={job}
                                  name={name}
+                                 avatar={avatar}
                                  age={age}
                                  gender={gender}
                                  tall={tall}
@@ -157,6 +161,7 @@ export const EditProfile: VFC<Props> = memo((props) => {
                                  onChangeTall={onChangeTall}
                                  onChangePrefecture={onChangePrefecture}
                                  onChangeIntroduction={onChangeIntroduction}
+                                 resetImage={resetImage}
               />
             ) : (
               <EditCompanyProfile job={job}

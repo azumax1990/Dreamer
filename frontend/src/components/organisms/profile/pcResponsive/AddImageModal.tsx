@@ -40,6 +40,14 @@ const InputContainer = styled.div`
 const InputImageTag = styled.input`
   display: none;
 `
+const ResetButton = styled.button`
+  display: block;
+  padding: 5px 10px;
+  margin-bottom: 15px;
+  border: none;
+  box-shadow:  0 0 4px gray;
+  cursor: pointer;
+`
 const ImgPreview = styled.img`
   width: 100%;
   height: 200px;
@@ -66,7 +74,7 @@ const ButtonTag = styled.button`
   padding: 5px 15px;
   margin-left: 20px;
   border: none;
-  box-shadow:  0 0 3px gray;
+  box-shadow:  0 0 4px gray;
   cursor: pointer;
 `
 const SpanTag = styled.span`
@@ -83,7 +91,7 @@ type Props = {
 export const AddImageModal: VFC<Props> = (props) => {
   const { setIsOpen, posts, setPosts } = props;
   
-  const { content, setContent, image, params, onChangeImage, post } = usePostImages()
+  const { content, setContent, image, resetImage, params, onChangeImage, post } = usePostImages()
 
   const SubmitPosts = () => {
     PostImages(params)
@@ -102,7 +110,12 @@ export const AddImageModal: VFC<Props> = (props) => {
             <LabelIconTag htmlFor="formImage"><FaCamera /><SpanTag>写真を追加する</SpanTag></LabelIconTag>
             <InputImageTag type="file" id="formImage" name="image"onChange={onChangeImage}/>
           </InputContainer>
-          {image.data !== '' ? (<ImgPreview src={image.data}/>) : (null)}
+          {image.data !== '' ? (
+            <>
+              <ResetButton onClick={resetImage}>リセット</ResetButton>
+              <ImgPreview src={image.data}/>
+            </>
+            ) : (null)}
           <InputContainer>
             <LabelTag htmlFor="formContent">コメント</LabelTag>
             <InputTag id="formContent" value={content} onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value)}/>

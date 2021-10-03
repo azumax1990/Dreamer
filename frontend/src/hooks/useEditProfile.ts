@@ -57,6 +57,10 @@ export const useEditProfile = () => {
     }
   }, [setAvatar])
 
+  const resetImage = useCallback(() => {
+    setAvatar({ data: '', name: ''})
+  }, [avatar])
+
   const onChangeJob = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setJob(e.target.value)
   }, [setJob])
@@ -123,6 +127,7 @@ export const useEditProfile = () => {
            onChangePrefecture,
            onChangeIntroduction,
            onChangeCompany,
-           onChangeDescription
+           onChangeDescription,
+           resetImage
           }
 }

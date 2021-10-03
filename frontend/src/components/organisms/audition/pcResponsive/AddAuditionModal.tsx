@@ -1,10 +1,11 @@
-import React, { Dispatch, VFC } from 'react'
+import React, { Dispatch, useContext, VFC } from 'react'
 import styled from 'styled-components'
 import { FaCamera } from 'react-icons/fa'
 
 import { PostAudition } from '../../../../api/audition'
 import { Audition } from '../../../../types'
 import { usePostAudition } from '../../../../hooks/usePostAudition'
+import { LoginUserContext } from '../../../../App'
 
 const ModalWrapper = styled.div`
 `
@@ -50,6 +51,14 @@ const InputTittle = styled.input`
 const InputImageTag = styled.input`
   display: none;
 `
+const ResetButton = styled.button`
+  display: block;
+  padding: 5px 10px;
+  margin-bottom: 15px;
+  border: none;
+  box-shadow:  0 0 4px gray;
+  cursor: pointer;
+`
 const ImgPreview = styled.img`
   width: 100%;
   height: 200px;
@@ -76,7 +85,7 @@ const ButtonTag = styled.button`
   padding: 5px 15px;
   margin-left: 20px;
   border: none;
-  box-shadow:  0 0 3px gray;
+  box-shadow:  0 0 4px gray;
   cursor: pointer;
 `
 const SpanTag = styled.span`
@@ -93,12 +102,14 @@ type  Props = {
 
 export const AddAuditionModal: VFC<Props> = (props) => {
   const { setIsOpen, auditions, setAuditions } = props;
-  const { onChangeImage, params, title, setTitle, description, setDescription, image, setImage } = usePostAudition()
+  const { onChangeImage, params, title, setTitle, description, setDescription, image, resetImage, setImage } = usePostAudition()
+  const { currentUser } = useContext(LoginUserContext)
 
   const id: number = auditions.length + 1
-  
+
   const audition: Audition = {
     id: id,
+    user_id: currentUser?.id,
     title: title,
     description: description,
     image_url: image.data
@@ -127,7 +138,12 @@ export const AddAuditionModal: VFC<Props> = (props) => {
             <LabelIconTag htmlFor="formImage"><FaCamera /><SpanTag>写真を追加する</SpanTag></LabelIconTag>
             <InputImageTag type="file" id="formImage" onChange={onChangeImage} />
           </InputContainer>
-            {image.data ? (<ImgPreview src={image.data}/>) : (null)}
+            {image.data ? (
+              <>
+                <ResetButton onClick={resetImage} >リセット</ResetButton>
+                <ImgPreview src={image.data}/>
+              </>
+              ) : (null)}
           <InputContainer>
             <LabelTag htmlFor="formDescription">募集内容</LabelTag>
             <InputTag id="formDescription" value={description} onChange={(e) => setDescription(e.target.value)} />

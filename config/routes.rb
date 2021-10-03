@@ -16,8 +16,10 @@ Rails.application.routes.draw do
         resources :messages, only: [:index, :create, :destroy]
       end
     end
-    resources :profiles, only: [:show, :edit, :update]
 
-    resources :auditions, only: [:index, :show, :create, :edit, :destroy]
+    resources :profiles, only: [:show, :edit, :update]
+    resources :auditions, only: [:index, :show, :create, :edit, :destroy] do
+      resources :applies, only: [:create]
+    end
   end
 end

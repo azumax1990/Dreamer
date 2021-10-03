@@ -3,6 +3,8 @@ class ::Api::ProfilesController < ApplicationController
   def show
     user = User.find(params[:id])
     profile = user.prepare_profile(user)
+    auditions = user.auditions
+    
     messages    = []
     profiles    = []
     group_users = []
@@ -18,7 +20,7 @@ class ::Api::ProfilesController < ApplicationController
       group_members << group_user[0]
       group_members << group_user[1]
     end
-    render json: { profile: profile, groups: groups, group_members: group_members, messages: messages, profiles: profiles }, methods: [:avatar_url]
+    render json: { profile: profile, groups: groups, group_members: group_members, messages: messages, profiles: profiles, auditions: auditions }, methods: [:avatar_url]
   end
 
   def edit

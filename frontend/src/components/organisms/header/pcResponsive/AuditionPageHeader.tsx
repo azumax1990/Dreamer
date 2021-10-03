@@ -16,7 +16,7 @@ const HeaderWrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 0 80px;
-  background-color: #E0FFFF;
+  border-bottom: 1px #cccccc solid;
 `
 export const AuditionPageHeader: VFC = memo(() => {
   const { currentUser, setCurrentUser } = useContext(LoginUserContext)
@@ -31,6 +31,7 @@ export const AuditionPageHeader: VFC = memo(() => {
         Cookies.remove("client")
         Cookies.remove("uid")
         setCurrentUser(undefined)
+        history.push("/auditions")
         alert("ログアウトしました")
       } 
     })
