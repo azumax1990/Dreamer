@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { LoginUserContext } from '../../../../App'
-import { Group, GroupUserParams, Post, Profile, Message, GroupUser } from '../../../../types'
+import { Group, GroupUserParams, Post, Profile, Message, GroupUser, Audition } from '../../../../types'
 import avatarImage from '../../../../images/no-avatar.jpeg'
 import { useSelectPost } from '../../../../hooks/useSelectPost'
 
@@ -12,6 +12,7 @@ import { Images } from '../../../organisms/profile/pcResponsive/Images'
 import { ModalImages } from '../../../organisms/profile/pcResponsive/ModalImages'
 import { PostGroup } from '../../../../api/group'
 import { ModalMessages } from '../../../organisms/profile/pcResponsive/ModalMessages'
+import { ModalAuditions } from '../../../organisms/profile/pcResponsive/ModalAuditions'
 
 const ProfileWrapper = styled.div`
   padding: 100px 170px;
@@ -76,11 +77,14 @@ type Props = {
   profiles:         Array<Profile>;
   groupUsers:       Array<GroupUser>;
   messageModalOpen: boolean;
-  ChangeMessageModalFalse: () => void;
+  ChangeMessageModalOpen: () => void;
+  auditions:        Array<Audition>;
+  auditionModalOpen:boolean;
+  ChangeAuditionModalOpen: () => void
 }
 
 export const PcResponsive: VFC<Props> = memo((props) => {
-  const { profile, isOpen, setIsOpen, posts, setPosts, groupId, groups, messageModalOpen, ChangeMessageModalFalse, messages, groupUsers, profiles } = props
+  const { profile, isOpen, setIsOpen, posts, setPosts, groupId, groups, messageModalOpen, ChangeMessageModalOpen, messages, groupUsers, profiles, auditions, auditionModalOpen, ChangeAuditionModalOpen } = props
 
   const { currentUser } = useContext(LoginUserContext)
   const history = useHistory()
@@ -118,15 +122,6 @@ export const PcResponsive: VFC<Props> = memo((props) => {
         <ProfileRightWrapper>
           <ProfileNameContainer>
             { profile.name ? (<UserName>{profile.name}</UserName>) : (<UserName>未設定</UserName>) }
-            {/* { currentUser?.id === profile?.user_id ? (
-              <Link to={`/user/${currentUser?.id}/profile/edit`}>
-                <EditButton>編集する</EditButton>
-              </Link>
-              ) : groupId ? (
-              <EditButton onClick={moveToMessageGroup}>メールをする</EditButton>)
-               : (
-              <EditButton onClick={onClickPostGroup}>メールをする</EditButton>)
-            } */}
             { !currentUser ? (null) : currentUser.id === profile.user_id ? (
                 <Link to={`/user/${currentUser?.id}/profile/edit`}>
                   <EditButton>編集する</EditButton>
@@ -161,7 +156,10 @@ export const PcResponsive: VFC<Props> = memo((props) => {
         <AddImageModal setIsOpen={setIsOpen} posts={posts} setPosts={setPosts}/>
       ) : (null)}
       {messageModalOpen ? (
-        <ModalMessages ChangeMessageModalFalse={ChangeMessageModalFalse} groups={groups} profile={profile} messages={messages} profiles={profiles} groupUsers={groupUsers}/>
+        <ModalMessages ChangeMessageModalOpen={ChangeMessageModalOpen} groups={groups} profile={profile} messages={messages} profiles={profiles} groupUsers={groupUsers}/>
+      ) : (null)}
+      {auditionModalOpen ? (
+        <ModalAuditions auditions={auditions} ChangeAuditionModalOpen={ChangeAuditionModalOpen}/>
       ) : (null)}
     </>
   )

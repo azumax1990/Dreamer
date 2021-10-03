@@ -1,7 +1,7 @@
 import React, { ChangeEvent, memo, VFC } from 'react'
 import MediaQuery from 'react-responsive'
-import { PcResponsive } from '../../responsive/edit/company/PcResponsive'
-import { SmartPhoneResponsive } from '../../responsive/edit/company/SmartPhoneResponsive'
+import { PcResponsive } from '../../mediaQuery/edit/company/PcResponsive'
+import { SmartPhoneResponsive } from '../../mediaQuery/edit/company/SmartPhoneResponsive'
 
 type Props = {
   job:                  string;

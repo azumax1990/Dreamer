@@ -1,13 +1,14 @@
-import React, { VFC, memo, useContext, Dispatch, SetStateAction, useCallback } from 'react'
+import React, { VFC, memo, useContext, useState, Dispatch, SetStateAction, useCallback } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { PostGroup } from '../../../../api/group'
 import { LoginUserContext } from '../../../../App'
 import { useSelectPost } from '../../../../hooks/useSelectPost'
 
-import { Group, GroupUser, GroupUserParams, Message, Post, Profile } from '../../../../types'
+import { Group, GroupUser, GroupUserParams, Message, Post, Profile, Audition } from '../../../../types'
 import { AddImageModal } from '../../../organisms/profile/pcResponsive/AddImageModal'
 import { Images } from '../../../organisms/profile/pcResponsive/Images'
+import { ModalAuditions } from '../../../organisms/profile/pcResponsive/ModalAuditions'
 import { ModalImages } from '../../../organisms/profile/pcResponsive/ModalImages'
 import { ModalMessages } from '../../../organisms/profile/pcResponsive/ModalMessages'
 
@@ -54,14 +55,17 @@ type Props ={
   messages:         Array<Message>;
   profiles:         Array<Profile>;
   groupUsers:       Array<GroupUser>;
+  auditions:        Array<Audition>;
   messageModalOpen: boolean;
-  ChangeMessageModalFalse: () => void;
+  auditionModalOpen:boolean;
+  ChangeMessageModalOpen: () => void;
+  ChangeAuditionModalOpen: () => void;
 }
 export const CompanyProfilePcResponsive: VFC<Props> = memo((props) => {
-  const { profile, isOpen, setIsOpen, posts, setPosts, groupId, groups, messageModalOpen, ChangeMessageModalFalse, messages, profiles, groupUsers } = props;
+  const { profile, isOpen, setIsOpen, posts, setPosts, groupId, groups, messageModalOpen, ChangeMessageModalOpen, messages, profiles, groupUsers, auditions, auditionModalOpen, ChangeAuditionModalOpen } = props;
 
-  const { currentUser } = useContext(LoginUserContext)
   const history = useHistory()
+  const { currentUser } = useContext(LoginUserContext)
   const { onSelectedPost, selectedPost, modalOpen, setModalOpen } = useSelectPost()
 
   const onClickOpen = useCallback((id: number | undefined) => {
@@ -116,8 +120,12 @@ export const CompanyProfilePcResponsive: VFC<Props> = memo((props) => {
         <AddImageModal setIsOpen={setIsOpen} posts={posts} setPosts={setPosts}/>
       ) : (null)}
       {messageModalOpen ? (
-        <ModalMessages ChangeMessageModalFalse={ChangeMessageModalFalse} groups={groups} profile={profile} messages={messages} profiles={profiles} groupUsers={groupUsers}/>
+        <ModalMessages ChangeMessageModalOpen={ChangeMessageModalOpen} groups={groups} profile={profile} messages={messages} profiles={profiles} groupUsers={groupUsers}/>
       ) : (null)}
+      {auditionModalOpen ? (
+        <ModalAuditions auditions={auditions} ChangeAuditionModalOpen={ChangeAuditionModalOpen}/>
+      ) : (null)}
+      
     </>
   )
 })

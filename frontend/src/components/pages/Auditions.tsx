@@ -6,8 +6,8 @@ import { getAllAuditions } from '../../api/audition'
 
 import { TopPageHeader } from '../organisms/header/pcResponsive/TopPageHeader'
 import { TopPageSmartPhoneHeader } from '../organisms/header/smartPhoneResponsive/TopPageSmartPhoneHeader'
-import { PcResponsive } from '../responsive/audition/index/PcResponsive'
-import { SmartPhoneResponsive } from '../responsive/audition/index/SmartPhoneResponsive'
+import { PcResponsive } from '../mediaQuery/audition/index/PcResponsive'
+import { SmartPhoneResponsive } from '../mediaQuery/audition/index/SmartPhoneResponsive'
 
 export const Auditions: VFC = memo(() => {
   const [isOpen, setIsOpen]           = useState(false)

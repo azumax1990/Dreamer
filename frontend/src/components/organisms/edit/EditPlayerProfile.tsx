@@ -1,5 +1,6 @@
 import React, { ChangeEvent, memo, VFC } from 'react'
 import styled from 'styled-components'
+import { FaCamera } from 'react-icons/fa'
 
 import { ages } from '../../../data/age'
 import { genders } from '../../../data/gender'
@@ -9,6 +10,25 @@ import { prefectures } from '../../../data/prefecture'
 
 const LabelTag = styled.label`
   font-size: 20px;
+`
+const LabelAvatarTag = styled.label`
+  display: block;
+  box-sizing:border-box;
+  width: 100%;
+  padding: 5px 5px 2px 10px;
+  margin-top: 15px;
+  outline: none;
+  border: solid 1px gray;
+  box-shadow:  0 0 6px #F5F5F5;
+  font-size: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+`
+const AvatarSpanTag = styled.span`
+  display: inline-block;
+  padding-left: 10px;
+  margin-bottom: 7px;
 `
 const InputContainer = styled.div`
   padding-bottom: 25px;
@@ -21,7 +41,22 @@ const InputTag = styled.input`
   margin-top: 10px;
   border-color: #f5f5f5;
   outline: none;
-  box-shadow:  0 0 3px gray;
+`
+const InputAvatarTag = styled.input`
+  display: none;
+`
+const ResetButton = styled.button`
+  display: block;
+  padding: 5px 10px;
+  margin-bottom: 15px;
+  border: none;
+  box-shadow:  0 0 4px gray;
+  cursor: pointer;
+`
+const ImgPreview = styled.img`
+  width: 100%;
+  height: 200px;
+  margin-bottom: 10px;
 `
 const RadioTag = styled.input`
 `
@@ -35,15 +70,12 @@ const TextAreaTag = styled.textarea`
   box-sizing:border-box;
   padding: 8px;
   margin-top: 10px;
-  border-color: #f5f5f5;
   outline: none;
-  box-shadow:  0 0 3px gray;
 `
 const SelectTag = styled.select`
   width: 100%;
   padding: 10px;
   margin-top: 10px;
-  box-shadow: 0 0 3px gray;
   outline: none;
   font-size: 16px;
 `
@@ -52,24 +84,26 @@ const OptionTag = styled.option`
 type Props = {
   job:                  string,
   name:                 string | undefined,
+  avatar:               {data: string, name: string};
   age:                  number | undefined,
   gender:               string | undefined,
   tall:                 number | undefined,
   prefecture:           string | undefined,
   introduction:         string | undefined,
   onChangeImage:        (e: ChangeEvent<HTMLInputElement>) => void,
-  onChangeJob:         (e: ChangeEvent<HTMLInputElement>) => void,
+  onChangeJob:          (e: ChangeEvent<HTMLInputElement>) => void,
   onChangeName:         (e: ChangeEvent<HTMLInputElement>) => void,
   onChangeAge:          (e: ChangeEvent<{ value: unknown }>) => void,
   onChangeGender:       (e: ChangeEvent<HTMLSelectElement>) => void,
   onChangeTall:         (e: ChangeEvent<{ value: unknown }>) => void,
   onChangePrefecture:   (e: ChangeEvent<HTMLSelectElement>) => void,
   onChangeIntroduction: (e: ChangeEvent<HTMLTextAreaElement>) => void,
+  resetImage:           () => void,
 }
 
 export const EditPlayerProfile: VFC<Props> = memo((props) => {
-  const { job, name, age, gender, tall, prefecture, introduction,
-          onChangeImage, onChangeJob, onChangeName, onChangeAge, onChangeGender, onChangeTall, onChangePrefecture, onChangeIntroduction
+  const { job, name, avatar, age, gender, tall, prefecture, introduction,
+          onChangeImage, onChangeJob, onChangeName, onChangeAge, onChangeGender, onChangeTall, onChangePrefecture, onChangeIntroduction, resetImage
         } = props;
 
   return (
@@ -86,9 +120,15 @@ export const EditPlayerProfile: VFC<Props> = memo((props) => {
         <InputTag id="formName" value={name} placeholder="名前を入力してください" onChange={onChangeName} />
       </InputContainer>
       <InputContainer>
-        <LabelTag htmlFor="formAvatar">写真</LabelTag>
-        <InputTag type="file" id="formAvatar" name="avatar" onChange={onChangeImage}/>
+        <LabelAvatarTag htmlFor="formAvatar"><FaCamera /><AvatarSpanTag>写真を追加する</AvatarSpanTag></LabelAvatarTag>
+        <InputAvatarTag type="file" id="formAvatar" name="avatar" onChange={onChangeImage}/>
       </InputContainer>
+      { avatar.data ? (
+        <>
+          <ResetButton onClick={resetImage}>リセット</ResetButton>
+          <ImgPreview src={avatar.data} />
+        </>
+      ) : (null)}
       <InputContainer>
         <LabelTag htmlFor="formAge">年齢</LabelTag>
         <SelectTag id="formAge" value={age} onChange={onChangeAge}>

@@ -15,7 +15,6 @@ const InputTag = styled.input`
   margin-top: 10px;
   border-color: #f5f5f5;
   outline: none;
-  box-shadow:  0 0 3px gray;
 `
 const RadioTag = styled.input`
 `
@@ -29,9 +28,7 @@ const TextAreaTag = styled.textarea`
   box-sizing:border-box;
   padding: 8px;
   margin-top: 10px;
-  border-color: #f5f5f5;
   outline: none;
-  box-shadow:  0 0 3px gray;
 `
 type Props = {
   job:                  string;

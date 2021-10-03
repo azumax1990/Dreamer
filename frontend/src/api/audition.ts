@@ -1,9 +1,9 @@
 import axios from "axios"
-import { AuditionParams } from "../types"
+import { Audition, AuditionParams } from "../types"
 
 // オーディション一覧取得
 export const getAllAuditions = () => {
-  return axios.get("http://localhost:3000/api/auditions")
+  return axios.get<Array<Audition>>("http://localhost:3000/api/auditions")
 }
 
 // オーディション作成
@@ -12,7 +12,7 @@ export const PostAudition = (params: AuditionParams) => {
 }
 
 // オーディション情報取得
-export const getAudition = (id: string) => {
+export const getAudition = (id: string | number) => {
   return axios.get(`http://localhost:3000/api/auditions/${id}`)
 }
 

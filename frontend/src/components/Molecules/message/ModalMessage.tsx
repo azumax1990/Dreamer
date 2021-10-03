@@ -1,7 +1,7 @@
 import React, { VFC } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import { Message, Profile, Group } from '../../../../types'
+import { Message, Profile, Group } from '../../../types'
 
 const MessageContainer = styled.div`
   display: flex;

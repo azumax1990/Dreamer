@@ -50,7 +50,6 @@ const InputTag = styled.input`
   margin-top: 10px;
   border-color: #f5f5f5;
   outline: none;
-  box-shadow:  0 0 3px gray;
 ` 
 const SubmitButton = styled.button`
   width: 100%;

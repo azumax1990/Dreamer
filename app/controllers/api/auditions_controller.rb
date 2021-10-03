@@ -8,7 +8,12 @@ class ::Api::AuditionsController < ApplicationController
   def show
     audition = Audition.find(params[:id])
     profile = audition.user.profile
-    render json: {audition: audition, profile: profile}
+    users = audition.applied_users
+    applied_profiles =[]
+    users.each do |user|
+      applied_profiles << user.profile
+    end
+    render json: { audition: audition, profile: profile, users: users, applied_profiles: applied_profiles }, methods: [:avatar_url]
   end
 
   def create

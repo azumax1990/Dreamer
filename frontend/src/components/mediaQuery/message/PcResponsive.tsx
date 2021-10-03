@@ -7,6 +7,7 @@ import { Dispatch } from 'react'
 const MessagesWrapper = styled.div`
   padding: 40px;
   display: flex;
+  background-color: #F5F5F5;
 `
 const MessagesContainer = styled.div`
   background-color: #fff;

@@ -1,8 +1,8 @@
 import React, { memo, useContext, VFC } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { LoginUserContext } from '../../../../App';
-import { Audition, Profile } from '../../../../types';
+import { Audition, Profile, User } from '../../../../types';
 
 const AuditionWrapper = styled.div`
   padding: 40px 20px;
@@ -67,14 +67,17 @@ const ApplyButton = styled.button`
   cursor: pointer;
 `
 type Props = {
-  audition: Audition | undefined;
-  profile: Profile | undefined;
+  audition:         Audition | undefined;
+  profile:          Profile | undefined;
+  onClickPostApply: () => void;
+  hasApplied:       User | undefined;
 }
 
 export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
-  const { audition, profile } = props;
+  const { audition, profile, onClickPostApply, hasApplied } = props;
   const { currentUser } = useContext(LoginUserContext)
-
+  const history = useHistory()
+  const moveToSignInPage  = () => (history.push("/sign_in"))
   return (
     <AuditionWrapper>
       <AuditionContainer>
@@ -101,7 +104,15 @@ export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
               <TableData></TableData>
             </TableRow>
           </Table>
-          <ApplyButton disabled={currentUser ? false : true}>応募する</ApplyButton>
+          {!currentUser ? (
+            <ApplyButton onClick={moveToSignInPage} >ログインしてください</ApplyButton>
+          ) : currentUser?.id === profile?.user_id ? (
+            <ApplyButton>応募を終了する</ApplyButton>
+          ) : !hasApplied ? ( 
+            <ApplyButton onClick={onClickPostApply} disabled={currentUser ? false : true}>応募する</ApplyButton>
+          ) : (
+            <ApplyButton>応募済</ApplyButton>
+          )}
         </CompanyContainer>
       </AuditionContainer>
     </AuditionWrapper>

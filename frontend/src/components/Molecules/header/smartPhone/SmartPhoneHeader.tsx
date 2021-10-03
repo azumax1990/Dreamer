@@ -11,7 +11,7 @@ const HeaderWrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  background-color: #E0FFFF;
+  border-bottom: 1px #cccccc solid;
   margin: 0;
 `
 const IconTag = styled.p`

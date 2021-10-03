@@ -61,7 +61,7 @@ export const MessageIndex: VFC<Props> = memo((props) => {
         <MessagesContainer>
           {groups.map((group, index) => {
                 const selectedUser    = groupUsers.find((groupUser) => groupUser.group_id === group.id && groupUser.user_id !== currentUser?.id)
-                const lastMessage     = messages.find((message) => message.group_id === group.id)
+                const lastMessage     = messages.find((message) => message?.group_id === group.id)
                 const selectedProfile = profiles.find((profile) => profile?.user_id === selectedUser?.user_id)
             return (
               <GroupMessages group={group} selectedProfile={selectedProfile} lastMessage={lastMessage} index={index}/>
