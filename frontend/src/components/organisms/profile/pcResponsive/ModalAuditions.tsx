@@ -3,8 +3,8 @@ import styled from 'styled-components'
 
 import { Audition } from '../../../../types'
 import { useSelectAudition } from '../../../../hooks/useSelectAudition'
-import { AuditionInfo } from '../../../Molecules/audition/AuditionInfo'
-import { AppliedUsers } from '../../../Molecules/audition/AppliedUsers'
+import { AuditionInfo } from '../../../Molecules/audition/pcResponsive/AuditionInfo'
+import { AppliedUsers } from '../../../Molecules/audition/pcResponsive/AppliedUsers'
 
 const ModalWrapper = styled.div`
 `

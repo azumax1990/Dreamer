@@ -4,7 +4,7 @@ class ::Api::ProfilesController < ApplicationController
     user = User.find(params[:id])
     profile = user.prepare_profile(user)
     auditions = user.auditions
-    
+
     messages    = []
     profiles    = []
     group_users = []

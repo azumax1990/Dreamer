@@ -31,6 +31,9 @@ export const ProfileSmartPhoneHeader: VFC<Props> = memo((props) => {
           <Link to={`/user/${currentUser?.id}/groups`} style={{ textDecoration: "none", color: "black" }}>
             <LinkText>メッセージ</LinkText>
           </Link>
+          <Link to={`/user/${currentUser?.id}/auditions`} style={{ textDecoration: "none", color: "black" }}>
+            <LinkText>募集リスト</LinkText>
+          </Link>
         </>
       ) : (
         <Link to={`/user/${currentUser?.id}/profile`} style={{ textDecoration: "none", color: "black" }}>

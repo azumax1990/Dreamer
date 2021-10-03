@@ -1,8 +1,8 @@
 import React, { VFC, memo, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { FaAngleDoubleLeft } from "react-icons/fa"
-import { getAudition } from '../../../api/audition'
-import { Profile } from '../../../types'
+import { getAudition } from '../../../../api/audition'
+import { Profile } from '../../../../types'
 import { AppliedUser } from './AppliedUser'
 
 
