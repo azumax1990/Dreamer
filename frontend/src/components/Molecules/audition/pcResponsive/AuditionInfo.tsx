@@ -1,6 +1,6 @@
 import React, { VFC, memo } from 'react'
 import styled from 'styled-components'
-import { Audition } from '../../../types'
+import { Audition } from '../../../../types'
 
 const AuditionContainer = styled.div`
   display: flex;

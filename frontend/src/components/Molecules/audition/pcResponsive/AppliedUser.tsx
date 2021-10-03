@@ -1,7 +1,7 @@
 import React, { memo, VFC } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import { Profile } from '../../../types'
+import { Profile } from '../../../../types'
 
 const AppliedUserContainer = styled.div`
   display: flex;

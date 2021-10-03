@@ -13,6 +13,8 @@ import { CreateAudition } from './components/pages/smartPhone/CreateAudition';
 import { CreatePost } from './components/pages/smartPhone/CreatePost';
 import { ChatRoom } from './components/pages/ChatRoom';
 import { MessageIndex } from './components/pages/smartPhone/MessageIndex';
+import { AuditionIndex } from './components/pages/smartPhone/AuditionIndex';
+import { AppliedUsers } from './components/pages/smartPhone/AppliedUsers';
 
 
 
@@ -99,6 +101,20 @@ function App() {
             path="/user/:userId/groups"
             render={({ match }) => (
               <MessageIndex id={match.params.userId}/>
+            )}
+           />
+           <Route 
+            exact 
+            path="/user/:userId/auditions"
+            render={({ match }) => (
+              <AuditionIndex id={match.params.userId}/>
+            )}
+          />
+            <Route 
+            exact 
+            path="/audition/:auditionId/users/"
+            render={({ match }) => (
+              <AppliedUsers id={match.params.auditionId}/>
             )}
            />
         </BrowserRouter>
