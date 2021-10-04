@@ -35,7 +35,6 @@ export const AppliedUsers: VFC<Props> = memo((props) => {
     getAudition(id as number)
     .then((res) => {
       setProfiles(res.data.applied_profiles)
-      console.log(res.data)
     })
   }, [])
   return (

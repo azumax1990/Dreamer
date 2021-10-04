@@ -102,7 +102,7 @@ type  Props = {
 
 export const AddAuditionModal: VFC<Props> = (props) => {
   const { setIsOpen, auditions, setAuditions } = props;
-  const { onChangeImage, params, title, setTitle, description, setDescription, image, resetImage, setImage } = usePostAudition()
+  const { onChangeImage, params, title, setTitle, description, setDescription, avatar, resetImage, setAvatar } = usePostAudition()
   const { currentUser } = useContext(LoginUserContext)
 
   const id: number = auditions.length + 1
@@ -112,7 +112,7 @@ export const AddAuditionModal: VFC<Props> = (props) => {
     user_id: currentUser?.id,
     title: title,
     description: description,
-    image_url: image.data
+    avatar_url: avatar.data
   }
   const SubmitPostAudition = () => {
     PostAudition(params)
@@ -121,7 +121,7 @@ export const AddAuditionModal: VFC<Props> = (props) => {
       setAuditions(newAuditions)
       setTitle('')
       setDescription('')
-      setImage({data: '', name: ''})
+      setAvatar({data: '', name: ''})
       setIsOpen(false)
     })
   }
@@ -138,10 +138,10 @@ export const AddAuditionModal: VFC<Props> = (props) => {
             <LabelIconTag htmlFor="formImage"><FaCamera /><SpanTag>写真を追加する</SpanTag></LabelIconTag>
             <InputImageTag type="file" id="formImage" onChange={onChangeImage} />
           </InputContainer>
-            {image.data ? (
+            {avatar.data ? (
               <>
                 <ResetButton onClick={resetImage} >リセット</ResetButton>
-                <ImgPreview src={image.data}/>
+                <ImgPreview src={avatar.data}/>
               </>
               ) : (null)}
           <InputContainer>
