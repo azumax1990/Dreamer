@@ -81,7 +81,7 @@ export type Audition = {
   user_id?:    number;
   title:       string;
   description: string;
-  image_url?:  string;
+  avatar_url?:  string;
   created_at?: Date;
   updated_at?: Date;
 }
@@ -91,7 +91,7 @@ export type AuditionParams = {
   id:          number | undefined;
   title:       string;
   description: string;
-  image:       {};
+  avatar:       {};
 }
 
 // group

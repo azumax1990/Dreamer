@@ -35,8 +35,8 @@ export const AuditionInfo: VFC<Props> = memo((props) => {
   return (
     <AuditionContainer onClick={MoveToAppliedUsersPage}>
       <ImageContainer>
-        {audition.image_url ? (
-          <AuditionImage src={audition.image_url} />
+        {audition.avatar_url ? (
+          <AuditionImage src={audition.avatar_url} />
         ) : (
           <AuditionImage src="https://source.unsplash.com/random" />
         )}

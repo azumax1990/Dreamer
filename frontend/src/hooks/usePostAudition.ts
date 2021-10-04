@@ -4,7 +4,7 @@ import { AuditionParams } from "../types"
 
 export const usePostAudition = () => {
   const [title, setTitle]             = useState('')
-  const [image, setImage]             = useState({data: '', name: ''})
+  const [avatar, setAvatar]             = useState({data: '', name: ''})
   const [description, setDescription] = useState('')
   const { currentUser }               = useContext(LoginUserContext)
 
@@ -13,24 +13,24 @@ export const usePostAudition = () => {
       const reader = new FileReader()
       const file = e.target.files[0];
       reader.onload = () => { 
-        setImage({
+        setAvatar({
           data: reader.result as string,
           name: file.name
         })
       }
       reader.readAsDataURL(file)
     }
-  }, [setImage])
+  }, [setAvatar])
 
   const params: AuditionParams = {
     id: currentUser?.id,
     title: title,
     description: description,
-    image: image
+    avatar: avatar
   }
   const resetImage = useCallback(() => {
-    setImage({ data: '', name: ''})
-  }, [image])
+    setAvatar({ data: '', name: ''})
+  }, [avatar])
 
-  return { onChangeImage, params, title, setTitle, description, setDescription, image, resetImage, setImage }
+  return { onChangeImage, params, title, setTitle, description, setDescription, avatar, resetImage, setAvatar }
 }

@@ -56,7 +56,7 @@ const SubmitButton = styled.button`
 `
 export const CreateAudition: VFC = memo(() => {
   const history = useHistory()
-  const { onChangeImage, params, title, setTitle, description, setDescription, image } = usePostAudition()
+  const { onChangeImage, params, title, setTitle, description, setDescription, avatar } = usePostAudition()
   
   const SubmitPostAudition = () => {
     PostAudition(params)
@@ -77,7 +77,7 @@ export const CreateAudition: VFC = memo(() => {
           <LabelIconTag htmlFor="formImage"><FaCamera /></LabelIconTag>
           <InputImageTag type="file" id="formImage" onChange={onChangeImage} />
         </InputContainer>
-          {image.data ? (<ImgPreview src={image.data}/>) : (null)}
+          {avatar.data ? (<ImgPreview src={avatar.data}/>) : (null)}
         <InputContainer>
           <LabelTag htmlFor="formDescription">募集内容</LabelTag>
           <InputTag id="formDescription" value={description} onChange={(e) => setDescription(e.target.value)} />

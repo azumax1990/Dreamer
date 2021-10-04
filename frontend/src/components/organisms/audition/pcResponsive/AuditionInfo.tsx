@@ -42,7 +42,7 @@ export const AuditionInfo: VFC<Props> = (props) => {
   return (
     <AuditionContainer>
       <ImageContainer>
-        {audition.image_url ? (<ImageTag src={audition.image_url} />) : (<ImageTag src={avatarImage} />)}
+        {audition.avatar_url ? (<ImageTag src={audition.avatar_url} />) : (<ImageTag src={avatarImage} />)}
       </ImageContainer>
       <DetailContainer>
         <TittleText>{audition.title}</TittleText>

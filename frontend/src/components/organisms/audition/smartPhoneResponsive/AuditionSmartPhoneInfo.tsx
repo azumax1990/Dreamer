@@ -45,7 +45,7 @@ export const AuditionSmartPhoneInfo: VFC<Props> = memo((props) => {
     <>
       <AuditionContainer>
         <ImageContainer>
-          {audition.image_url ? (<ImageTag src={audition.image_url}/>) : (<ImageTag src={avatarImage}/>)}
+          {audition.avatar_url ? (<ImageTag src={audition.avatar_url}/>) : (<ImageTag src={avatarImage}/>)}
         </ImageContainer>
         <DetailContainer>
           <TitleText>{audition.title}</TitleText>

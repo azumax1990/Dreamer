@@ -2,7 +2,7 @@ class ::Api::AuditionsController < ApplicationController
 
   def index
     auditions = Audition.all.order(id: "DESC")
-    render json: auditions, methods: [:image_url]
+    render json: auditions, methods: [:avatar_url]
   end
 
   def show
@@ -19,9 +19,9 @@ class ::Api::AuditionsController < ApplicationController
   def create
     user = User.find(params[:id])
     audition = user.auditions.new(title: params[:title], description: params[:description])
-    if params[:image][:data] != ""
-      audition.image.attach(io: StringIO.new(decode(params[:image][:data]) + "\n"),
-                            filename: params[:image][:name])
+    if params[:avatar][:data] != ""
+      audition.avatar.attach(io: StringIO.new(decode(params[:avatar][:data]) + "\n"),
+                            filename: params[:avatar][:name])
     end
     audition.save
     render json: { status: 'ok' }
@@ -40,6 +40,6 @@ class ::Api::AuditionsController < ApplicationController
 
   private
   def audition_params
-    params.require(:audition).permit(:title, :description, :id, :image, :user_id)
+    params.require(:audition).permit(:title, :description, :id, :avatar, :user_id)
   end
 end
