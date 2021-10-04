@@ -1,17 +1,35 @@
 import React, { VFC, memo, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { SmartPhoneHeader } from '../../../Molecules/header/smartPhone/SmartPhoneHeader'
 import { LinkText } from '../../../atoms/header/smartPhone/LinkText'
 import { Profile } from '../../../../types'
 import { LoginUserContext } from '../../../../App'
+import { signOut } from '../../../../api/auth'
+import Cookies from 'js-cookie'
 
 type Props = {
   profile: Profile | undefined;
 }
 export const ProfileSmartPhoneHeader: VFC<Props> = memo((props) => {
   const { profile } = props;
-  const { currentUser } = useContext(LoginUserContext)
+  const { currentUser, setCurrentUser } = useContext(LoginUserContext)
+  const history = useHistory()
   
+  // ログアウト&Cookie削除
+  const submitSignOut = () => {
+    signOut()
+    .then((res) => {
+      if (res.data.success === true) {
+        Cookies.remove("access_token")
+        Cookies.remove("client")
+        Cookies.remove("uid")
+        setCurrentUser(undefined)
+        alert("ログアウトしました")
+        history.push("/auditions")
+      } 
+    })
+    .catch(() => alert("ログアウト出来ませんでした"))
+  }
   return (
     <SmartPhoneHeader >
       { !currentUser ? (
@@ -34,6 +52,7 @@ export const ProfileSmartPhoneHeader: VFC<Props> = memo((props) => {
           <Link to={`/user/${currentUser?.id}/auditions`} style={{ textDecoration: "none", color: "black" }}>
             <LinkText>募集リスト</LinkText>
           </Link>
+          <LinkText onClick={submitSignOut}>ログアウト</LinkText>
         </>
       ) : (
         <Link to={`/user/${currentUser?.id}/profile`} style={{ textDecoration: "none", color: "black" }}>

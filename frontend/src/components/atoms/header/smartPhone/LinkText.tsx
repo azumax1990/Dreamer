@@ -8,10 +8,11 @@ const LinkItem = styled.p`
 `
 type Props = {
   children: ReactNode;
+  onClick?: () => void;
 }
 export const LinkText: VFC<Props> = memo((props) => {
-  const { children } = props;
+  const { children, onClick } = props;
   return (
-    <LinkItem>{children}</LinkItem>
+    <LinkItem onClick={onClick}>{children}</LinkItem>
   )
 })
