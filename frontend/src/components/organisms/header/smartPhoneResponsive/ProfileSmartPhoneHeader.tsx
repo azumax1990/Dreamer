@@ -1,11 +1,14 @@
 import React, { VFC, memo, useContext } from 'react'
+import Cookies from 'js-cookie'
 import { Link, useHistory } from 'react-router-dom'
-import { SmartPhoneHeader } from '../../../Molecules/header/smartPhone/SmartPhoneHeader'
-import { LinkText } from '../../../atoms/header/smartPhone/LinkText'
+
 import { Profile } from '../../../../types'
 import { LoginUserContext } from '../../../../App'
 import { signOut } from '../../../../api/auth'
-import Cookies from 'js-cookie'
+
+import { SmartPhoneHeader } from '../../../Molecules/header/smartPhone/SmartPhoneHeader'
+import { LinkText } from '../../../atoms/header/smartPhone/LinkText'
+
 
 type Props = {
   profile: Profile | undefined;
@@ -14,7 +17,7 @@ export const ProfileSmartPhoneHeader: VFC<Props> = memo((props) => {
   const { profile } = props;
   const { currentUser, setCurrentUser } = useContext(LoginUserContext)
   const history = useHistory()
-  
+
   // ログアウト&Cookie削除
   const submitSignOut = () => {
     signOut()
