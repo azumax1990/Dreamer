@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback, useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { PostProfile } from '../api/profile'
+import { getEditProfile, PostProfile } from '../api/profile'
 import { LoginUserContext } from '../App'
 import { ParamsProfile } from '../types'
 
@@ -18,6 +18,21 @@ export const useEditProfile = () => {
 
   const { currentUser } = useContext(LoginUserContext)
   const history = useHistory()
+
+  const getProfile = useCallback((id) => {
+    getEditProfile(currentUser?.id || id)
+    .then((res) => {
+      setName(res.data.name)
+      setAge(res.data.age)
+      setGender(res.data.gender)
+      setTall(res.data.tall)
+      setPrefecture(res.data.prefecture)
+      setIntroduction(res.data.introduction)
+      setCompany(res.data.company)
+      setDescription(res.data.description)
+    })
+    .catch(() => alert('エラー'))
+  }, [])
 
   const params: ParamsProfile = {
     id:           currentUser?.id,
@@ -63,58 +78,50 @@ export const useEditProfile = () => {
 
   const onChangeJob = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setJob(e.target.value)
-  }, [setJob])
+  }, [job, setJob])
 
   const onChangeName = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value)
-  }, [setName])
+  }, [name, setName])
 
   const onChangeAge = useCallback((e: ChangeEvent<{ value: unknown }>) => {
     setAge(e.target.value as number)
-  }, [setAge])
+  }, [age, setAge])
 
   const onChangeGender = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     setGender(e.target.value)
-  }, [setGender])
+  }, [gender, setGender])
 
   const onChangeTall = useCallback((e: ChangeEvent<{ value: unknown }>) => {
     setTall(e.target.value as number)
-  }, [setTall])
+  }, [tall, setTall])
 
   const onChangePrefecture = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     setPrefecture(e.target.value)
-  }, [setPrefecture])
+  }, [prefecture, setPrefecture])
 
   const onChangeIntroduction = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
     setIntroduction(e.target.value)
-  }, [setIntroduction])
+  }, [introduction, setIntroduction])
 
   const onChangeCompany = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setCompany(e.target.value)
-  }, [setCompany])
+  }, [company, setCompany])
 
   const onChangeDescription = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(e.target.value)
-  }, [setDescription])
+  }, [description, setDescription])
 
-  return { job,
-           setJob,
+  return { 
+           job,
            name,
-           setName,
            avatar,
-           setAvatar,
            age,
-           setAge,
            gender,
-           setGender,
            tall,
-           setTall,
            prefecture,
-           setPrefecture,
            introduction,
-           setIntroduction,
            company,
-           setCompany,
            description,
            setDescription,
            onClickPostProfile,
@@ -128,6 +135,7 @@ export const useEditProfile = () => {
            onChangeIntroduction,
            onChangeCompany,
            onChangeDescription,
-           resetImage
-          }
+           resetImage,
+           getProfile
+  }
 }

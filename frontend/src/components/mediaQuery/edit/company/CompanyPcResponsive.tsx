@@ -2,18 +2,23 @@ import React, { ChangeEvent, memo, VFC } from 'react'
 import styled from 'styled-components'
 
 const EditProfileWrapper = styled.div`
+  background-color: #F5F5F5;
   padding: 40px 0;
   min-height: 100vh;
 `
+
 const PageTittle = styled.h1`
-  font-size: 26px;
+  font-size: 30px;
   padding-bottom: 25px;
   margin: 0 ;
   text-align: center;
 `
 const EditProfileContainer = styled.div`
-  padding: 20px 30px;
+  width: 500px;
+  background-color: #fff;
+  padding: 50px 40px;
   margin: 0 auto;
+  box-shadow:  0 0 3px gray;
 `
 const LabelTag = styled.label`
   font-size: 20px;
@@ -62,7 +67,7 @@ type Props = {
   onChangeDescription:  (e: ChangeEvent<HTMLTextAreaElement>) => void;
   onClickPostProfile:   () => void;
 }
-export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
+export const CompanyPcResponsive: VFC<Props> = memo((props) => {
   const { job, company, description, onChangeJob, onChangeCompany, onChangeDescription, onClickPostProfile } = props;
 
   return (
@@ -88,6 +93,7 @@ export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
           <SubmitButton onClick={onClickPostProfile} disabled={company || description ? false : true}>保存</SubmitButton>
         </EditProfileContainer>
       </EditProfileWrapper>
+      
     </>
   )
 })
