@@ -55,7 +55,7 @@ const TableHeader = styled.th`
 ` 
 const TableData = styled.td`
   padding: 8px 0;
-  text-align: left;
+  padding-right: 60px;
 `
 const ApplyButton = styled.button`
   color: #fff;
@@ -92,13 +92,23 @@ export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
           <Table>
             <TableRow>
               <TableHeader>記載元</TableHeader>
-              <Link to={`/user/${profile?.user_id}/profile`} style={{ textDecoration: "none", color: "black"}}>
-                <TableData>{profile?.company}</TableData>
-              </Link>
+              {profile?.company || profile?.name ? (
+                <Link to={`/user/${profile?.user_id}/profile`} style={{ textDecoration: "none", color: "black"}}>
+                  <TableData>{profile?.company || profile?.name}</TableData>
+                </Link>
+                ) : (
+                <Link to={`/user/${profile?.user_id}/profile`} style={{ textDecoration: "none", color: "black"}}>
+                  <TableData>記載元ページへ</TableData>
+                </Link>
+              )}
             </TableRow>
             <TableRow>
               <TableHeader>担当者</TableHeader>
-              <TableData></TableData>
+              {profile?.name ? (
+                <Link to={`/user/${profile?.user_id}/profile`} style={{ textDecoration: "none", color: "black"}}>
+                  <TableData>{profile?.name}</TableData>
+                </Link>
+                ) : (null)}
             </TableRow>
             <TableRow>
               <TableHeader>住所</TableHeader>
