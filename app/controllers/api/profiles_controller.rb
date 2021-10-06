@@ -1,25 +1,13 @@
 class ::Api::ProfilesController < ApplicationController
 
   def show
-    user = User.find(params[:id])
-    profile = user.prepare_profile(user)
-    auditions = user.auditions
-
-    messages    = []
-    profiles    = []
-    group_users = []
-    groups = user.groups
-    groups.each do |group|
-      group_users << group.group_users
-      group.profiles(profiles, group)
-      group.last_messages(messages, group)
-    end
-
-    group_members = []
-    group_users.each do |group_user|
-      group_members << group_user[0]
-      group_members << group_user[1]
-    end
+    user          = User.find(params[:id])
+    profile       = user.prepare_profile(user)
+    groups        = user.groups
+    group_members = user.all_group_users(user)
+    messages      = user.last_messages(user)
+    profiles      = user.all_profiles(user)
+    auditions     = user.auditions
     render json: { profile: profile, groups: groups, group_members: group_members, messages: messages, profiles: profiles, auditions: auditions }, methods: [:avatar_url]
   end
 
