@@ -1,7 +1,7 @@
 import React, { memo, useContext, VFC } from 'react'
 import styled from 'styled-components'
+import moment from 'moment'
 import { Link, useHistory } from 'react-router-dom'
-
 
 import { LoginUserContext } from '../../../../App'
 import { Audition, Profile, User } from '../../../../types'
@@ -89,7 +89,7 @@ export const PcResponsive: VFC<Props> = memo((props) => {
     <AuditionWrapper>
       <AuditionContainer>
         <TitleText>{audition?.title}</TitleText>
-        <CreatedAt>{audition?.created_at}</CreatedAt>
+        <CreatedAt>{moment(audition?.created_at).format('YYYY年MM月DD日')}</CreatedAt>
         <InfoContainer>
           <InfoText>{audition?.description}</InfoText>
         </InfoContainer>

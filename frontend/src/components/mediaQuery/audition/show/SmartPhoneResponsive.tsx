@@ -1,4 +1,5 @@
 import React, { memo, useContext, VFC } from 'react'
+import moment from 'moment';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { LoginUserContext } from '../../../../App';
@@ -82,7 +83,7 @@ export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
     <AuditionWrapper>
       <AuditionContainer>
         <TitleText>{audition?.title}</TitleText>
-        <CreatedAt>{audition?.created_at}</CreatedAt>
+        <CreatedAt>{moment(audition?.created_at).format('YYYY年MM月DD日')}</CreatedAt>
         <InfoContainer>
           <InfoText>{audition?.description}</InfoText>
         </InfoContainer>

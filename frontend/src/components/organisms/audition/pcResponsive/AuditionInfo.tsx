@@ -1,5 +1,6 @@
 import React, { VFC } from 'react'
 import styled from 'styled-components'
+import moment from 'moment'
 import { Audition } from '../../../../types'
 import avatarImage from '../../../../images/no-avatar.jpeg'
 
@@ -46,7 +47,7 @@ export const AuditionInfo: VFC<Props> = (props) => {
       </ImageContainer>
       <DetailContainer>
         <TittleText>{audition.title}</TittleText>
-        {audition.created_at ? (<TimeText>{audition.created_at}</TimeText>) : (<TimeText>新着情報</TimeText>)}
+        {audition.created_at ? (<TimeText>{moment(audition.created_at).format('YYYY年MM月DD日')}</TimeText>) : (<TimeText>新着情報</TimeText>)}
       </DetailContainer>
     </AuditionContainer>
   )
