@@ -47,7 +47,7 @@ export const UserProfile: VFC<Props> = memo((props) => {
           </MediaQuery>
           <MediaQuery query="(max-width: 767px)">
             <ProfileSmartPhoneHeader profile={profile}/>
-            <SmartPhoneResponsive profile={profile} posts={posts} groupId={groupId}/>
+            <SmartPhoneResponsive profile={profile} posts={posts} setPosts={setPosts} groupId={groupId}/>
           </MediaQuery>
         </>
       ) : (
@@ -58,7 +58,7 @@ export const UserProfile: VFC<Props> = memo((props) => {
           </MediaQuery>
           <MediaQuery query="(max-width: 767px)">
             <ProfileSmartPhoneHeader profile={profile}/>
-            <CompanyProfileSmartPhoneResponsive profile={profile} posts={posts} groupId={groupId}/>
+            <CompanyProfileSmartPhoneResponsive profile={profile} posts={posts} setPosts={setPosts} groupId={groupId}/>
           </MediaQuery>
         </>
       )}

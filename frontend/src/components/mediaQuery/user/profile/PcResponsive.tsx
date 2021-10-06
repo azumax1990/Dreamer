@@ -150,7 +150,7 @@ export const PcResponsive: VFC<Props> = memo((props) => {
         ))}
       </ImagesWrapper>
       {modalOpen ? (
-        <ModalImages selectedPost={selectedPost} setModalOpen={setModalOpen}/>
+        <ModalImages selectedPost={selectedPost} setModalOpen={setModalOpen} posts={posts} setPosts={setPosts}/>
       ) : (null)}
       {isOpen ? (
         <AddImageModal setIsOpen={setIsOpen} posts={posts} setPosts={setPosts}/>
