@@ -36,7 +36,7 @@ export const AppliedUsers: VFC<Props> = memo((props) => {
     .then((res) => {
       setProfiles(res.data.applied_profiles)
     })
-  }, [])
+  }, [id])
   return (
     <>
       <AuditionNameContainer>
@@ -45,7 +45,7 @@ export const AppliedUsers: VFC<Props> = memo((props) => {
       </AuditionNameContainer>
       <AppliedUsersContainer>
         {profiles?.map((profile) => (
-          <AppliedUser profile={profile} ChangeAuditionModalOpen={ChangeAuditionModalOpen}/>
+          <AppliedUser profile={profile} ChangeAuditionModalOpen={ChangeAuditionModalOpen} key={profile.id}/>
         ))}
       </AppliedUsersContainer>
     </>

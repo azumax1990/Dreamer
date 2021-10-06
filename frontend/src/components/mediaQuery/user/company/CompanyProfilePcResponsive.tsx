@@ -1,4 +1,4 @@
-import React, { VFC, memo, useContext, useState, Dispatch, SetStateAction, useCallback } from 'react'
+import React, { VFC, memo, useContext, Dispatch, SetStateAction, useCallback } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { PostGroup } from '../../../../api/group'
@@ -125,7 +125,6 @@ export const CompanyProfilePcResponsive: VFC<Props> = memo((props) => {
       {auditionModalOpen ? (
         <ModalAuditions auditions={auditions} ChangeAuditionModalOpen={ChangeAuditionModalOpen}/>
       ) : (null)}
-      
     </>
   )
 })

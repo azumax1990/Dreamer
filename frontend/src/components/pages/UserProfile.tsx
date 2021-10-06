@@ -35,7 +35,7 @@ export const UserProfile: VFC<Props> = memo((props) => {
           ChangeAuditionModalOpen,
         } = useProfile()
 
-  useEffect(() => getProfile(id), [id])
+  useEffect(() => getProfile(id), [getProfile, id])
   
   return (
     <>

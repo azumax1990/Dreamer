@@ -11,9 +11,6 @@ const AuditionWrapper = styled.div`
   padding: 20px 0;
   border-radius: 10px;
   box-shadow: 0 0 5px gray;
-
-`
-const AuditionInfos = styled.div`
 `
 const AuditionsContainer = styled.div`
   padding: 10px;
@@ -37,7 +34,7 @@ export const AuditionIndex: VFC<Props> = memo((props) => {
     .then((res) => {
       setAuditions(res.data.auditions)
     })
-  }, [])
+  }, [id])
   return (
     <>
       <MessagePageSmartPhoneHeader />
@@ -45,9 +42,7 @@ export const AuditionIndex: VFC<Props> = memo((props) => {
         <TitleText>募集リスト</TitleText>
         <AuditionsContainer>
           {auditions.map((audition) => (
-            <AuditionInfos key={audition.id}>
-              <AuditionInfo audition={audition} />
-            </AuditionInfos>
+            <AuditionInfo audition={audition} key={audition.id}/>
           ))}
         </AuditionsContainer>
       </AuditionWrapper>

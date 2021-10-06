@@ -30,7 +30,7 @@ export const usePostAudition = () => {
   }
   const resetImage = useCallback(() => {
     setAvatar({ data: '', name: ''})
-  }, [avatar])
+  }, [])
 
   return { onChangeImage, params, title, setTitle, description, setDescription, avatar, resetImage, setAvatar }
 }

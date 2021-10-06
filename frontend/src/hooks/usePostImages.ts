@@ -34,6 +34,6 @@ export const usePostImages = () => {
 
   const resetImage = useCallback(() => {
     setImage({ data: '', name: ''})
-  }, [image])
+  }, [])
   return { content, setContent, image, resetImage, params, onChangeImage, post }
 }

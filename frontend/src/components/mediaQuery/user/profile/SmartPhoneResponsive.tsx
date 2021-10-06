@@ -54,7 +54,6 @@ const IntroductionText= styled.p`
 const ImagesWrapper = styled.div`
   padding-bottom: 20px;
 `
-
 type Props = {
   profile:  Profile;
   posts:    Array<Post>;
@@ -120,7 +119,7 @@ export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
       </ProfileWrapper>
       <ImagesWrapper>
         {posts.map((post) => (
-          <Images post={post} posts={posts} setPosts={setPosts}/>
+          <Images post={post} posts={posts} setPosts={setPosts} key={post.id}/>
         ))}
       </ImagesWrapper>
     </>

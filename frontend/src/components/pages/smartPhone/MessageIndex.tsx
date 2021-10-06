@@ -35,7 +35,7 @@ export const MessageIndex: VFC<Props> = memo((props) => {
   const [messages, setMessages]     = useState<Array<Message>>([])
   const [groupUsers, setGroupUsers] = useState<Array<GroupUser>>([])
 
-  const { currentUser }         = useContext(LoginUserContext)
+  const { currentUser } = useContext(LoginUserContext)
 
   useEffect(() => {
     getUserProfile(id)
@@ -59,12 +59,12 @@ export const MessageIndex: VFC<Props> = memo((props) => {
           <UseName>{profile?.company}</UseName>
         )}
         <MessagesContainer>
-          {groups.map((group, index) => {
+          {groups.map((group) => {
                 const selectedUser    = groupUsers.find((groupUser) => groupUser.group_id === group.id && groupUser.user_id !== currentUser?.id)
                 const lastMessage     = messages.find((message) => message?.group_id === group.id)
                 const selectedProfile = profiles.find((profile) => profile?.user_id === selectedUser?.user_id)
             return (
-              <GroupMessages group={group} selectedProfile={selectedProfile} lastMessage={lastMessage} index={index}/>
+              <GroupMessages group={group} selectedProfile={selectedProfile} lastMessage={lastMessage} key={group.id}/>
             )
           })}
         </MessagesContainer>
