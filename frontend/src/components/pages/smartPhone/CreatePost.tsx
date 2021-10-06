@@ -13,12 +13,11 @@ const HeaderWrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 0 30px;
-  background-color: #E0FFFF;
   margin: 0;
 `
 const SubmitButton = styled.button`
   border: none;
-  background-color: #E0FFFF;
+  background-color: #fff;
 `
 const PostWrapper = styled.div`
   padding: 50px 20px;

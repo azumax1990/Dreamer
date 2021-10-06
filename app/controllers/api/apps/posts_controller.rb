@@ -18,8 +18,8 @@ class ::Api::Apps::PostsController < ApplicationController
   end
 
   def destroy
-    # post = current_api_user.posts.find(params[:id])
-    # post.destroy
+    post = Post.find(params[:id])
+    post.destroy
     render json: { status: 'ok' }
   end
 

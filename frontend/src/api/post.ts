@@ -10,3 +10,8 @@ export const getAllImages = (id: number | string) => {
 export const PostImages = (params: paramsPost) => {
   return axios.post("http://localhost:3000/api/posts", params)
 }
+
+// 写真削除
+export const deleteImages = (id: number | undefined) => {
+  return axios.delete(`http://localhost:3000/api/posts/${id}`)
+}

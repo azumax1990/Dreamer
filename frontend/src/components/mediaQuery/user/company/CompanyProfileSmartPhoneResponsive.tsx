@@ -1,4 +1,4 @@
-import React, { memo, useContext, VFC } from 'react'
+import React, { Dispatch, memo, useContext, VFC } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { PostGroup } from '../../../../api/group'
@@ -34,12 +34,13 @@ const IntroductionText = styled.p`
 const ImagesWrapper = styled.div`
 `
 type Props = {
-  profile: Profile | undefined;
-  posts:   Array<Post>;
-  groupId: number | undefined;
+  profile:  Profile | undefined;
+  posts:    Array<Post>;
+  setPosts: Dispatch<React.SetStateAction<Array<Post>>>;
+  groupId:  number | undefined;
 }
 export const CompanyProfileSmartPhoneResponsive: VFC<Props> = memo((props) => {
-  const { profile, posts, groupId } = props;
+  const { profile, posts, setPosts, groupId } = props;
   const { currentUser } = useContext(LoginUserContext)
   const history = useHistory()
 
@@ -80,7 +81,7 @@ export const CompanyProfileSmartPhoneResponsive: VFC<Props> = memo((props) => {
       </ProfileWrapper>
       <ImagesWrapper>
         {posts.map((post) => (
-          <Images post={post} key={post.id}/>
+          <Images post={post} posts={posts} setPosts={setPosts} />
         ))}
       </ImagesWrapper>
     </>
