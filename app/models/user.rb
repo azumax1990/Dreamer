@@ -31,4 +31,39 @@ class User < ActiveRecord::Base
         return profile
     end
   end
+
+  def all_group_users(user)
+    group_users = []
+    groups = user.groups
+    groups.each do |group|
+      group_users << group.group_users
+    end
+    group_members = []
+    group_users.each do |group_user|
+      group_members << group_user[0]
+      group_members << group_user[1]
+    end
+    return group_members
+  end
+
+  def last_messages(user)
+    messages = []
+    groups = user.groups
+    groups.each do |group|
+      if group.messages
+        messages << group.messages.last
+      end
+    end
+    return messages
+  end
+
+  def all_profiles(user)
+    profiles = []
+    groups = user.groups
+    groups.each do |group|
+      profiles << group.users[0].profile
+      profiles << group.users[1].profile
+    end
+    return profiles
+  end
 end
