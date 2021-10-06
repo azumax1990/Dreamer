@@ -38,7 +38,7 @@ export const SignUp: VFC = memo(() => {
         Cookies.set('uid', res.headers['uid']);
         setCurrentUser(res.data.data)
         history.push(`/user/${res.data.data.id}/profile`)
-        alert("ログインしました")
+        alert("新規登録ありがとうございます。まず始めにプロフィールを作成しましょう。")
       } else {
         alert("登録出来ませんでした")
       }
