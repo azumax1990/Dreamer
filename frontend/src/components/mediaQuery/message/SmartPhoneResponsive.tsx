@@ -60,10 +60,10 @@ export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
       <MessagesWrapper>
         <MessageWrapper>
           <MessagesContainer>
-          {messages.map((message, index) => {
+          {messages.map((message) => {
             const selectedProfile = profiles.find((profile) => profile?.user_id === message.user_id)
             return (
-              <Messages selectedProfile={selectedProfile} message={message} index={index} />
+              <Messages selectedProfile={selectedProfile} message={message} key={message.id} />
             )
           })}
           </MessagesContainer> 

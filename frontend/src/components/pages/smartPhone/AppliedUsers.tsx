@@ -17,8 +17,6 @@ const UsersContainer = styled.div`
   height: 600px;
   overflow: scroll;
 `
-const AppliedUserContainer = styled.div`
-`
 const TitleText = styled.h2`
   margin: 0;
   text-align: center;
@@ -34,7 +32,7 @@ export const AppliedUsers: VFC<Props> = memo((props) => {
     .then((res) => {
       setProfiles(res.data.applied_profiles)
     })
-  }, [])
+  }, [id])
 
   return (
     <>
@@ -43,9 +41,7 @@ export const AppliedUsers: VFC<Props> = memo((props) => {
         <UsersContainer>
           <TitleText>応募リスト</TitleText>
           {profiles.map((profile) => (
-            <AppliedUserContainer key={profile.id}>
-              <AppliedUser profile={profile}/>
-            </AppliedUserContainer>
+            <AppliedUser profile={profile} key={profile.id}/>
           ))}
         </UsersContainer>
       </AppliedUsersWrapper>

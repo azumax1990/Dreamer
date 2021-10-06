@@ -31,8 +31,6 @@ const MessagesContainer = styled.div`
   height: 500px;
   overflow: scroll;
 `
-const NoGroupMessage = styled.p`
-`
 type Props = {
   profile:                 Profile | undefined;
   groups:                  Array<Group>;
@@ -59,12 +57,12 @@ export const ModalMessages: VFC<Props> = memo((props) => {
               <UseName>{profile?.company}</UseName>
             )}
             <MessagesContainer>
-              {groups.map((group, index) => {
+              {groups.map((group) => {
                 const selectedUser    = groupUsers.find((groupUser) => groupUser.group_id === group.id && groupUser.user_id !== currentUser?.id)
                 const lastMessage     = messages.find((message) => message?.group_id === group.id)
                 const selectedProfile = profiles.find((profile) => profile?.user_id === selectedUser?.user_id)
                 return (
-                  <ModalMessage group={group} selectedProfile={selectedProfile} lastMessage={lastMessage} index={index}/>
+                  <ModalMessage group={group} selectedProfile={selectedProfile} lastMessage={lastMessage} key={group.id}/>
                 )
               })}
             </MessagesContainer>

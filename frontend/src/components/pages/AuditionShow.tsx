@@ -34,20 +34,18 @@ export const AuditionShow: VFC<Props>= memo((props) => {
       setAppliedUsers(res.data.users)
     })
     .catch(() => alert('情報を取得出来ませんでした'))
-  }, [])
-
-  const params: ApplyParams = {
-    user_id: currentUser?.id,
-  }
+  }, [id])
 
   const onClickPostApply = useCallback(() => {
+    const params: ApplyParams = {
+      user_id: currentUser?.id,
+    }
     postApply(id, params)
     .then((res) => {
       alert('応募が完了しました。記載元からの連絡をお待ちください')
       history.push("/auditions")
     })
-  }, [params])
-  
+  }, [currentUser?.id, history, id])
   
   return (
     <>

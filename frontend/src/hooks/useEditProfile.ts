@@ -32,7 +32,7 @@ export const useEditProfile = () => {
       setDescription(res.data.description)
     })
     .catch(() => alert('エラー'))
-  }, [])
+  }, [currentUser?.id])
 
   const params: ParamsProfile = {
     id:           currentUser?.id,
@@ -74,43 +74,43 @@ export const useEditProfile = () => {
 
   const resetImage = useCallback(() => {
     setAvatar({ data: '', name: ''})
-  }, [avatar])
+  }, [])
 
   const onChangeJob = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setJob(e.target.value)
-  }, [job, setJob])
+  }, [setJob])
 
   const onChangeName = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value)
-  }, [name, setName])
+  }, [setName])
 
   const onChangeAge = useCallback((e: ChangeEvent<{ value: unknown }>) => {
     setAge(e.target.value as number)
-  }, [age, setAge])
+  }, [setAge])
 
   const onChangeGender = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     setGender(e.target.value)
-  }, [gender, setGender])
+  }, [setGender])
 
   const onChangeTall = useCallback((e: ChangeEvent<{ value: unknown }>) => {
     setTall(e.target.value as number)
-  }, [tall, setTall])
+  }, [setTall])
 
   const onChangePrefecture = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     setPrefecture(e.target.value)
-  }, [prefecture, setPrefecture])
+  }, [setPrefecture])
 
   const onChangeIntroduction = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
     setIntroduction(e.target.value)
-  }, [introduction, setIntroduction])
+  }, [setIntroduction])
 
   const onChangeCompany = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setCompany(e.target.value)
-  }, [company, setCompany])
+  }, [setCompany])
 
   const onChangeDescription = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(e.target.value)
-  }, [description, setDescription])
+  }, [setDescription])
 
   return { 
            job,

@@ -2,7 +2,6 @@ import React, { memo, useContext, useEffect, VFC } from 'react'
 import MediaQuery from 'react-responsive'
 
 import { LoginUserContext } from '../../App'
-import { getEditProfile } from '../../api/profile'
 
 import { useEditProfile } from '../../hooks/useEditProfile'
 import { CompanyPcResponsive } from '../mediaQuery/edit/company/CompanyPcResponsive'
@@ -48,7 +47,7 @@ export const EditProfile: VFC<Props> = memo((props) => {
   // 編集プロフィール取得
   useEffect(() => {
     getProfile(id)
-  }, [currentUser, id])
+  }, [currentUser, getProfile, id])
   return (
     <>
       {job === '演者' ? (

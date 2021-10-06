@@ -35,15 +35,14 @@ type Props = {
   group:           Group;
   selectedProfile: Profile | undefined;
   lastMessage:     Message | undefined;
-  index:           number;
 }
 export const ModalMessage: VFC<Props> = (props) => {
-  const { group, lastMessage, selectedProfile, index } = props
+  const { group, lastMessage, selectedProfile } = props
   const history = useHistory()
   const moveToMessageGroup = () => (history.push(`/group/${group.id}`))
   return (
     <>
-      <MessageContainer key={index} onClick={moveToMessageGroup}>
+      <MessageContainer onClick={moveToMessageGroup}>
         <AvatarContainer>
           {selectedProfile?.avatar_url ? (
             <UserAvatar src={`${selectedProfile?.avatar_url}`} />

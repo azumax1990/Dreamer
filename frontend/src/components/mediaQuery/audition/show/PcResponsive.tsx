@@ -49,8 +49,6 @@ const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
 `
-const Tbody = styled.tbody`
-`
 const TableRow = styled.tr`
   border-bottom: 2px solid #ddd;
 `

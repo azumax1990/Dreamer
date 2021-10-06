@@ -81,7 +81,7 @@ export const CompanyProfileSmartPhoneResponsive: VFC<Props> = memo((props) => {
       </ProfileWrapper>
       <ImagesWrapper>
         {posts.map((post) => (
-          <Images post={post} posts={posts} setPosts={setPosts} />
+          <Images post={post} posts={posts} setPosts={setPosts} key={post.id}/>
         ))}
       </ImagesWrapper>
     </>

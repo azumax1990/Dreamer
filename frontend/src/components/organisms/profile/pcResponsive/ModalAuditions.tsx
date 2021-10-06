@@ -77,7 +77,7 @@ export const ModalAuditions: VFC<Props> = memo((props) => {
                 </AuditionNameContainer>
                 <AuditionsContainer>
                   {auditions.map((audition) => (
-                    <AuditionInfo audition={audition} onChooseAudition={onChooseAudition} /> 
+                    <AuditionInfo audition={audition} onChooseAudition={onChooseAudition} key={audition.id}/> 
                   ))}
                 </AuditionsContainer>
               </>
