@@ -1,5 +1,6 @@
 import React, { VFC, memo } from 'react'
 import styled from 'styled-components'
+import moment from 'moment'
 import avatarImage from '../../../../images/no-avatar.jpeg'
 import { Audition } from '../../../../types'
 
@@ -49,7 +50,7 @@ export const AuditionSmartPhoneInfo: VFC<Props> = memo((props) => {
         </ImageContainer>
         <DetailContainer>
           <TitleText>{audition.title}</TitleText>
-          <TimeText>{audition.created_at}</TimeText>
+          <TimeText>{moment(audition.created_at).format('YYYY年MM月DD日')}</TimeText>
         </DetailContainer>
       </AuditionContainer>
     </>

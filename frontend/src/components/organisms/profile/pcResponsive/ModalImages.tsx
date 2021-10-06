@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useContext, useState, VFC } from 'react'
 import styled from 'styled-components'
+import moment from 'moment'
 import { Post } from '../../../../types'
 import { FaEllipsisV } from "react-icons/fa";
 import { deleteImages } from '../../../../api/post';
@@ -101,7 +102,7 @@ export const ModalImages: VFC<Props> = (props) => {
           <ImageTag src={selectedPost?.image_url} />
           <ContentWrapper>
             <ContentWrapperTop>
-              <TimeText>{selectedPost?.created_at}</TimeText>
+              <TimeText>{moment(selectedPost?.created_at).format('YYYY年MM月DD日')}</TimeText>
               {currentUser?.id === selectedPost?.user_id ? (
                 <FaEllipsisV style={{cursor: "pointer"}} onClick={onChangeDeletePost} />
               ) : (null)}

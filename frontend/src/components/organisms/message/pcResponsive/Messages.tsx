@@ -1,6 +1,7 @@
 import React, { memo, useContext, VFC } from 'react'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import moment from 'moment'
+import { Link } from 'react-router-dom'
 import { LoginUserContext } from '../../../../App'
 import { Message, Profile } from '../../../../types'
 
@@ -55,7 +56,7 @@ export const Messages: VFC<Props> = memo((props) => {
             </Link>
           )}
           <MessageText>{message.content}</MessageText>
-          <TimeText>{message.created_at}</TimeText>
+          <TimeText>{moment(message.created_at).format('YYYY年MM月DD日')}</TimeText>
         </CurrentUserMessageContainer>
       </>
     ) : (
@@ -71,7 +72,7 @@ export const Messages: VFC<Props> = memo((props) => {
             </Link>
           )}
            <MessageText>{message.content}</MessageText>
-           <TimeText>{message.created_at}</TimeText>
+           <TimeText>{moment(message.created_at).format('YYYY年MM月DD日')}</TimeText>
          </MessageContainer>
       </>
     )

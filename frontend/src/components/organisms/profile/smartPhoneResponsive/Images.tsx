@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useContext, useState, VFC } from 'react'
 import styled from 'styled-components'
+import moment from 'moment'
 import { FaEllipsisV } from "react-icons/fa"
 import { Post } from '../../../../types'
 import { deleteImages } from '../../../../api/post'
@@ -68,7 +69,7 @@ export const Images: VFC<Props> = (props) => {
   return (
     <ImageContainer >
       <ContentWrapperTop>
-        <TimeText>{post.created_at}</TimeText>
+        <TimeText>{moment(post.created_at).format('YYYY年MM月DD日')}</TimeText>
         {currentUser?.id === post.user_id ? (
           <FaEllipsisV onClick={onChangeDeletePost}/>
         ) : (null)}
