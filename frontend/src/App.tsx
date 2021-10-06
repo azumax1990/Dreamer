@@ -59,7 +59,7 @@ function App() {
           <Route exact path="/sign_in">
             <SignIn/>
           </Route>
-          <Route exact path="/auditions">
+          <Route exact path="/">
             <Auditions />
           </Route>
           <Route exact path="/audition">

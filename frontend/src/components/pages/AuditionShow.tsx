@@ -43,7 +43,7 @@ export const AuditionShow: VFC<Props>= memo((props) => {
     postApply(id, params)
     .then((res) => {
       alert('応募が完了しました。記載元からの連絡をお待ちください')
-      history.push("/auditions")
+      history.push("/")
     })
   }, [currentUser?.id, history, id])
   

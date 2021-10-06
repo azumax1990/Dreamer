@@ -49,7 +49,7 @@ const InputTag = styled.textarea`
 
 const SubmitButton = styled.button`
   width: 100%;
-  padding: 5px 15px;
+  padding: 10px 15px;
   border: none;
   box-shadow:  0 0 3px gray;
   cursor: pointer;

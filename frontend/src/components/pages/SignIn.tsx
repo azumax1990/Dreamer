@@ -33,7 +33,7 @@ export const SignIn: VFC = memo(() => {
         Cookies.set('client', res.headers['client']);
         Cookies.set('uid', res.headers['uid']);
         setCurrentUser(res.data.data)
-        history.push("/auditions")
+        history.push("/")
         alert("ログインしました")
       } else {
         alert("ログイン出来ませんでした")

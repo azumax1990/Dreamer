@@ -39,7 +39,7 @@ export const ProfilePageHeader: VFC<Props> = memo((props) => {
         Cookies.remove("client")
         Cookies.remove("uid")
         setCurrentUser(undefined)
-        history.push("/auditions")
+        history.push("/")
         alert("ログアウトしました")
       } 
     })
