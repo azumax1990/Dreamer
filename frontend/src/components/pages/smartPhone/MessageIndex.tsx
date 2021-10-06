@@ -53,7 +53,8 @@ export const MessageIndex: VFC<Props> = memo((props) => {
     <>
       <MessagePageSmartPhoneHeader />
       <MessageWrapper>
-        {profile?.job === '演者' ? (
+        {!profile?.name && !profile?.company ? (<UseName>ゲスト</UseName>
+        ) : profile?.job === '演者' ? (
           <UseName>{profile?.name}</UseName>
         ) : (
           <UseName>{profile?.company}</UseName>

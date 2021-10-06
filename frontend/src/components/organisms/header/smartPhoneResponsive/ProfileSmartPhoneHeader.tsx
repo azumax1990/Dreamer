@@ -28,7 +28,7 @@ export const ProfileSmartPhoneHeader: VFC<Props> = memo((props) => {
         Cookies.remove("uid")
         setCurrentUser(undefined)
         alert("ログアウトしました")
-        history.push("/auditions")
+        history.push("/")
       } 
     })
     .catch(() => alert("ログアウト出来ませんでした"))

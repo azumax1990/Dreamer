@@ -29,7 +29,7 @@ export const EditPageHeader: VFC = () => {
         Cookies.remove("client")
         Cookies.remove("uid")
         setCurrentUser(undefined)
-        history.push("/auditions")
+        history.push("/")
         alert("ログアウトしました")
       } 
     })

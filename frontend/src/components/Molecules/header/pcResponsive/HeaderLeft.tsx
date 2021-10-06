@@ -12,7 +12,7 @@ const HeaderTittle = styled.h2`
 export const HeaderLeft: VFC= memo(() => {
   return (
     <TittleWrapper>
-      <Link to="/auditions" style={{ textDecoration: "none", color: "black"}}>
+      <Link to="/" style={{ textDecoration: "none", color: "black"}}>
         <HeaderTittle>Dreamer</HeaderTittle>
       </Link>
     </TittleWrapper>
