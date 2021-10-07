@@ -51,7 +51,9 @@ export const GroupMessages: VFC<Props> = (props) => {
           )}
         </AvatarContainer>
         <ContentContainer>
-          {selectedProfile?.job === '演者' ? (
+          {!selectedProfile?.name && !selectedProfile?.company ? (
+            <MessageAccount>ゲスト</MessageAccount>
+          ) : selectedProfile?.job === '演者' ? (
             <MessageAccount>{selectedProfile?.name}</MessageAccount>
           ) : (
             <MessageAccount>{selectedProfile?.company}</MessageAccount>

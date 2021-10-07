@@ -156,7 +156,7 @@ export const PcResponsive: VFC<Props> = memo((props) => {
         <AddImageModal setIsOpen={setIsOpen} posts={posts} setPosts={setPosts}/>
       ) : (null)}
       {messageModalOpen ? (
-        <ModalMessages ChangeMessageModalOpen={ChangeMessageModalOpen} groups={groups} profile={profile} messages={messages} profiles={profiles} groupUsers={groupUsers}/>
+        <ModalMessages ChangeMessageModalOpen={ChangeMessageModalOpen} groups={groups}  messages={messages} profiles={profiles} groupUsers={groupUsers}/>
       ) : (null)}
       {auditionModalOpen ? (
         <ModalAuditions auditions={auditions} ChangeAuditionModalOpen={ChangeAuditionModalOpen}/>

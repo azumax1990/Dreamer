@@ -13,8 +13,6 @@ const AuditionsWrapper = styled.div`
 const AuditionsContainer = styled.div`
   background-color: #fff;
   width: 700px;
-  // box-shadow: 0 0 3px gray;
-  // box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
   margin: 0 auto;
 `
 type Props = {
