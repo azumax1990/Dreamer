@@ -32,7 +32,6 @@ const MessagesContainer = styled.div`
   overflow: scroll;
 `
 type Props = {
-  profile:                 Profile | undefined;
   groups:                  Array<Group>;
   messages:                Array<Message>;
   profiles:                Array<Profile>;
@@ -41,7 +40,7 @@ type Props = {
 }
 
 export const ModalMessages: VFC<Props> = memo((props) => {
-  const { ChangeMessageModalOpen, profile, groups, messages, profiles, groupUsers } = props;
+  const { ChangeMessageModalOpen, groups, messages, profiles, groupUsers } = props;
   const { currentUser } = useContext(LoginUserContext)
   
   return (
@@ -49,13 +48,7 @@ export const ModalMessages: VFC<Props> = memo((props) => {
       <ModalWrapper onClick={ChangeMessageModalOpen}>
         <OverLay>
           <Modal>
-            {profile?.name === null && profile?.company === null ? (
-              <UseName>ゲスト</UseName>
-            ) : profile?.job === '演者' ? (
-              <UseName>{profile?.name}</UseName> 
-            ) : (
-              <UseName>{profile?.company}</UseName>
-            )}
+            <UseName>メッセージ一覧</UseName>
             <MessagesContainer>
               {groups.map((group) => {
                 const selectedUser    = groupUsers.find((groupUser) => groupUser.group_id === group.id && groupUser.user_id !== currentUser?.id)

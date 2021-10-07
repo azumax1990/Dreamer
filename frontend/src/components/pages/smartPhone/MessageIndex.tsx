@@ -30,7 +30,6 @@ type Props = {
 export const MessageIndex: VFC<Props> = memo((props) => {
   const { id } = props;
   const [groups, setGroups]         = useState<Array<Group>>([])
-  const [profile, setProfile]       = useState<Profile>()
   const [profiles, setProfiles]     = useState<Array<Profile>>([])
   const [messages, setMessages]     = useState<Array<Message>>([])
   const [groupUsers, setGroupUsers] = useState<Array<GroupUser>>([])
@@ -40,7 +39,6 @@ export const MessageIndex: VFC<Props> = memo((props) => {
   useEffect(() => {
     getUserProfile(id)
     .then((res) => {
-      setProfile(res.data.profile)
       setGroups(res.data.groups)
       setProfiles(res.data.profiles)
       setMessages(res.data.messages)
@@ -53,12 +51,7 @@ export const MessageIndex: VFC<Props> = memo((props) => {
     <>
       <MessagePageSmartPhoneHeader />
       <MessageWrapper>
-        {!profile?.name && !profile?.company ? (<UseName>ゲスト</UseName>
-        ) : profile?.job === '演者' ? (
-          <UseName>{profile?.name}</UseName>
-        ) : (
-          <UseName>{profile?.company}</UseName>
-        )}
+        <UseName>メッセージ一覧</UseName>
         <MessagesContainer>
           {groups.map((group) => {
                 const selectedUser    = groupUsers.find((groupUser) => groupUser.group_id === group.id && groupUser.user_id !== currentUser?.id)
