@@ -30,6 +30,10 @@ const InfoContainer = styled.div`
 const InfoText = styled.p`
   letter-spacing: 5px;
 `
+const AuditionAvatar = styled.img`
+  width: 100%;
+  height: 300px;
+`
 const CompanyContainer = styled.div`
   background-color: #EFEFEF;
   padding: 20px;
@@ -84,6 +88,9 @@ export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
       <AuditionContainer>
         <TitleText>{audition?.title}</TitleText>
         <CreatedAt>{moment(audition?.created_at).format('YYYY年MM月DD日')}</CreatedAt>
+        {audition?.avatar_url ? (
+          <AuditionAvatar src={audition?.avatar_url}/>
+        ) : (null)}
         <InfoContainer>
           <InfoText>{audition?.description}</InfoText>
         </InfoContainer>
