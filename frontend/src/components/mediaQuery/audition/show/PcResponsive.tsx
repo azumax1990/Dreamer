@@ -76,17 +76,21 @@ const ApplyButton = styled.button`
   cursor: pointer;
 `
 type Props = {
+  id:               string;
   audition:         Audition | undefined;
   profile:          Profile | undefined;
-  onClickPostApply: () => void;
   hasApplied:       User | undefined;
+  onClickPostApply: (id: string) => void;
+  onDeleteAudition: (id: string) => void;
+  onDeleteApply:    (id: string) => void;
 }
 
 export const PcResponsive: VFC<Props> = memo((props) => {
-  const { audition, profile, onClickPostApply, hasApplied } = props;
+  const { id, audition, profile, onClickPostApply, hasApplied, onDeleteAudition, onDeleteApply } = props;
   const { currentUser } = useContext(LoginUserContext)
   const history = useHistory()
   const moveToSignInPage  = () => (history.push("/sign_in"))
+
   return (
     <AuditionWrapper>
       <AuditionContainer>
@@ -129,11 +133,11 @@ export const PcResponsive: VFC<Props> = memo((props) => {
           { !currentUser ? (
             <ApplyButton onClick={moveToSignInPage} >ログインしてください</ApplyButton>
           ) : currentUser?.id === profile?.user_id ? (
-            <ApplyButton>応募を終了する</ApplyButton>
+            <ApplyButton onClick={() => onDeleteAudition(id)}>応募を終了する</ApplyButton>
           ) : !hasApplied ? ( 
-            <ApplyButton onClick={onClickPostApply} disabled={currentUser ? false : true}>応募する</ApplyButton>
+            <ApplyButton onClick={() => onClickPostApply(id)} disabled={currentUser ? false : true}>応募する</ApplyButton>
           ) : (
-            <ApplyButton>応募済</ApplyButton>
+            <ApplyButton onClick={() => onDeleteApply(id)}>応募をやめる</ApplyButton>
           )}
         </CompanyContainer>
       </AuditionContainer>
