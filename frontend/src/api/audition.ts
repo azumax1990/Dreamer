@@ -16,5 +16,10 @@ export const getAudition = (id: string | number) => {
   return axios.get(`http://localhost:3000/api/auditions/${id}`)
 }
 
+// オーディション削除
+export const deleteAudition = (id: number | undefined) => {
+  return axios.delete(`http://localhost:3000/api/auditions/${id}`)
+}
+
 
 

@@ -24,7 +24,7 @@ class ::Api::AuditionsController < ApplicationController
                             filename: params[:avatar][:name])
     end
     audition.save
-    render json: { status: 'ok' }
+    render json: audition, methods: [:avatar_url]
   end
 
   def edit
@@ -32,6 +32,9 @@ class ::Api::AuditionsController < ApplicationController
   end
 
   def destroy
+    audition = Audition.find(params[:id])
+    audition.destroy
+    render json: { status: 'ok' }
   end
 
   def decode(str)
