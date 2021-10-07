@@ -1,11 +1,10 @@
-import React, { Dispatch, useContext, VFC } from 'react'
+import React, { Dispatch, VFC } from 'react'
 import styled from 'styled-components'
 import { FaCamera } from 'react-icons/fa'
 
 import { PostAudition } from '../../../../api/audition'
 import { Audition } from '../../../../types'
 import { usePostAudition } from '../../../../hooks/usePostAudition'
-import { LoginUserContext } from '../../../../App'
 
 const ModalWrapper = styled.div`
 `
@@ -103,21 +102,12 @@ type  Props = {
 export const AddAuditionModal: VFC<Props> = (props) => {
   const { setIsOpen, auditions, setAuditions } = props;
   const { onChangeImage, params, title, setTitle, description, setDescription, avatar, resetImage, setAvatar } = usePostAudition()
-  const { currentUser } = useContext(LoginUserContext)
 
-  const id: number = auditions.length + 1
-
-  const audition: Audition = {
-    id: id,
-    user_id: currentUser?.id,
-    title: title,
-    description: description,
-    avatar_url: avatar.data
-  }
   const SubmitPostAudition = () => {
     PostAudition(params)
     .then((res) => {
-      const newAuditions = [audition, ...auditions]
+      console.log(res)
+      const newAuditions = [res.data, ...auditions]
       setAuditions(newAuditions)
       setTitle('')
       setDescription('')

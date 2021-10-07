@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
     resources :profiles, only: [:show, :edit, :update]
     resources :auditions, only: [:index, :show, :create, :edit, :destroy] do
-      resources :applies, only: [:create]
+      resources :applies, only: [:create, :destroy]
     end
   end
 end

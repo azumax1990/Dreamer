@@ -1,16 +1,11 @@
-import React, { memo, VFC, useState, useEffect, useCallback, useContext } from 'react'
+import React, { memo, VFC, useEffect } from 'react'
 import MediaQuery from 'react-responsive'
-import { useHistory } from 'react-router-dom'
-
-import { postApply } from '../../api/apply'
-import { getAudition } from '../../api/audition'
-import { LoginUserContext } from '../../App'
-import { ApplyParams, Audition, Profile, User } from '../../types'
 
 import { AuditionPageHeader } from '../organisms/header/pcResponsive/AuditionPageHeader'
 import { TopPageSmartPhoneHeader } from '../organisms/header/smartPhoneResponsive/TopPageSmartPhoneHeader'
 import { PcResponsive } from '../mediaQuery/audition/show/PcResponsive'
 import { SmartPhoneResponsive } from '../mediaQuery/audition/show/SmartPhoneResponsive'
+import { useAuditionShow } from '../../hooks/useAuditionShow'
 
 type Props = {
   id: string;
@@ -19,43 +14,54 @@ type Props = {
 export const AuditionShow: VFC<Props>= memo((props) => {
   const { id } = props;
 
-  const [audition, setAudition]         = useState<Audition>()
-  const [profile, setProfile]           = useState<Profile>()
-  const [appliedUsers, setAppliedUsers] = useState<Array<User>>([])
-  const { currentUser } = useContext(LoginUserContext)
-  const hasApplied = appliedUsers.find((appliedUser) => appliedUser.id === currentUser?.id )
-  const history = useHistory()
+  // const history         = useHistory()
+  // const { currentUser } = useContext(LoginUserContext)
 
-  useEffect(() => {
-    getAudition(id)
-    .then((res) => {
-      setAudition(res.data.audition)
-      setProfile(res.data.profile)
-      setAppliedUsers(res.data.users)
-    })
-    .catch(() => alert('情報を取得出来ませんでした'))
-  }, [id])
+  const { getAuditionShow, onClickPostApply, onDeleteAudition, onDeleteApply, audition, profile, hasApplied } = useAuditionShow()
 
-  const onClickPostApply = useCallback(() => {
-    const params: ApplyParams = {
-      user_id: currentUser?.id,
-    }
-    postApply(id, params)
-    .then((res) => {
-      alert('応募が完了しました。記載元からの連絡をお待ちください')
-      history.push("/")
-    })
-  }, [currentUser?.id, history, id])
+
+  useEffect(() => getAuditionShow(id), [getAuditionShow, id])
+
+  // const onClickPostApply = useCallback(() => {
+  //   const params: ApplyParams = {
+  //     user_id: currentUser?.id,
+  //   }
+  //   postApply(id, params)
+  //   .then((res) => {
+  //     alert('応募が完了しました。記載元からの連絡をお待ちください')
+  //     history.push("/")
+  //   })
+  // }, [currentUser?.id, history, id])
+
+  // const onDeleteAudition = useCallback(() => {
+  //   deleteAudition(audition?.id)
+  //   .then((res) => {
+  //     if (res.data.status === 'ok') {
+  //       history.push("/")
+  //       alert("募集を終了しました。")
+  //     }
+  //   })
+  // }, [audition?.id, history])
+
+  // const onDeleteApply = useCallback(() => {
+  //   deleteApply(id, currentUser?.id)
+  //   .then((res) => {
+  //     if (res.data.status === 'ok') {
+  //       history.push("/")
+  //       alert("応募を取り消しました。")
+  //     }
+  //   })
+  // }, [currentUser?.id, id, history])
   
   return (
     <>
       <MediaQuery query="(min-width: 768px)">
         <AuditionPageHeader />
-        <PcResponsive audition={audition} profile={profile} onClickPostApply={onClickPostApply} hasApplied={hasApplied}/>
+        <PcResponsive id={id} audition={audition} profile={profile} onClickPostApply={onClickPostApply} hasApplied={hasApplied} onDeleteAudition={onDeleteAudition} onDeleteApply={onDeleteApply}/>
       </MediaQuery>
       <MediaQuery query="(max-width: 767px)">
         <TopPageSmartPhoneHeader />
-        <SmartPhoneResponsive audition={audition} profile={profile} onClickPostApply={onClickPostApply} hasApplied={hasApplied} />
+        <SmartPhoneResponsive id={id} audition={audition} profile={profile} onClickPostApply={onClickPostApply} hasApplied={hasApplied} onDeleteAudition={onDeleteAudition} onDeleteApply={onDeleteApply}/>
       </MediaQuery>
     </>
   )

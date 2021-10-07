@@ -1,13 +1,12 @@
 import React, { memo, useContext, VFC } from 'react'
+import styled from 'styled-components';
 import moment from 'moment';
 import { Link, useHistory } from 'react-router-dom';
-import styled from 'styled-components';
 import { LoginUserContext } from '../../../../App';
 import { Audition, Profile, User } from '../../../../types';
 
 const AuditionWrapper = styled.div`
   padding: 40px 20px;
-  // background-color: #F5F5F5;
   min-height: 100vh;
 `
 const AuditionContainer = styled.div`
@@ -72,17 +71,21 @@ const ApplyButton = styled.button`
   cursor: pointer;
 `
 type Props = {
+  id:               string;
   audition:         Audition | undefined;
   profile:          Profile | undefined;
-  onClickPostApply: () => void;
   hasApplied:       User | undefined;
+  onClickPostApply: (id: string) => void;
+  onDeleteAudition: (id: string) => void;
+  onDeleteApply:    (id: string) => void;
 }
 
 export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
-  const { audition, profile, onClickPostApply, hasApplied } = props;
+  const { id, audition, profile, onClickPostApply, hasApplied, onDeleteAudition, onDeleteApply } = props;
   const { currentUser } = useContext(LoginUserContext)
   const history = useHistory()
   const moveToSignInPage  = () => (history.push("/sign_in"))
+
   return (
     <AuditionWrapper>
       <AuditionContainer>
@@ -125,11 +128,11 @@ export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
           {!currentUser ? (
             <ApplyButton onClick={moveToSignInPage} >ログインしてください</ApplyButton>
           ) : currentUser?.id === profile?.user_id ? (
-            <ApplyButton>応募を終了する</ApplyButton>
+            <ApplyButton onClick={() => onDeleteAudition(id)}>応募を終了する</ApplyButton>
           ) : !hasApplied ? ( 
-            <ApplyButton onClick={onClickPostApply} disabled={currentUser ? false : true}>応募する</ApplyButton>
+            <ApplyButton onClick={() => onClickPostApply(id)} disabled={currentUser ? false : true}>応募する</ApplyButton>
           ) : (
-            <ApplyButton>応募済</ApplyButton>
+            <ApplyButton onClick={() => onDeleteApply(id)}>応募をやめる</ApplyButton>
           )}
         </CompanyContainer>
       </AuditionContainer>
