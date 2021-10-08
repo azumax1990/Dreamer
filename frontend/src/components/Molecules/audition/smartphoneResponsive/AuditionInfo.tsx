@@ -32,16 +32,17 @@ export const AuditionInfo: VFC<Props> = memo((props) => {
   const { audition } = props;
   const history = useHistory()
   const MoveToAppliedUsersPage = () => history.push(`/audition/${audition.id}/users`)
+  const moveToAuditionPage = () => history.push(`/audition/${audition?.id}`)
   return (
-    <AuditionContainer onClick={MoveToAppliedUsersPage}>
-      <ImageContainer>
+    <AuditionContainer>
+      <ImageContainer onClick={moveToAuditionPage}>
         {audition.avatar_url ? (
           <AuditionImage src={audition.avatar_url} />
         ) : (
           <AuditionImage src="https://source.unsplash.com/random" />
         )}
       </ImageContainer>
-      <ContentContainer>
+      <ContentContainer onClick={MoveToAppliedUsersPage}>
         <AuditionTitleText>{audition.title}</AuditionTitleText>
       </ContentContainer>
     </AuditionContainer>

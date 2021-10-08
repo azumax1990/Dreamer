@@ -2,8 +2,9 @@ import React, { VFC, memo, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { FaAngleDoubleLeft } from "react-icons/fa"
 import { getAudition } from '../../../../api/audition'
-import { Profile } from '../../../../types'
+import { Audition, Profile } from '../../../../types'
 import { AppliedUser } from './AppliedUser'
+import { useHistory } from 'react-router-dom'
 
 
 const AuditionNameContainer = styled.div`
@@ -11,10 +12,13 @@ const AuditionNameContainer = styled.div`
   aline-items: center;
 `
 const AuditionName = styled.h2`
+  font-size: 26px;
   height: 36px;
   overflow: hidden;
-  padding-left: 205px;
+  padding-left: 15px;
+  padding-bottom: 5px;
   margin: 0;
+  cursor: pointer;
 `
 const AppliedUsersContainer = styled.div`
   height: 500px;
@@ -24,13 +28,15 @@ const AppliedUsersContainer = styled.div`
 
 type Props = {
   id:                      number | undefined;
+  audition:                Audition | undefined;
   onChangeAppliedModal:    () => void;
   ChangeAuditionModalOpen: () => void;
 } 
 export const AppliedUsers: VFC<Props> = memo((props) => {
-  const {id, onChangeAppliedModal, ChangeAuditionModalOpen} = props
+  const {id, audition, onChangeAppliedModal, ChangeAuditionModalOpen} = props
   const [profiles, setProfiles] = useState<Array<Profile>>()
-  
+  const history = useHistory()
+  const moveToAuditionPage = () => history.push(`/audition/${audition?.id}`)
   useEffect(() => {
     getAudition(id as number)
     .then((res) => {
@@ -41,7 +47,7 @@ export const AppliedUsers: VFC<Props> = memo((props) => {
     <>
       <AuditionNameContainer>
         <FaAngleDoubleLeft style={{ fontSize: "30px", cursor: "pointer" }} onClick={onChangeAppliedModal}/>
-        <AuditionName>応募リスト</AuditionName>
+        <AuditionName onClick={moveToAuditionPage}>{audition?.title}</AuditionName>
       </AuditionNameContainer>
       <AppliedUsersContainer>
         {profiles?.map((profile) => (

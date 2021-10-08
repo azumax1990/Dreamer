@@ -5,7 +5,7 @@ import { Profile } from '../../../../types'
 
 const UserContainer = styled.div`
   display: flex;
-  padding: 7px 0;
+  padding-top: 10px;
   cursor: pointer;
 `
 const AvatarContainer = styled.div`
