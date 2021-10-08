@@ -82,7 +82,7 @@ export const ModalAuditions: VFC<Props> = memo((props) => {
                 </AuditionsContainer>
               </>
             ) : (
-              <AppliedUsers id={selectedAudition?.id} onChangeAppliedModal={onChangeAppliedModal} ChangeAuditionModalOpen={ChangeAuditionModalOpen}/>
+              <AppliedUsers id={selectedAudition?.id} audition={selectedAudition} onChangeAppliedModal={onChangeAppliedModal} ChangeAuditionModalOpen={ChangeAuditionModalOpen}/>
             )}
           </Modal>
         </OverLay>

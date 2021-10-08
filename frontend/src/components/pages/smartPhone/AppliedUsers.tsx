@@ -1,7 +1,8 @@
 import React, { memo, VFC, useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { getAudition } from '../../../api/audition'
-import { Profile } from '../../../types'
+import { Audition, Profile } from '../../../types'
 import { AppliedUser } from '../../Molecules/audition/smartphoneResponsive/AppliedUser'
 import { MessagePageSmartPhoneHeader } from '../../organisms/header/smartPhoneResponsive/MessagePageSmartPhoneHeader'
 
@@ -13,13 +14,16 @@ const AppliedUsersWrapper = styled.div`
   box-shadow: 0 0 5px gray;
 `
 const UsersContainer = styled.div`
-  padding: 10px;
+  padding: 0 10px 10px 10px;
   height: 600px;
   overflow: scroll;
 `
-const TitleText = styled.h2`
+const AuditionTitle = styled.h2`
+  height: 36px;
+  overflow: hidden;
   margin: 0;
   text-align: center;
+  
 `
 type Props = {
   id: string;
@@ -27,10 +31,14 @@ type Props = {
 export const AppliedUsers: VFC<Props> = memo((props) => {
   const { id } = props;
   const [profiles, setProfiles] = useState<Array<Profile>>([])
+  const [audition, setAudition] = useState<Audition>()
+  const history = useHistory()
+  const moveToAuditionPage = () => history.push(`/audition/${audition?.id}`)
   useEffect(() => {
     getAudition(id)
     .then((res) => {
       setProfiles(res.data.applied_profiles)
+      setAudition(res.data.audition)
     })
   }, [id])
 
@@ -39,7 +47,7 @@ export const AppliedUsers: VFC<Props> = memo((props) => {
       <MessagePageSmartPhoneHeader />
       <AppliedUsersWrapper>
         <UsersContainer>
-          <TitleText>応募リスト</TitleText>
+          <AuditionTitle onClick={moveToAuditionPage}>{audition?.title}</AuditionTitle>
           {profiles.map((profile) => (
             <AppliedUser profile={profile} key={profile.id}/>
           ))}
