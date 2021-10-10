@@ -1,9 +1,14 @@
 class Audition < ApplicationRecord
   include Rails.application.routes.url_helpers
 
+  validates :title, presence: true
+  validates :description, presence: true
+  
   belongs_to :user
+
   has_many :applies, dependent: :destroy
   has_many :applied_users, through: :applies, source: :user
+
   has_one_attached :avatar
 
   def avatar_url
