@@ -16,9 +16,10 @@ export const useProfile = () => {
   const [messageModalOpen, setMessageModalOpen] = useState(false)
   const [auditionModalOpen, setAuditionModalOpen] = useState(false)
 
-  const { currentUser } = useContext(LoginUserContext)
+  const { setLoading, currentUser } = useContext(LoginUserContext)
 
   const getProfile = useCallback(((id: string) => {
+    setLoading(true)
     getUserProfile(id)
     .then((res) => {
       setProfile(res.data.profile)
@@ -34,11 +35,13 @@ export const useProfile = () => {
       .catch(() => alert('写真を取得できませんでした'))
     })
     .catch(() => alert('ユーザーを取得できませんでした'))
-  }), [])
+    .finally(() => setLoading(false))
+  }), [setLoading])
 
   const changeIsOpen             = useCallback(() => setIsOpen(true), [])
   const ChangeMessageModalOpen   = useCallback(() => setMessageModalOpen(!messageModalOpen), [messageModalOpen, setMessageModalOpen])
   const ChangeAuditionModalOpen  = useCallback(() => setAuditionModalOpen(!auditionModalOpen), [auditionModalOpen, setAuditionModalOpen])
+
   const selectedGroupUser = groupUsers.find((groupUser) => groupUser.user_id === currentUser?.id)
   const groupId = selectedGroupUser?.group_id
 

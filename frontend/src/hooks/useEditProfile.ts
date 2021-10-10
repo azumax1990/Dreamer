@@ -16,10 +16,11 @@ export const useEditProfile = () => {
   const [company, setCompany]           = useState('')
   const [description, setDescription]   = useState('')
 
-  const { currentUser } = useContext(LoginUserContext)
+  const { setLoading, currentUser } = useContext(LoginUserContext)
   const history = useHistory()
 
   const getProfile = useCallback((id) => {
+    setLoading(true)
     getEditProfile(currentUser?.id || id)
     .then((res) => {
       setName(res.data.name)
@@ -31,8 +32,9 @@ export const useEditProfile = () => {
       setCompany(res.data.company)
       setDescription(res.data.description)
     })
-    .catch(() => alert('エラー'))
-  }, [currentUser?.id])
+    .catch(() => alert('読み込めませんでした'))
+    .finally(() => setLoading(false))
+  }, [currentUser?.id, setLoading])
 
   const params: ParamsProfile = {
     id:           currentUser?.id,

@@ -5,6 +5,7 @@ import { LoginUserContext } from '../../../App';
 import { Group, Profile, Message, GroupUser } from '../../../types';
 
 import { MessagePageSmartPhoneHeader } from '../../organisms/header/smartPhoneResponsive/MessagePageSmartPhoneHeader';
+import { Loading } from '../../organisms/loading/Loading';
 import { GroupMessages } from '../../organisms/message/smartPhoneResponsive/GroupMessages';
 
 const MessageWrapper = styled.div`
@@ -34,9 +35,10 @@ export const MessageIndex: VFC<Props> = memo((props) => {
   const [messages, setMessages]     = useState<Array<Message>>([])
   const [groupUsers, setGroupUsers] = useState<Array<GroupUser>>([])
 
-  const { currentUser } = useContext(LoginUserContext)
+  const { loading, setLoading, currentUser } = useContext(LoginUserContext)
 
   useEffect(() => {
+    setLoading(true)
     getUserProfile(id)
     .then((res) => {
       setGroups(res.data.groups)
@@ -45,7 +47,8 @@ export const MessageIndex: VFC<Props> = memo((props) => {
       setGroupUsers(res.data.group_members)
     })
     .catch(() => alert("メッセージを取得出来ませんでした"))
-  }, [id])
+    .finally(() => setLoading(false))
+  }, [id, setLoading])
 
   return (
     <>
@@ -53,14 +56,20 @@ export const MessageIndex: VFC<Props> = memo((props) => {
       <MessageWrapper>
         <UseName>メッセージ一覧</UseName>
         <MessagesContainer>
-          {groups.map((group) => {
+          {loading ? (
+            <Loading />
+          ) : (
+            <>
+              {groups.map((group) => {
                 const selectedUser    = groupUsers.find((groupUser) => groupUser.group_id === group.id && groupUser.user_id !== currentUser?.id)
                 const lastMessage     = messages.find((message) => message?.group_id === group.id)
                 const selectedProfile = profiles.find((profile) => profile?.user_id === selectedUser?.user_id)
-            return (
-              <GroupMessages group={group} selectedProfile={selectedProfile} lastMessage={lastMessage} key={group.id}/>
-            )
-          })}
+                return (
+                  <GroupMessages group={group} selectedProfile={selectedProfile} lastMessage={lastMessage} key={group.id}/>
+                )
+              })}
+            </>
+          )}
         </MessagesContainer>
       </MessageWrapper>
     </>

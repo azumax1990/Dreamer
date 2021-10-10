@@ -3,6 +3,7 @@ import MediaQuery from 'react-responsive'
 import { LoginUserContext } from '../../App'
 import { useMessage } from '../../hooks/useMessage'
 import { MessageParams } from '../../types'
+
 import { MassagePageHeader } from '../organisms/header/pcResponsive/MassagePageHeader'
 import { MessagePageSmartPhoneHeader } from '../organisms/header/smartPhoneResponsive/MessagePageSmartPhoneHeader'
 import { PcResponsive } from '../mediaQuery/message/PcResponsive'

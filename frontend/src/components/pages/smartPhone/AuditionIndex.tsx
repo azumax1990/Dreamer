@@ -1,9 +1,12 @@
-import React, { memo, VFC, useEffect, useState } from 'react'
+import React, { memo, VFC, useEffect, useState, useContext } from 'react'
 import styled from 'styled-components'
 import { getUserProfile } from '../../../api/profile'
+import { LoginUserContext } from '../../../App'
 import { Audition } from '../../../types'
+
 import { AuditionInfo } from '../../Molecules/audition/smartphoneResponsive/AuditionInfo'
 import { MessagePageSmartPhoneHeader } from '../../organisms/header/smartPhoneResponsive/MessagePageSmartPhoneHeader'
+import { Loading } from '../../organisms/loading/Loading'
 
 const AuditionWrapper = styled.div`
   width: 340px;
@@ -28,22 +31,32 @@ type Props = {
 export const AuditionIndex: VFC<Props> = memo((props) => {
   const { id } = props;
   const [auditions, setAuditions] = useState<Array<Audition>>([])
+  const { loading, setLoading } = useContext(LoginUserContext)
 
   useEffect(() => {
+    setLoading(true)
     getUserProfile(id)
     .then((res) => {
       setAuditions(res.data.auditions)
     })
-  }, [id])
+    .catch(() => alert('読み込めませんでした'))
+    .finally(() => setLoading(false))
+  }, [id, setLoading])
   return (
     <>
       <MessagePageSmartPhoneHeader />
       <AuditionWrapper>
         <TitleText>募集リスト</TitleText>
         <AuditionsContainer>
-          {auditions.map((audition) => (
-            <AuditionInfo audition={audition} key={audition.id}/>
-          ))}
+          {loading ? (
+            <Loading />
+          ) : (
+            <>
+              {auditions.map((audition) => (
+                <AuditionInfo audition={audition} key={audition.id}/>
+              ))}
+            </>
+          )}
         </AuditionsContainer>
       </AuditionWrapper>
     </>

@@ -23,7 +23,6 @@ const AuditionTitle = styled.h2`
   overflow: hidden;
   margin: 0;
   text-align: center;
-  
 `
 type Props = {
   id: string;
@@ -34,6 +33,7 @@ export const AppliedUsers: VFC<Props> = memo((props) => {
   const [audition, setAudition] = useState<Audition>()
   const history = useHistory()
   const moveToAuditionPage = () => history.push(`/audition/${audition?.id}`)
+  
   useEffect(() => {
     getAudition(id)
     .then((res) => {
