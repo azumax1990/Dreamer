@@ -16,9 +16,7 @@ import { MessageIndex } from './components/pages/smartPhone/MessageIndex';
 import { AuditionIndex } from './components/pages/smartPhone/AuditionIndex';
 import { AppliedUsers } from './components/pages/smartPhone/AppliedUsers';
 
-
-
-// ログインユーザーContextのtype型
+// loginUserContextのtype型
 export type LoginUserContextType = {
   loading:        boolean;
   setLoading:     Dispatch<SetStateAction<boolean>>;

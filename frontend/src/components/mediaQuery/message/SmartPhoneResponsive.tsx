@@ -1,8 +1,12 @@
-import React, { Dispatch, memo, SetStateAction, VFC } from 'react'
+import React, { Dispatch, memo, SetStateAction, useContext, VFC } from 'react'
 import styled from 'styled-components'
 import { FaLocationArrow } from "react-icons/fa";
 import { Message, Profile } from '../../../types';
+import { LoginUserContext } from '../../../App';
+
 import { Messages } from '../../organisms/message/smartPhoneResponsive/Messages';
+import { Loading } from '../../organisms/loading/Loading';
+
 
 const MessagesWrapper = styled.div`
   padding: 20px;
@@ -54,18 +58,24 @@ type Props = {
 
 export const SmartPhoneResponsive: VFC<Props> = memo((props) => {
   const { messages, profiles, content, setContent, onCliCkPostMessage } = props;
-
+  const { loading } = useContext(LoginUserContext)
   return (
     <>
       <MessagesWrapper>
         <MessageWrapper>
           <MessagesContainer>
-          {messages.map((message) => {
-            const selectedProfile = profiles.find((profile) => profile?.user_id === message.user_id)
-            return (
-              <Messages selectedProfile={selectedProfile} message={message} key={message.id} />
-            )
-          })}
+            {loading ? (
+              <Loading />
+            ) : (
+              <>
+                {messages.map((message) => {
+                  const selectedProfile = profiles.find((profile) => profile?.user_id === message.user_id)
+                  return (
+                    <Messages selectedProfile={selectedProfile} message={message} key={message.id} />
+                  )
+                })}
+              </>
+            )}
           </MessagesContainer> 
           <FormContainer>
             <TextareaTag value={content} placeholder="メッセージを入力してください" onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value)}/>

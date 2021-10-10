@@ -1,8 +1,10 @@
-import React, { SetStateAction, VFC } from 'react'
+import React, { SetStateAction, VFC, Dispatch, useContext } from 'react'
 import styled from 'styled-components'
-import { Messages } from '../../organisms/message/pcResponsive/Messages'
 import { Message, Profile } from '../../../types'
-import { Dispatch } from 'react'
+import { LoginUserContext } from '../../../App'
+
+import { Messages } from '../../organisms/message/pcResponsive/Messages'
+import { Loading } from '../../organisms/loading/Loading'
 
 const MessagesWrapper = styled.div`
   padding: 40px;
@@ -55,17 +57,23 @@ type Props = {
 }
 export const PcResponsive: VFC<Props> = (props) => {
   const { messages, profiles, content, setContent, onCliCkPostMessage } = props;
-
+  const { loading } = useContext(LoginUserContext)
   return (
     <>
       <MessagesWrapper>
         <MessagesContainer>
-          {messages.map((message) => {
-            const selectedProfile = profiles.find((profile) => profile?.user_id === message.user_id)
-            return (
-              <Messages selectedProfile={selectedProfile} message={message} key={message.id} />
-            )
-          })}
+          {loading ? (
+            <Loading />
+          ) : (
+            <>
+              {messages.map((message) => {
+                const selectedProfile = profiles.find((profile) => profile?.user_id === message.user_id)
+                return (
+                  <Messages selectedProfile={selectedProfile} message={message} key={message.id} />
+                )
+              })}
+            </>
+          )}
         </MessagesContainer>
         <FormContainer>
           <InputTag value={content} placeholder="メッセージを入力してください、、、" onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value)}/>

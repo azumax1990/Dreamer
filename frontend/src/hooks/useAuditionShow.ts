@@ -10,19 +10,21 @@ export const useAuditionShow = () => {
   const [profile, setProfile]           = useState<Profile>()
   const [appliedUsers, setAppliedUsers] = useState<Array<User>>([])
 
-  const { currentUser } = useContext(LoginUserContext)
+  const { setLoading, currentUser } = useContext(LoginUserContext)
   const history         = useHistory()
 
   // オーディション情報取得
   const getAuditionShow = useCallback((id: string) => {
+    setLoading(true)
     getAudition(id)
     .then((res) => {
       setAudition(res.data.audition)
       setProfile(res.data.profile)
       setAppliedUsers(res.data.users)
     })
-    .catch(() => alert('情報を取得出来ませんでした'))
-  }, [])
+    .catch(() => alert('プロフィールを読み込めませんでした'))
+    .finally(() => setLoading(false))
+  }, [setLoading])
 
   const hasApplied = appliedUsers.find((appliedUser) => appliedUser.id === currentUser?.id )
 
