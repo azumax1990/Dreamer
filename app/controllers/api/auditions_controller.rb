@@ -17,8 +17,7 @@ class ::Api::AuditionsController < ApplicationController
   end
 
   def create
-    user = User.find(params[:id])
-    audition = user.auditions.new(title: params[:title], description: params[:description])
+    audition = Audition.new(user_id: params[:id], title: params[:title], description: params[:description])
     if params[:avatar][:data] != ""
       audition.avatar.attach(io: StringIO.new(decode(params[:avatar][:data]) + "\n"),
                             filename: params[:avatar][:name])
@@ -43,6 +42,6 @@ class ::Api::AuditionsController < ApplicationController
 
   private
   def audition_params
-    params.require(:audition).permit(:title, :description, :id, :avatar, :user_id)
+    params.require(:audition).permit(:title, :description, :id, :avatar)
   end
 end
