@@ -11,13 +11,14 @@ class ::Api::Apps::MessagesController < ApplicationController
   end
 
   def create
-    message = Message.create(message_params)
+    group = Group.find(params[:group_id])
+    message = group.messages.create(message_params)
     profile = message.user.profile
     render json: { message: message, profile: profile }
   end
 
   private
   def message_params
-    params.require(:message).permit(:content, :user_id, :group_id)
+    params.require(:message).permit(:content, :user_id)
   end
 end

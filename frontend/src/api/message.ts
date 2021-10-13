@@ -7,6 +7,6 @@ export const getAllMessages = (id: string) => {
 }
 
 // メッセージ作成
-export const postMessage = (params: MessageParams) => {
-  return axios.post(`http://localhost:3000/api/groups/:group_id/messages`, params)
+export const postMessage = (group_id: string, params: MessageParams) => {
+  return axios.post(`http://localhost:3000/api/groups/${group_id}/messages`, params)
 }

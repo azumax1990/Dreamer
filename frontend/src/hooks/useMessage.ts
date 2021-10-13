@@ -20,8 +20,8 @@ export const useMessage = () => {
     .finally(() => setLoading(false))
   }, [setLoading])
 
-  const createMessage = (params: MessageParams) => {   
-    postMessage(params)
+  const createMessage = (group_id: string, params: MessageParams) => {   
+    postMessage(group_id, params)
     .then((res) => {   
       setMessages([...messages, res.data.message])
       setProfiles([...profiles, res.data.profile])
