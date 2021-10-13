@@ -32,6 +32,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'faker'
   gem 'factory_bot_rails'
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -46,3 +47,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 gem 'devise_token_auth'
+gem 'aws-sdk-s3', require: false
