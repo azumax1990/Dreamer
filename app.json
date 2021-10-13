@@ -1,0 +1,16 @@
+{
+  "name": "Dreamer",
+  "description": "This is Dreamer",
+  "keywords": [],
+  "website": "",
+  "repository": "https://github.com/azumax1990/Dreamer",
+  "env": {},
+  "addons": [
+    "heroku-postgresql:hobby-dev"
+  ],
+  "buildpacks": [{
+    "url": "heroku/nodejs"
+  }, {
+    "url": "heroku/ruby"
+  }]
+}
