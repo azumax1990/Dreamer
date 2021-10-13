@@ -129,7 +129,6 @@ export type Message = {
 // message作成
 export type MessageParams = {
   user_id:  number | undefined;
-  group_id: number | string;
   content:  string;
 }
 

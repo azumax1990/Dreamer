@@ -23,10 +23,9 @@ export const ChatRoom: VFC<Props> = memo((props) => {
   const onClickPostMessage = useCallback(() => {
     const params: MessageParams = {
       user_id: currentUser?.id,
-      group_id: id,
       content: content
     }
-    createMessage(params)
+    createMessage(id, params)
     setContent('')
   }, [createMessage, content, currentUser?.id, id])
   
