@@ -1,3 +1,2 @@
-web: bundle exec rails s
-frontend: exec /usr/bin/env PORT=3001 sh -c 'cd frontend && yarn start'
-backend: exec /usr/bin/env PORT=3000 sh -c 'bundle exec rails s'
+web: bundle exec puma -C config/puma.rb
+release: bundle exec rake db:migrate
