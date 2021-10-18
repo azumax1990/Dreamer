@@ -10,7 +10,7 @@ class CreateProfiles < ActiveRecord::Migration[6.0]
       t.string  :prefecture
       t.text    :introduction
       t.string  :company
-      t.string  :description
+      t.text  :description
       t.timestamps
     end
   end
