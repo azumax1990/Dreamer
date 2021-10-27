@@ -53,7 +53,7 @@ production:
   adapter: mysql2
   encoding: utf8
   charset: utf8mb4
-  collation: utf8mb4_general_ci
+  collation: utf8
   username: <%= Rails.application.credentials.db[:user_name] %>
   password: <%= Rails.application.credentials.db[:password] %>
   host: <%= Rails.application.credentials.db[:endpoint] %>  
