@@ -23,6 +23,7 @@
 !/tmp/pids/
 !/tmp/pids/.keep
 !/tmp/sockets/
+!/tmp/mysql.sock
 
 # Ignore uploaded files in development.
 /storage/*
