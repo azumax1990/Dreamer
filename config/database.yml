@@ -57,4 +57,3 @@ production:
   host: <%= Rails.application.credentials.db[:endpoint] %>
   pool: 20
   timeout: 1000
-  socket: /tmp/mysql.sock
