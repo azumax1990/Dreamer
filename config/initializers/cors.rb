@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'localhost:3001', 'https://dreamer-test.herokuapp.com'
+    origins 'localhost:3001', 'http://13.112.186.109/'
 
     resource '*',
       headers: :any,
