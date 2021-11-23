@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'localhost:3001', 'https://d2qfsuewgva6x5.cloudfront.net/'
+    origins 'localhost:3001', 'http://dreamer.com.s3-website-ap-northeast-1.amazonaws.com/'
 
     resource '*',
       headers: :any,
