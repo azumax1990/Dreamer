@@ -115,6 +115,9 @@ function App() {
               <AppliedUsers id={match.params.auditionId}/>
             )}
            />
+           <Route exact path="＊">
+            <Auditions />
+          </Route>
         </BrowserRouter>
       </LoginUserContext.Provider>
     </>
