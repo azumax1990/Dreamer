@@ -38,8 +38,6 @@ export const UserProfile: VFC<Props> = memo((props) => {
         } = useProfile()
 
   useEffect(() => getProfile(id), [getProfile, id])
-  console.log(posts)
-  console.log(profile)
   return (
     <>
       {loading ? (
