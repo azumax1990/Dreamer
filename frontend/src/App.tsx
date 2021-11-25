@@ -15,6 +15,7 @@ import { ChatRoom } from './components/pages/ChatRoom';
 import { MessageIndex } from './components/pages/smartPhone/MessageIndex';
 import { AuditionIndex } from './components/pages/smartPhone/AuditionIndex';
 import { AppliedUsers } from './components/pages/smartPhone/AppliedUsers';
+import { Page404 } from './components/pages/Page404';
 
 // loginUserContextのtype型
 export type LoginUserContextType = {
@@ -116,7 +117,7 @@ function App() {
             )}
            />
            <Route exact path="＊">
-            <Auditions />
+            <Page404 />
           </Route>
         </BrowserRouter>
       </LoginUserContext.Provider>
