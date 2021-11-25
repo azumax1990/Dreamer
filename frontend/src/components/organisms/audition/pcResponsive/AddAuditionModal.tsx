@@ -106,7 +106,6 @@ export const AddAuditionModal: VFC<Props> = (props) => {
   const SubmitPostAudition = () => {
     PostAudition(params)
     .then((res) => {
-      console.log(res)
       const newAuditions = [res.data, ...auditions]
       setAuditions(newAuditions)
       setTitle('')
