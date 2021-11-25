@@ -61,7 +61,7 @@ export const CreateAudition: VFC = memo(() => {
   const SubmitPostAudition = () => {
     PostAudition(params)
     .then((res) => {
-      history.push("/auditions")
+      history.push("/")
     })
     .catch(() => alert('投稿出来ませんでした'))
   }
