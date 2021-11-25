@@ -54,71 +54,71 @@ function App() {
             <Route exact path="/sign_up">
               <SignUp/>
             </Route>
-          </Switch>
-          <Route exact path="/sign_in">
-            <SignIn/>
-          </Route>
-          <Route exact path="/">
-            <Auditions />
-          </Route>
-          <Route exact path="/audition">
-            <CreateAudition />
-           </Route>
-          <Route 
-            exact 
-            path="/audition/:id"
-            render={({ match }) => (
-              <AuditionShow id={match.params.id}/>
-            )}
-           />
-          <Route 
-            exact 
-            path="/user/:userId/profile"
-            render={({ match }) => (
-              <UserProfile id={match.params.userId}/>
-            )}
-           />
-           <Route
-            exact 
-            path="/user/:userId/profile/edit"
-            render={({ match }) => (
-              <EditProfile id={match.params.userId} />
-            )}
-           />
-           <Route exact path="/post">
-            <CreatePost />
-           </Route>
-           <Route
-            exact 
-            path="/group/:groupId"
-            render={({ match }) => (
-              <ChatRoom id={match.params.groupId} />
-            )}
-           />
-           <Route 
-            exact 
-            path="/user/:userId/groups"
-            render={({ match }) => (
-              <MessageIndex id={match.params.userId}/>
-            )}
-           />
-           <Route 
-            exact 
-            path="/user/:userId/auditions"
-            render={({ match }) => (
-              <AuditionIndex id={match.params.userId}/>
-            )}
-          />
+            <Route exact path="/sign_in">
+              <SignIn/>
+            </Route>
+            <Route exact path="/">
+              <Auditions />
+            </Route>
+            <Route exact path="/audition">
+              <CreateAudition />
+            </Route>
             <Route 
-            exact 
-            path="/audition/:auditionId/users/"
-            render={({ match }) => (
-              <AppliedUsers id={match.params.auditionId}/>
-            )}
-           />
-           <Route exact path="＊">
-            <Page404 />
-          </Route>
+              exact 
+              path="/audition/:id"
+              render={({ match }) => (
+                <AuditionShow id={match.params.id}/>
+              )}
+            />
+            <Route 
+              exact 
+              path="/user/:userId/profile"
+              render={({ match }) => (
+                <UserProfile id={match.params.userId}/>
+              )}
+            />
+            <Route
+              exact 
+              path="/user/:userId/profile/edit"
+              render={({ match }) => (
+                <EditProfile id={match.params.userId} />
+              )}
+            />
+            <Route exact path="/post">
+              <CreatePost />
+            </Route>
+            <Route
+              exact 
+              path="/group/:groupId"
+              render={({ match }) => (
+                <ChatRoom id={match.params.groupId} />
+              )}
+            />
+            <Route 
+              exact 
+              path="/user/:userId/groups"
+              render={({ match }) => (
+                <MessageIndex id={match.params.userId}/>
+              )}
+            />
+            <Route 
+              exact 
+              path="/user/:userId/auditions"
+              render={({ match }) => (
+                <AuditionIndex id={match.params.userId}/>
+              )}
+            />
+            <Route 
+              exact 
+              path="/audition/:auditionId/users/"
+              render={({ match }) => (
+                <AppliedUsers id={match.params.auditionId}/>
+              )}
+            />
+            <Route path="＊">
+              <Page404 />
+            </Route>
+          </Switch>
         </BrowserRouter>
       </LoginUserContext.Provider>
     </>
