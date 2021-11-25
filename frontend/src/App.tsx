@@ -115,7 +115,7 @@ function App() {
                 <AppliedUsers id={match.params.auditionId}/>
               )}
             />
-            <Route path="＊">
+            <Route path="*">
               <Page404 />
             </Route>
           </Switch>
