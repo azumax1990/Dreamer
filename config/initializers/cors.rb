@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'http://dreamer.com.s3-website-ap-northeast-1.amazonaws.com'
+    origins 'http://dreamer.com.s3-website-ap-northeast-1.amazonaws.com', 'https://max2020.s3.ap-northeast-1.amazonaws.com'
     resource '*',
       headers: :any,
       expose: ["access-token", "expiry", "token-type", "uid", "client"],
