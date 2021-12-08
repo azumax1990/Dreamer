@@ -59,3 +59,4 @@ Things you may want to cover:
  * active_model_serializersの導入
  * Mailerの導入
  * ユーザー、オーディション等の検索機能
+ * ReactのデプロイにCloud Front, Route53を使用する
