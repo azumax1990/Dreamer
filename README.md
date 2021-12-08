@@ -41,9 +41,9 @@ Things you may want to cover:
 
 # 機能一覧
   * ユーザー登録、ログイン機能、ログアウト機能（devise_token_auth）
-  * プロフィール編集機能
-  * 写真投稿、削除機能（active_storage）
-  * オーディション投稿、削除機能（active_storage）
+  * プロフィール編集機能(画像プレビュー機能有)
+  * 写真投稿、削除機能（active_storage）(画像プレビュー機能有)
+  * オーディション投稿、削除機能（active_storage）(画像プレビュー機能有)
   * オーディション応募機能
   * メッセージ機能
 
