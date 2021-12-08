@@ -1,32 +1,10 @@
-<!-- # README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ... -->
 # 名前
   Dreamer
   俳優や歌手、モデルなどを目指す人と、事務所、制作会社、イベント会社などをつなげるマッチングアプリです。
+# URL
   アプリURL http://dreamer.com.s3-website-ap-northeast-1.amazonaws.com
-
+  * ゲストログイン1 Email: user2@example.com, password: password をご使用ください。
+  * ゲストログイン2 Email: user1@example.com, password: password をご使用ください。
 # 開発環境
   * Ruby
   * Ruby on Rails(APIモード)
