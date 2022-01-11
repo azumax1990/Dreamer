@@ -3,9 +3,8 @@
   俳優や歌手、モデルなどを目指す人と、事務所、制作会社、イベント会社などをつなげるマッチングアプリです。
 # URL
   http://dreamer.com.s3-website-ap-northeast-1.amazonaws.com
-<!--   http://dreamer.com.s3-website-ap-northeast-1.amazonaws.com -->
-  * ゲストログイン1 Email: user2@example.com, password: password をご使用ください。
-  * ゲストログイン2 Email: user1@example.com, password: password をご使用ください。
+  * ゲストログイン1 Email: test1@example.com, password: password をご使用ください。
+  * ゲストログイン2 Email: test2@example.com, password: password をご使用ください。
 # 開発環境
   * Ruby
   * Ruby on Rails(APIモード)
